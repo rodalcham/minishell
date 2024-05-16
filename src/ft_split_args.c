@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/16 11:16:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/16 12:17:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int	sep(char c)
 		return (1);
 	if (c == '\"')
 		return (2);
+	if (c == '<')
+		return (3);
+	if (c == '>')
+		return (4);
 	return (0);
 }
 
@@ -50,7 +54,7 @@ int	arg_count(char *s)
 		if (x && ++i)
 		{
 			count++;
-			while (s[i] && x != sep(s[i]))
+			while (s[i] && x != sep(s[i]) && x != 3 && x != 4)
 				i++;
 		}
 		if (s[i])
@@ -73,6 +77,8 @@ int	ft_arglen(char *arg)
 	if (x)
 	{
 		i++;
+		if ((x == 3 || x == 4) && x != sep(arg[i]))
+			return (i);
 		while (arg[i] && x != sep(arg[i + 1]))
 			i++;
 		if(arg[i])
@@ -97,13 +103,12 @@ int	ft_argcpy(char *dst, char *src)
 	{
 		i++;
 		dst[i] = src[i];
+		if ((x == 3 || x == 4) && x != sep(src[i + 1]))
+			return (1);
 		while (src[++i] && x != sep(src[i]))
 			dst[i] = src[i];
-		if (x == sep(src[i]))
-		{
-			dst[i] = src[i];
-			i++;
-		}
+		if (x == sep(src[i++]))
+			dst[i - 1] = src[i - 1];
 	}
 	else
 		while (src[++i] && src[i] != ' ' && !sep(src[i]))
