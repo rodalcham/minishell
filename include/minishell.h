@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/16 11:11:53 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/16 14:28:29 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,10 @@ void	*ft_realloc(void *ptr, size_t size);
 
 //split
 char	**ft_split_args(char *str);
+
+//signals
+void	signal_handler(void);
+void	handle_ctrl_backslash(int signal);
+void	handle_ctrlc(int signal);
 
 #endif

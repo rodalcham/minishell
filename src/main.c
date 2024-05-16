@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/16 11:10:54 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:00:40 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	main_loop(void)
 	{
 		line = readline("🐚  ");
 		if (!line)
-			break ;
+		{
+			write(1, "\r🐚  exit", 9);
+			exit (0);
+		}
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
 		tokens = ft_split_args(line);
@@ -62,6 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	envp = (void *)envp;
 	if (argc != 1)
 		return (1);
+	signal_handler();
 	intro();
 	main_loop();
 	printf("exit\n");
