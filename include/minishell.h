@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/15 12:18:27 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/16 10:59:33 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
-# include "../printf/ft_printf.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>

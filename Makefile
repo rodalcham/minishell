@@ -6,7 +6,7 @@
 #    By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/05/15 12:21:25 by lglauch          ###   ########.fr        #
+#    Updated: 2024/05/16 10:59:18 by lglauch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,21 +18,18 @@ OBJS	:= ${SRCS:src/%.c=src/%.o}
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ libft/libft.a printf/libftprintf.a -lreadline
+	$(CC) $(CFLAGS) -o $@ $^ libft/libft.a -lreadline
 
 src/%.o: src/%.c
 	@make -C libft
-	@make -C printf
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 	@make -C libft clean
-	@make -C printf clean
 	rm -rf src/*.o
 
 fclean: clean
 	@make -C libft fclean
-	@make -C printf fclean
 	rm -rf $(NAME)
 
 re: clean all
