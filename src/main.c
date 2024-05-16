@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/17 15:12:33 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/17 15:22:40 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	envp = (void *)envp;
 	if (argc != 1)
 		return (1);
+	rl_catch_signals = 0;
 	signal_handler();
 	intro();
 	main_loop();
