@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/14 13:38:50 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/16 11:10:54 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	main_loop(void)
 			break ;
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
-		tokens = tokenizer(line);
+		tokens = ft_split_args(line);
 		if (!tokens)
 			printf("Error tokens returned NULL");
 		int i = 0;
