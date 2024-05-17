@@ -1,0 +1,10 @@
+*.o
+*.a
+.vscode
+.dSYM
+*.dSYM
+.DS_Store
+.vscode/
+.json
+./*
+.*
