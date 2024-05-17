@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/16 11:24:41 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/16 13:35:24 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	**ft_splitfree(char **ret, size_t i)
+char    **ft_splitfree(char **ret, size_t i)
 {
-	while (i > 0)
-	{
-		free(ret[i - 1]);
-		i--;
-	}
-	free(ret);
-	return (NULL);
+    while (i > 0)
+    {
+        free(ret[i - 1]);
+        i--;
+    }
+    free(ret);
+    return (NULL);
 }
 
 int	sep(char c)
@@ -29,6 +29,12 @@ int	sep(char c)
 		return (1);
 	if (c == '\"')
 		return (2);
+	if (c == '<')
+		return (3);
+	if (c == '>')
+		return (4);
+	if (c == '|')
+		return (5);
 	return (0);
 }
 
@@ -50,10 +56,10 @@ int	arg_count(char *s)
 		if (x && ++i)
 		{
 			count++;
-			while (s[i] && x != sep(s[i]))
+			while (s[i] && x != sep(s[i]) && x < 3)
 				i++;
 		}
-		if (s[i])
+		if (s[i] && (x < 3 || x == sep(s[i])))
 			i++;
 	}
 	if (!s[i] && s[i - 1] != ' ' && !sep(s[i - 1]) && !x)
@@ -73,9 +79,11 @@ int	ft_arglen(char *arg)
 	if (x)
 	{
 		i++;
+		if (x > 2 && x != sep(arg[i]))
+			return (i);
 		while (arg[i] && x != sep(arg[i + 1]))
 			i++;
-		if (arg[i])
+		if(arg[i])
 			i++;
 		return (i);
 	}
@@ -97,13 +105,12 @@ int	ft_argcpy(char *dst, char *src)
 	{
 		i++;
 		dst[i] = src[i];
+		if (x > 2 && x != sep(src[i + 1]))
+			return (1);
 		while (src[++i] && x != sep(src[i]))
 			dst[i] = src[i];
-		if (x == sep(src[i]))
-		{
-			dst[i] = src[i];
-			i++;
-		}
+		if (x == sep(src[i++]))
+			dst[i - 1] = src[i - 1];
 	}
 	else
 		while (src[++i] && src[i] != ' ' && !sep(src[i]))
