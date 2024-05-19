@@ -3,103 +3,134 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/19 10:50:57 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/19 15:51:18 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	***tokenize(char **args)
+int	is_spc(char c)
 {
-	char	***ret;
+	if (c == ' ' || c == '\t' || c == '\n' 
+		|| c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	else
+		return (0);
+}
+
+int	is_op(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
+}
+
+int	count_lex(char *line)
+{
+	int	i;
+	int	last;
+	int	count;
+
+	i = 0;
+	count = 0;
+	last = 1;
+	while(line[i])
+	{
+		if (is_op(line[i]))
+		{
+			last = 1;
+			count++;
+			while(line [i] && is_op(line[i]))
+				i++;
+		}
+		else if(!is_spc(line[i]))
+			last = 0;
+		i++;
+	}
+	if (!last)
+		count++;
+	return (count);
+}
+
+int	count_cmd(char **args, int *j)
+{
+	int	i;
+
+	i = *j;
+	while(args[*j] && !is_op(args[*j][0]))
+		*j += 1;
+	printf("\ncmd num %i\n", *j - i);
+	return (*j - i);
+}
+
+int	count_ops(char **args, int *j)
+{
+	int	i;
+
+	i = *j;
+	while(args[*j] && is_op(args[*j][0]))
+		*j += 1;
+	printf("\nops num %i\n", *j - i);
+	return (*j - i);
+}
+
+t_lexer	*tokenize(char *line)
+{
+	t_lexer	*ret;
+	char	**args;
 	int		i;
 	int		j;
-	int		a;
-	i = 0;
-	a = 0;
-	if (sep(args[i][0]) > 2)
-		return (printf("parse error near '%c'", args[i][0]));
-	ret = (char ***)malloc(sizeof(char **) * (c_tokens(args) + 1));
+	int		count;
+
+	count = count_lex(line);
+	printf("\ncount : %i\n", count);
+	i = -1;
+	j = 0;
+	args = ft_split_args(line);
+	if (!args)
+		printf("\nPreotection Missing\n");//											FIX!
+	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1));
 	if (!ret)
-		printf("Memory error"); //FREE!!!!!
+		printf("\nPreotection Missing\n");//											FIX!
+	while (++i < count)
+	{
+		ret[i].cmd = (char **)malloc(sizeof(char *) * (count_cmd(args, &j) + 1));
+		if (!ret[i].cmd)
+			printf("\nPreotection Missing\n");//										FIX!
+		ret[i].ops = (char **)malloc(sizeof(char *) * (count_ops(args, &j) + 1));
+		if (!ret[i].ops)
+			printf("\nPreotection Missing\n");//										FIX!
+	}
+	return (token_fill(ret, args));
+}
+
+t_lexer	*token_fill(t_lexer *ret, char **args)
+{
+	int	i;
+	int	j;
+	int	z;
+
+	i = 0;
+	z = 0;
 	while (args[i])
 	{
 		j = 0;
-		if (sep(args[i][0]) < 3)
+		while(args[i] && !is_op(args[i][0]))
 		{
-			ret[a] = (char **)malloc(sizeof(char *) * (c_args(&args[i]) + 1));
-			if (!ret[a])
-				printf("Memory error"); //FREE!!!!!
-			while (args[i] && sep(args[i][0]) < 3)
-				ret[a][j++] = args[i++];
-			ret[a][j] = NULL;
-			a++;
+			ret[z].cmd[j] = args[i];
+			i++;
+			j++;
 		}
-		else
-		{
-			ret[a] = (char **)malloc(sizeof(char *) * (c_ops(&args[i]) + 1));
-			if (!ret[a])
-				printf("Memory error"); //FREE!!!!!
-			while (args[i] && sep(args[i][0]) > 2)
-				ret[a][j++] = args[i++];
-			ret[a][j] = NULL;
-			a++;
-		}
+		ret[z].cmd[j] = NULL;
+		j = 0;
+		while(args[i] && is_op(args[i][0]))
+			ret[z].cmd[j++] = args[i++];
+		ret[z].cmd[j] = NULL;
+		z++;
 	}
-	ret[a] = NULL;
-	return (ret);
-}
-
-int	c_args(char	**args)
-{
-	int	i;
-
-	i = 0;
-	if (!args || !args[0])
-		return (0);
-	while (args[i] && sep(args[i][0]) < 3)
-		i++;
-	return (i);
-}
-
-int	c_ops(char	**args)
-{
-	int	i;
-
-	i = 0;
-	if (!args || !args[0])
-		return (0);
-	while (args[i] && sep(args[i][0]) > 2)
-		i++;
-	return (i);
-}
-
-int	c_tokens(char **args)
-{
-	int	i;
-	int	ret;
-
-	i = 0;
-	ret = 0;
-	if (!args || !args[0])
-		return (0);
-	while (args[i])
-	{
-		if (sep(args[i]) < 3)
-		{
-			ret++;
-			while (args[i] && sep(args[i][0]) < 3)
-				i++;
-		}
-		else
-		{
-			ret++;
-			while (args[i] && sep(args[i][0]) > 2)
-				i++;
-		}
-	}
-	return (ret);
+	// path_finder(ret);
+	return ret;
 }

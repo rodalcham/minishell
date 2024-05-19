@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/17 15:12:33 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/19 15:08:50 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	intro(void)
 	printf("  \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \n");
 	printf("    ********************************\n");
 	printf("\n    Welcome to Minishell by \033]8;;https://github.com/lglauch"
-		"\alglauch\033]8;;\a && ...\n\n");
+		"\alglauch\033]8;;\a && rchavez\n\n");
 	printf("    ********************************\n");
 }
 
 void	main_loop(void)
 {
 	char	*line;
-	char	**tokens;
+	t_lexer	*tokens;
 
 	line = NULL;
 	while (*get_run() == 1)
@@ -40,13 +40,20 @@ void	main_loop(void)
 			break ;
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
-		tokens = ft_split_args(line);
+		tokens = tokenize(line);
 		if (!tokens)
 			printf("Error tokens returned NULL");
 		int i = 0;
-        while (tokens[i] != NULL)
+		int j;
+			
+        while (i < count_lex(line))
         {
-            printf("tokens[%d] = %s\n", i, tokens[i]); //delete later just a tester
+			j = -1;
+            while (tokens[i].cmd[++j])
+				printf("\nToken %i, command %i: %s\n", i, j, tokens[i].cmd[j]);
+			j = -1;
+            while (tokens[i].ops[++j])
+				printf("\nToken %i, operator %i: %s\n", i, j, tokens[i].ops[j]);
             i++;
         }
 		if (ft_strncmp(line, "exit", 4) == 0 && line[4] == 0)

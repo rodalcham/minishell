@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/19 10:07:22 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/19 12:22:04 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char    **ft_splitfree(char **ret, size_t i)
+char	**ft_splitfree(char **ret, size_t i)
 {
-    while (i > 0)
-    {
-        free(ret[i - 1]);
-        i--;
-    }
-    free(ret);
-    return (NULL);
+	while (i > 0)
+	{
+		free(ret[i - 1]);
+		i--;
+	}
+	free(ret);
+	return (NULL);
 }
 
 int	sep(char c)
@@ -40,7 +40,7 @@ int	sep(char c)
 
 int	spc(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' 
+	if (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\v' || c == '\f' || c == '\r')
 	{
 		return (1);
@@ -94,7 +94,7 @@ int	ft_arglen(char *arg)
 			return (i);
 		while (arg[i] && x != sep(arg[i + 1]))
 			i++;
-		if(arg[i])
+		if (arg[i])
 			i++;
 		return (i);
 	}
