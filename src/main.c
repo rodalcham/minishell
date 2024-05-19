@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/17 15:22:40 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/19 13:28:00 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	intro(void)
 	printf(" ( M | I | N | I | S | H | E | L | L )\n");
 	printf("  \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \n");
 	printf("    ********************************\n");
-	printf("\n    Welcome to Minishell by \033]8;;https://github.com/lglauch"
-		"\alglauch\033]8;;\a && ...\n\n");
+	printf("\n    Welcome to Minishell by \033]8;;https://github.com/rodalcham"
+		"\archavez\033]8;;\a && \033]8;;https://github.com/lglauch"
+		"\alglauch\033]8;;\a\n\n");
 	printf("    ********************************\n");
 }
 
