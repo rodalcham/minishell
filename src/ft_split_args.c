@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/16 12:17:12 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/19 10:03:50 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,20 @@ int	sep(char c)
 		return (3);
 	if (c == '>')
 		return (4);
+	if (c == '|')
+		return (5);
 	return (0);
+}
+
+int	spc(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' 
+		|| c == '\v' || c == '\f' || c == '\r')
+	{
+		return (1);
+	}
+	else
+		return (0);
 }
 
 int	arg_count(char *s)
@@ -49,18 +62,18 @@ int	arg_count(char *s)
 	while (s[i])
 	{
 		x = sep(s[i]);
-		if (i > 0 && (s[i] == ' ' || x) && s[i - 1] != ' ' && !sep(s[i - 1]))
+		if (i > 0 && (spc(s[i]) || x) && !spc(s[i - 1]) && !sep(s[i - 1]))
 			count++;
 		if (x && ++i)
 		{
 			count++;
-			while (s[i] && x != sep(s[i]) && x != 3 && x != 4)
+			while (s[i] && x != sep(s[i]) && x < 3)
 				i++;
 		}
-		if (s[i])
+		if (s[i] && (x < 3 || x == sep(s[i])))
 			i++;
 	}
-	if (!s[i] && s[i - 1] != ' ' && !sep(s[i - 1]) && !x)
+	if (!s[i] && !spc(s[i - 1]) && !sep(s[i - 1]) && !x)
 		count++;
 	return (count);
 }
@@ -77,7 +90,7 @@ int	ft_arglen(char *arg)
 	if (x)
 	{
 		i++;
-		if ((x == 3 || x == 4) && x != sep(arg[i]))
+		if (x > 2 && x != sep(arg[i]))
 			return (i);
 		while (arg[i] && x != sep(arg[i + 1]))
 			i++;
@@ -85,7 +98,7 @@ int	ft_arglen(char *arg)
 			i++;
 		return (i);
 	}
-	while (arg[i] && arg[i] != ' ' && !sep(arg[i]))
+	while (arg[i] && !spc(arg[i]) && !sep(arg[i]))
 		i++;
 	return (i);
 }
@@ -103,7 +116,7 @@ int	ft_argcpy(char *dst, char *src)
 	{
 		i++;
 		dst[i] = src[i];
-		if ((x == 3 || x == 4) && x != sep(src[i + 1]))
+		if (x > 2 && x != sep(src[i + 1]))
 			return (1);
 		while (src[++i] && x != sep(src[i]))
 			dst[i] = src[i];
@@ -111,7 +124,7 @@ int	ft_argcpy(char *dst, char *src)
 			dst[i - 1] = src[i - 1];
 	}
 	else
-		while (src[++i] && src[i] != ' ' && !sep(src[i]))
+		while (src[++i] && !spc(src[i]) && !sep(src[i]))
 			dst[i] = src[i];
 	dst[i] = '\0';
 	return (i);
@@ -133,7 +146,7 @@ char	**ft_split_args(char *str)
 	ret[count] = NULL;
 	while (str && str[j] && i < count + 1)
 	{
-		while (str[j] && str[j] == ' ')
+		while (str[j] && spc(str[j]))
 			j++;
 		ret[i] = (char *)malloc(sizeof(char) * (ft_arglen(&str[j]) + 1));
 		if (!ret[i])
