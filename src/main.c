@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/19 13:28:00 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/19 16:14:42 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ void	main_loop(void)
 	while (*get_run() == 1)
 	{
 		line = readline("🐚  ");
-		if (!line)
-			break ;
+		if (line == NULL)
+		{
+			//free because of ctrl + D
+			if (line)
+				free(line);
+			exit (0);
+		}
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
 		tokens = ft_split_args(line);

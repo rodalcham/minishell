@@ -14,3 +14,5 @@ guide:
 
 
 https://github.com/maiadegraaf/minishell?tab=readme-ov-file#what-is-bash-and-how-does-it-work
+
+https://achrafbelarif.medium.com/42cursus-minishell-29cd25f972e6
