@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/19 16:04:13 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/20 12:30:51 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	handle_ctrlc(int signal)
 void	handle_ctrl_backslash(int signal)
 {
 	(void)signal;
-	write(1, "SIGQUIT received\n", 18);
 }
 
 void	signal_handler(void)

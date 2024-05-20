@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/17 13:07:45 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/20 12:07:49 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,21 @@
 // 	char	**str;
 // }		t_lexer;
 
+typedef struct s_lexer
+{
+	char			*path;
+	char			**cmd;
+	char			**ops;
+}					t_lexer;
+
 //signals
 int		*get_run(void);
 
 //tokens
 char	**tokenizer(char *line);
+t_lexer	*tokenize(char *line);
+int	count_lex(char *line);
+t_lexer	*token_fill(t_lexer *ret, char **args);
 
 //utils
 void	*ft_realloc(void *ptr, size_t size);

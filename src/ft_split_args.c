@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/19 13:31:24 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/20 12:32:15 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 char	**ft_splitfree(char **ret, size_t i)
 {
+	while (i > 0)
+	{
+		free(ret[i - 1]);
+		i--;
+	}
+	free(ret);
+	return (NULL);
 	while (i > 0)
 	{
 		free(ret[i - 1]);
@@ -40,7 +47,7 @@ int	sep(char c)
 
 int	spc(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' 
+	if (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\v' || c == '\f' || c == '\r')
 	{
 		return (1);
@@ -94,7 +101,7 @@ int	ft_arglen(char *arg)
 			return (i);
 		while (arg[i] && x != sep(arg[i + 1]))
 			i++;
-		if(arg[i])
+		if (arg[i])
 			i++;
 		return (i);
 	}
@@ -144,7 +151,7 @@ char	**ft_split_args(char *str)
 	if (!ret)
 		return (NULL);
 	ret[count] = NULL;
-	while (str && str[j] && i < count + 1)
+	while (str && str[j] && i < count)
 	{
 		while (str[j] && spc(str[j]))
 			j++;

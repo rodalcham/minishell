@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/19 16:14:42 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/20 12:45:16 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	intro(void)
 void	main_loop(void)
 {
 	char	*line;
-	char	**tokens;
+	t_lexer	*tokens;
 
 	line = NULL;
 	while (*get_run() == 1)
@@ -39,6 +39,7 @@ void	main_loop(void)
 		line = readline("🐚  ");
 		if (line == NULL)
 		{
+			write(1, "\r🐚  exit", ft_strlen("\r🐚  exit"));
 			//free because of ctrl + D
 			if (line)
 				free(line);
@@ -46,13 +47,20 @@ void	main_loop(void)
 		}
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
-		tokens = ft_split_args(line);
+		tokens = tokenize(line);
 		if (!tokens)
 			printf("Error tokens returned NULL");
 		int i = 0;
-        while (tokens[i] != NULL)
+		int j;
+			
+        while (i < count_lex(line))
         {
-            printf("tokens[%d] = %s\n", i, tokens[i]); //delete later just a tester
+			j = -1;
+            while (tokens[i].cmd[++j])
+				printf("\nToken %i, command %i: %s\n", i, j, tokens[i].cmd[j]);
+			j = -1;
+            while (tokens[i].ops[++j])
+				printf("\nToken %i, operator %i: %s\n", i, j, tokens[i].ops[j]);
             i++;
         }
 		if (ft_strncmp(line, "exit", 4) == 0 && line[4] == 0)
