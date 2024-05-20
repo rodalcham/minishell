@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/20 12:29:02 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:04:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	is_spc(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' 
-		|| c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	else
-		return (0);
-}
-
-int	is_op(char c)
-{
-	if (c == '|' || c == '<' || c == '>')
-		return (1);
-	return (0);
-}
 
 int	count_lex(char *line)
 {

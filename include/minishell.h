@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 12:07:49 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:06:37 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ int		*get_run(void);
 //tokens
 char	**tokenizer(char *line);
 t_lexer	*tokenize(char *line);
-int	count_lex(char *line);
+int		count_lex(char *line);
 t_lexer	*token_fill(t_lexer *ret, char **args);
 
 //utils
-void	*ft_realloc(void *ptr, size_t size);
+int		is_spc(char c);
+int		is_op(char c);
 
 //split
 char	**ft_split_args(char *str);

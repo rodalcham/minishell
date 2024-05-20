@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/20 12:32:15 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:06:04 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,6 @@ int	sep(char c)
 	return (0);
 }
 
-int	spc(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r')
-	{
-		return (1);
-	}
-	else
-		return (0);
-}
-
 int	arg_count(char *s)
 {
 	int	i;
@@ -69,7 +58,7 @@ int	arg_count(char *s)
 	while (s[i])
 	{
 		x = sep(s[i]);
-		if (i > 0 && (spc(s[i]) || x) && !spc(s[i - 1]) && !sep(s[i - 1]))
+		if (i > 0 && (is_spc(s[i]) || x) && !is_spc(s[i - 1]) && !sep(s[i - 1]))
 			count++;
 		if (x && ++i)
 		{
@@ -80,7 +69,7 @@ int	arg_count(char *s)
 		if (s[i] && (x < 3 || x == sep(s[i])))
 			i++;
 	}
-	if (!s[i] && !spc(s[i - 1]) && !sep(s[i - 1]) && !x)
+	if (!s[i] && !is_spc(s[i - 1]) && !sep(s[i - 1]) && !x)
 		count++;
 	return (count);
 }
@@ -105,7 +94,7 @@ int	ft_arglen(char *arg)
 			i++;
 		return (i);
 	}
-	while (arg[i] && !spc(arg[i]) && !sep(arg[i]))
+	while (arg[i] && !is_spc(arg[i]) && !sep(arg[i]))
 		i++;
 	return (i);
 }
@@ -131,7 +120,7 @@ int	ft_argcpy(char *dst, char *src)
 			dst[i - 1] = src[i - 1];
 	}
 	else
-		while (src[++i] && !spc(src[i]) && !sep(src[i]))
+		while (src[++i] && !is_spc(src[i]) && !sep(src[i]))
 			dst[i] = src[i];
 	dst[i] = '\0';
 	return (i);
@@ -153,7 +142,7 @@ char	**ft_split_args(char *str)
 	ret[count] = NULL;
 	while (str && str[j] && i < count)
 	{
-		while (str[j] && spc(str[j]))
+		while (str[j] && is_spc(str[j]))
 			j++;
 		ret[i] = (char *)malloc(sizeof(char) * (ft_arglen(&str[j]) + 1));
 		if (!ret[i])
