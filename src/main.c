@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 12:15:23 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:26:44 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ void	main_loop(void)
 	while (*get_run() == 1)
 	{
 		line = readline("🐚  ");
-		if (!line)
-			break ;
+		if (line == NULL)
+		{
+			//free because of ctrl + D
+			if (line)
+				free(line);
+			exit (0);
+		}
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
 		tokens = tokenize(line);

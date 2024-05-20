@@ -3,17 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/20 10:29:25 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:31:06 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 char	**ft_splitfree(char **ret, size_t i)
+char	**ft_splitfree(char **ret, size_t i)
 {
+	while (i > 0)
+	{
+		free(ret[i - 1]);
+		i--;
+	}
+	free(ret);
+	return (NULL);
 	while (i > 0)
 	{
 		free(ret[i - 1]);
