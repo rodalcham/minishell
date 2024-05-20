@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/20 12:29:02 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:39:36 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	is_spc(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' 
-		|| c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	else
-		return (0);
-}
-
-int	is_op(char c)
-{
-	if (c == '|' || c == '<' || c == '>')
-		return (1);
-	return (0);
-}
 
 int	count_lex(char *line)
 {
@@ -37,17 +21,17 @@ int	count_lex(char *line)
 	i = 0;
 	count = 0;
 	last = 1;
-	while(line[i])
+	while (line[i])
 	{
 		if (is_op(line[i]))
 		{
 			last = 1;
 			count++;
-			while(line [i] && is_op(line[i]))
+			while (line [i] && is_op(line[i]))
 				i++;
 			i--;
 		}
-		else if(!is_spc(line[i]))
+		else if (!is_spc(line[i]))
 			last = 0;
 		i++;
 	}
@@ -61,7 +45,7 @@ int	count_cmd(char **args, int *j)
 	int	i;
 
 	i = *j;
-	while(args[*j] && !is_op(args[*j][0]))
+	while (args[*j] && !is_op(args[*j][0]))
 		*j += 1;
 	return (*j - i);
 }
@@ -71,7 +55,7 @@ int	count_ops(char **args, int *j)
 	int	i;
 
 	i = *j;
-	while(args[*j] && is_op(args[*j][0]))
+	while (args[*j] && is_op(args[*j][0]))
 		*j += 1;
 	return (*j - i);
 }
@@ -88,9 +72,6 @@ t_lexer	*tokenize(char *line)
 	i = -1;
 	j = 0;
 	args = ft_split_args(line);
-	// while (args[j])
-	// 	printf("\nstr: '%s'\n", args[j++]);
-	// j = 0;	
 	if (!args)
 		printf("\nPreotection Missing\n");//											FIX!
 	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1));
@@ -98,10 +79,12 @@ t_lexer	*tokenize(char *line)
 		printf("\nPreotection Missing\n");//											FIX!
 	while (++i < count)
 	{
-		ret[i].cmd = (char **)malloc(sizeof(char *) * (count_cmd(args, &j) + 1));
+		ret[i].cmd = (char **)malloc(sizeof(char *)
+				* (count_cmd(args, &j) + 1));
 		if (!ret[i].cmd)
 			printf("\nPreotection Missing\n");//										FIX!
-		ret[i].ops = (char **)malloc(sizeof(char *) * (count_ops(args, &j) + 1));
+		ret[i].ops = (char **)malloc(sizeof(char *)
+				* (count_ops(args, &j) + 1));
 		if (!ret[i].ops)
 			printf("\nPreotection Missing\n");//										FIX!
 	}
@@ -119,7 +102,7 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 	while (args[i])
 	{
 		j = 0;
-		while(args[i] && !is_op(args[i][0]))
+		while (args[i] && !is_op(args[i][0]))
 		{
 			ret[z].cmd[j] = args[i];
 			i++;
@@ -127,7 +110,7 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 		}
 		ret[z].cmd[j] = NULL;
 		j = 0;
-		while(args[i] && is_op(args[i][0]))
+		while (args[i] && is_op(args[i][0]))
 		{
 			ret[z].ops[j] = args[i];
 			j++;
@@ -136,6 +119,13 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 		ret[z].ops[j] = NULL;
 		z++;
 	}
-	// path_finder(ret);
-	return ret;
+	ret[z].cmd = NULL;
+	z = 0;
+	while (ret[z].cmd != NULL && ret[z].cmd[0] != NULL)
+	{
+		path_finder(&ret[z], ret[z].cmd[0], getenv("PATH"));
+		printf("PATH: %s\n", ret[z].path);
+		z++;
+	}
+	return (ret);
 }

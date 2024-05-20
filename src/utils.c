@@ -3,34 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/15 12:25:16 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:04:03 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	*ft_realloc(void *ptr, size_t size)
+int	is_spc(char c)
 {
-	void	*new_ptr;
+	if (c == ' ' || c == '\t' || c == '\n' 
+		|| c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	else
+		return (0);
+}
 
-	if (size == 0)
-	{
-		free (ptr);
-		return (NULL);
-	}
-	new_ptr = malloc(size);
-	if (new_ptr)
-	{
-		if (ptr)
-		{
-			ft_memcpy(new_ptr, ptr, size);
-			free (ptr);
-		}
-		else
-			printf("Unable to allocate memory in ft_realloc");
-	}
-	return (new_ptr);
+int	is_op(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
 }

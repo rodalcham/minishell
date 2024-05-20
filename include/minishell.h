@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 12:07:49 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 16:11:30 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,23 @@ int		*get_run(void);
 //tokens
 char	**tokenizer(char *line);
 t_lexer	*tokenize(char *line);
-int	count_lex(char *line);
+int		count_lex(char *line);
 t_lexer	*token_fill(t_lexer *ret, char **args);
 
 //utils
-void	*ft_realloc(void *ptr, size_t size);
+int		is_spc(char c);
+int		is_op(char c);
 
 //split
 char	**ft_split_args(char *str);
+char	**ft_splitfree(char **ret, size_t i);
 
 //signals
 void	signal_handler(void);
 void	handle_ctrl_backslash(int signal);
 void	handle_ctrlc(int signal);
+
+//path
+char	*path_finder(t_lexer *path_command, char *command, char *envp);
 
 #endif
