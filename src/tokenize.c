@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/20 09:39:37 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/20 11:37:50 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	count_lex(char *line)
 			count++;
 			while(line [i] && is_op(line[i]))
 				i++;
+			i--;
 		}
 		else if(!is_spc(line[i]))
 			last = 0;
@@ -62,7 +63,6 @@ int	count_cmd(char **args, int *j)
 	i = *j;
 	while(args[*j] && !is_op(args[*j][0]))
 		*j += 1;
-	printf("\ncmd num %i\n", *j - i);
 	return (*j - i);
 }
 
@@ -73,7 +73,6 @@ int	count_ops(char **args, int *j)
 	i = *j;
 	while(args[*j] && is_op(args[*j][0]))
 		*j += 1;
-	printf("\nops num %i\n", *j - i);
 	return (*j - i);
 }
 
@@ -123,7 +122,6 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 		while(args[i] && !is_op(args[i][0]))
 		{
 			ret[z].cmd[j] = args[i];
-			printf("\ncmd: %s\n", ret[z].cmd[j]);
 			i++;
 			j++;
 		}
@@ -132,11 +130,10 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 		while(args[i] && is_op(args[i][0]))
 		{
 			ret[z].ops[j] = args[i];
-			printf("\nops: %s\n", ret[z].ops[j]);
 			j++;
 			i++;
 		}
-		ret[z].cmd[j] = NULL;
+		ret[z].ops[j] = NULL;
 		z++;
 	}
 	// path_finder(ret);
