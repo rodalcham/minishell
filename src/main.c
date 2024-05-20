@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 12:26:44 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:45:16 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	main_loop(void)
 		line = readline("🐚  ");
 		if (line == NULL)
 		{
+			write(1, "\r🐚  exit", ft_strlen("\r🐚  exit"));
 			//free because of ctrl + D
 			if (line)
 				free(line);

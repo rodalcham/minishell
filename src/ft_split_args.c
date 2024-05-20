@@ -6,13 +6,12 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/20 12:31:06 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 12:32:15 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	**ft_splitfree(char **ret, size_t i)
 char	**ft_splitfree(char **ret, size_t i)
 {
 	while (i > 0)
