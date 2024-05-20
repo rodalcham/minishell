@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/19 15:51:18 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/20 09:39:37 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,12 @@ t_lexer	*tokenize(char *line)
 	int		count;
 
 	count = count_lex(line);
-	printf("\ncount : %i\n", count);
 	i = -1;
 	j = 0;
 	args = ft_split_args(line);
+	// while (args[j])
+	// 	printf("\nstr: '%s'\n", args[j++]);
+	// j = 0;	
 	if (!args)
 		printf("\nPreotection Missing\n");//											FIX!
 	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1));
@@ -121,13 +123,19 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 		while(args[i] && !is_op(args[i][0]))
 		{
 			ret[z].cmd[j] = args[i];
+			printf("\ncmd: %s\n", ret[z].cmd[j]);
 			i++;
 			j++;
 		}
 		ret[z].cmd[j] = NULL;
 		j = 0;
 		while(args[i] && is_op(args[i][0]))
-			ret[z].cmd[j++] = args[i++];
+		{
+			ret[z].ops[j] = args[i];
+			printf("\nops: %s\n", ret[z].ops[j]);
+			j++;
+			i++;
+		}
 		ret[z].cmd[j] = NULL;
 		z++;
 	}

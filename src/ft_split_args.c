@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/19 12:22:04 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/20 09:45:03 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ char	**ft_split_args(char *str)
 	if (!ret)
 		return (NULL);
 	ret[count] = NULL;
-	while (str && str[j] && i < count + 1)
+	while (str && str[j] && i < count)
 	{
 		while (str[j] && spc(str[j]))
 			j++;
