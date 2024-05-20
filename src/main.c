@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 09:21:37 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/20 12:15:23 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	intro(void)
 	printf(" ( M | I | N | I | S | H | E | L | L )\n");
 	printf("  \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \n");
 	printf("    ********************************\n");
-	printf("\n    Welcome to Minishell by \033]8;;https://github.com/lglauch"
-		"\alglauch\033]8;;\a && rchavez\n\n");
+	printf("\n    Welcome to Minishell by \033]8;;https://github.com/rodalcham"
+		"\archavez\033]8;;\a && \033]8;;https://github.com/lglauch"
+		"\alglauch\033]8;;\a\n\n");
 	printf("    ********************************\n");
 }
 
@@ -69,7 +70,8 @@ int	main(int argc, char **argv, char **envp)
 	envp = (void *)envp;
 	if (argc != 1)
 		return (1);
-	// signal_handler();
+	rl_catch_signals = 0;
+	signal_handler();
 	intro();
 	main_loop();
 	printf("exit\n");
