@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 14:17:29 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/20 15:54:52 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ typedef struct s_lexer
 int		*get_run(void);
 
 //tokens
-char	**tokenizer(char *line);
-t_lexer	*tokenize(char *line);
+t_lexer	*tokenize(char *line, char **args);
 int		count_lex(char *line);
 t_lexer	*token_fill(t_lexer *ret, char **args);
+void	free_tokens(t_lexer *tokens, char **args, char *line);
 
 //utils
 int		is_spc(char c);

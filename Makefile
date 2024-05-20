@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+         #
+#    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/05/20 12:11:50 by lglauch          ###   ########.fr        #
+#    Updated: 2024/05/20 15:55:34 by rchavez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CFLAGS	:= -Wextra -Wall -Werror
 CFLAGS	:= -Wextra -Wall -Werror -I/usr/local/opt/readline/include
-SRCS	:= src/main.c src/globals.c src/tokenizer.c src/utils.c src/ft_split_args.c src/tokenize.c src/signals.c
+SRCS	:= src/main.c src/globals.c src/utils.c src/ft_split_args.c src/tokenize.c src/signals.c src/free_tokens.c
 OBJS	:= ${SRCS:src/%.c=src/%.o}
 
 all: $(NAME)

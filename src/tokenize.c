@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/20 14:07:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/20 15:55:10 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ int	count_ops(char **args, int *j)
 	return (*j - i);
 }
 
-t_lexer	*tokenize(char *line)
+t_lexer	*tokenize(char *line, char **args)
 {
 	t_lexer	*ret;
-	char	**args;
 	int		i;
 	int		j;
 	int		count;
@@ -71,9 +70,6 @@ t_lexer	*tokenize(char *line)
 	count = count_lex(line);
 	i = -1;
 	j = 0;
-	args = ft_split_args(line);
-	if (!args)
-		printf("\nPreotection Missing\n");//											FIX!
 	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1));
 	if (!ret)
 		printf("\nPreotection Missing\n");//											FIX!

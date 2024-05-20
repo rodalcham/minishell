@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 12:45:16 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/20 15:58:42 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	intro(void)
 void	main_loop(void)
 {
 	char	*line;
+	char	**args;
 	t_lexer	*tokens;
 
 	line = NULL;
@@ -47,7 +48,10 @@ void	main_loop(void)
 		}
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
-		tokens = tokenize(line);
+		args = ft_split_args(line);
+		if (!args)
+			printf("\nPreotection Missing\n");//											FIX!
+		tokens = tokenize(line, args);
 		if (!tokens)
 			printf("Error tokens returned NULL");
 		int i = 0;
@@ -65,9 +69,8 @@ void	main_loop(void)
         }
 		if (ft_strncmp(line, "exit", 4) == 0 && line[4] == 0)
 			break ;
+		free_tokens(tokens, args, line);
 	}
-	if (line)
-		free(line);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -81,5 +84,6 @@ int	main(int argc, char **argv, char **envp)
 	intro();
 	main_loop();
 	printf("exit\n");
+	system("leaks minishell");
 	return (0);
 }
