@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/20 14:39:36 by jkauker          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:52:39 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ t_lexer	*tokenize(char *line)
 
 t_lexer	*token_fill(t_lexer *ret, char **args)
 {
-	int	i;
-	int	j;
-	int	z;
+	int			i;
+	int			j;
+	int			z;
+	char	*path;
 
 	i = 0;
 	z = 0;
@@ -123,7 +124,12 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 	z = 0;
 	while (ret[z].cmd != NULL && ret[z].cmd[0] != NULL)
 	{
-		path_finder(&ret[z], ret[z].cmd[0], getenv("PATH"));
+		path = path_finder(&ret[z], ret[z].cmd[0], getenv("PATH"));
+		if (!path)
+		{
+			printf("\nCommand not found\n");
+			break ;
+		}
 		printf("PATH: %s\n", ret[z].path);
 		z++;
 	}
