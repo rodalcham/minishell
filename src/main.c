@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/22 15:31:42 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/22 15:46:02 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (1);
 	rl_attempted_completion_function = my_completion_function;
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 	signal_handler();
 	intro();
 	main_loop();
