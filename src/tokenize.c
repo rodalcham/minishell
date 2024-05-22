@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/21 17:52:39 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/22 14:53:59 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	count_lex(char *line)
 		{
 			last = 1;
 			count++;
-			while (line [i] && is_op(line[i]))
+			while (line [i] && (is_op(line[i]) || is_spc(line[i])))
 				i++;
 			i--;
 		}
@@ -60,10 +60,9 @@ int	count_ops(char **args, int *j)
 	return (*j - i);
 }
 
-t_lexer	*tokenize(char *line)
+t_lexer	*tokenize(char *line, char **args)
 {
 	t_lexer	*ret;
-	char	**args;
 	int		i;
 	int		j;
 	int		count;
@@ -71,10 +70,7 @@ t_lexer	*tokenize(char *line)
 	count = count_lex(line);
 	i = -1;
 	j = 0;
-	args = ft_split_args(line);
-	if (!args)
-		printf("\nPreotection Missing\n");//											FIX!
-	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1));
+	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1)); // +1 if you want to null terminate
 	if (!ret)
 		printf("\nPreotection Missing\n");//											FIX!
 	while (++i < count)
@@ -130,7 +126,6 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 			printf("\nCommand not found\n");
 			break ;
 		}
-		printf("PATH: %s\n", ret[z].path);
 		z++;
 	}
 	return (ret);

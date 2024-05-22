@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 12:45:16 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/22 14:59:23 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	intro(void)
 void	main_loop(void)
 {
 	char	*line;
+	char	**args;
 	t_lexer	*tokens;
 
 	line = NULL;
@@ -47,12 +48,14 @@ void	main_loop(void)
 		}
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
-		tokens = tokenize(line);
+		args = ft_split_args(line);
+		if (!args)
+			printf("\nProtection Missing\n");// 											FIX!
+		tokens = tokenize(line, args);
 		if (!tokens)
 			printf("Error tokens returned NULL");
 		int i = 0;
 		int j;
-			
         while (i < count_lex(line))
         {
 			j = -1;
@@ -61,13 +64,16 @@ void	main_loop(void)
 			j = -1;
             while (tokens[i].ops[++j])
 				printf("\nToken %i, operator %i: %s\n", i, j, tokens[i].ops[j]);
+			printf("\nToken %i, path: %s\n", i, tokens[i].path);
             i++;
         }
 		if (ft_strncmp(line, "exit", 4) == 0 && line[4] == 0)
+		{
+			free_tokens(tokens, args, line);
 			break ;
+		}
+		free_tokens(tokens, args, line);
 	}
-	if (line)
-		free(line);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -76,10 +82,11 @@ int	main(int argc, char **argv, char **envp)
 	envp = (void *)envp;
 	if (argc != 1)
 		return (1);
-	rl_catch_signals = 0;
-	signal_handler();
+	// rl_catch_signals = 0;
+	// signal_handler();
 	intro();
 	main_loop();
 	printf("exit\n");
+	system("leaks minishell");
 	return (0);
 }

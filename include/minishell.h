@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/21 14:50:49 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/22 14:34:23 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ typedef struct s_lexer
 int		*get_run(void);
 
 //tokens
-t_lexer	*tokenize(char *line);
+t_lexer	*tokenize(char *line, char **args);
 int		count_lex(char *line);
 t_lexer	*token_fill(t_lexer *ret, char **args);
+void	free_tokens(t_lexer *tokens, char **args, char *line);
 
 //utils
 int		is_spc(char c);

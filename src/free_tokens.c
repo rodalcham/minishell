@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/22 14:15:54 by rchavez@stu      ###   ########.fr       */
+/*   Created: 2024/05/22 14:16:14 by rchavez@stu       #+#    #+#             */
+/*   Updated: 2024/05/22 14:32:00 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include  "../include/minishell.h"
 
-void	handle_ctrlc(int signal)
+void	free_tokens(t_lexer *tokens, char **args, char *line)
 {
-	(void)signal;
-	write(1, "\n", 1);
-	// rl_on_new_line();
-	// rl_replace_line("", 0);
-	// rl_redisplay();
-	//handle free
-}
+	int	i;
+	int	j;
 
-void	handle_ctrl_backslash(int signal)
-{
-	(void)signal;
-}
-
-void	signal_handler(void)
-{
-	signal(SIGINT, handle_ctrlc);
-	signal(SIGQUIT, handle_ctrl_backslash);
+	i = 0;
+	j = count_lex(line);
+	while (i < j)
+	{
+		free(tokens[i].cmd);
+		free(tokens[i].ops);
+		free(tokens[i].path);
+		i++;
+	}
+	free(tokens);
+	i = 0;
+	while (args[i])
+		free(args[i++]);
+	free(args);
+	free(line);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/21 17:53:29 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/22 15:04:40 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ char    *path_finder(t_lexer *path_command, char *command, char *envp)
 			ft_splitfree(paths, i + 1);
 			return (ret);
 		}
-		free (ret);
+		free(paths[i]);
+		free(ret);
 	}
 	return (free(paths), NULL);
 }
