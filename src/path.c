@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/21 17:53:29 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/22 13:56:08 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ size_t	ft_countwords(char const *s, char c)
 	return (x);
 }
 
-char    *path_finder(t_lexer *path_command, char *command, char *envp)
+char	*path_finder(t_lexer *path_command, char *command, char *envp)
 {
 	int		i;
-	char 	**paths;
+	char	**paths;
 	char	*ret;
 
 	paths = ft_split(envp, ':');

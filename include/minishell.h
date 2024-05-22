@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/21 14:50:49 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/22 13:29:10 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_lexer	*token_fill(t_lexer *ret, char **args);
 //utils
 int		is_spc(char c);
 int		is_op(char c);
+char	**my_completion_function(const char *text, int start, int end);
 
 //split
 char	**ft_split_args(char *str);

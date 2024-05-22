@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 12:45:16 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/22 13:23:47 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ void	main_loop(void)
             i++;
         }
 		if (ft_strncmp(line, "exit", 4) == 0 && line[4] == 0)
+		{
+			free (line);
 			break ;
+		}
 	}
 	if (line)
 		free(line);
@@ -76,6 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	envp = (void *)envp;
 	if (argc != 1)
 		return (1);
+	rl_attempted_completion_function = my_completion_function;
 	rl_catch_signals = 0;
 	signal_handler();
 	intro();

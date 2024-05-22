@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/21 17:52:39 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/22 13:48:22 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 	int			i;
 	int			j;
 	int			z;
-	char	*path;
+	char		*path;
 
 	i = 0;
 	z = 0;
@@ -127,11 +127,14 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 		path = path_finder(&ret[z], ret[z].cmd[0], getenv("PATH"));
 		if (!path)
 		{
-			printf("\nCommand not found\n");
-			break ;
+			z++;
+			continue ;
 		}
-		printf("PATH: %s\n", ret[z].path);
-		z++;
+		else
+		{
+			printf("PATH: %s\n", ret[z].path);
+			z++;
+		}
 	}
 	return (ret);
 }
