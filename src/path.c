@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/22 13:56:08 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/22 15:27:08 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ char	*path_finder(t_lexer *path_command, char *command, char *envp)
 			ft_splitfree(paths, i + 1);
 			return (ret);
 		}
-		free (ret);
+		free(paths[i]);
+		free(ret);
 	}
 	return (free(paths), NULL);
 }
