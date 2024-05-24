@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/22 16:08:50 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/23 21:05:16 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ int	main(int argc, char **argv, char **envp)
 	intro();
 	main_loop();
 	printf("exit\n");
+	system("leaks minishell");
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/22 15:27:08 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/24 09:56:36 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t	ft_countwords(char const *s, char c)
 	return (x);
 }
 
-char	*path_finder(t_lexer *path_command, char *command, char *envp)
+char	*path_finder(char *command, char *envp)
 {
 	int		i;
 	char	**paths;
@@ -71,12 +71,11 @@ char	*path_finder(t_lexer *path_command, char *command, char *envp)
 			return (ft_splitfree(paths, i), NULL);
 		if (access(ret, X_OK) == 0)
 		{
-			path_command->path = ret;
 			ft_splitfree(paths, i + 1);
 			return (ret);
 		}
 		free(paths[i]);
 		free(ret);
 	}
-	return (free(paths), NULL);
+	return (free(paths), ft_strdup("not_found"));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/22 15:30:47 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/24 09:04:47 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,21 @@ typedef struct s_lexer
 int		*get_run(void);
 
 //tokens
-t_lexer	*tokenize(char *line, char **args);
 int		count_lex(char *line);
-t_lexer	*token_fill(t_lexer *ret, char **args);
+t_lexer	*tokenize(char *line, char **args);
+t_lexer	*token_fill(t_lexer *ret, char **args, char *line);
+t_lexer	*fill_paths(t_lexer *ret, char **args, char *line);
 void	free_tokens(t_lexer *tokens, char **args, char *line);
+void	free_fail(t_lexer *tokens, char **args, char *line, int pos);
+
 
 //utils
 int		is_spc(char c);
 int		is_op(char c);
 char	**my_completion_function(const char *text, int start, int end);
+
+//error handling
+void	ft_error(int	errno);
 
 //split
 char	**ft_split_args(char *str);
@@ -62,6 +68,6 @@ void	handle_ctrl_backslash(int signal);
 void	handle_ctrlc(int signal);
 
 //path
-char	*path_finder(t_lexer *path_command, char *command, char *envp);
+char	*path_finder(char *command, char *envp);
 
 #endif

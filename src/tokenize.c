@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/22 15:26:22 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/24 09:07:48 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	count_lex(char *line)
 	return (count);
 }
 
-int	count_cmd(char **args, int *j)
+int	c_cmd(char **args, int *j)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ int	count_cmd(char **args, int *j)
 	return (*j - i);
 }
 
-int	count_ops(char **args, int *j)
+int	c_ops(char **args, int *j)
 {
 	int	i;
 
@@ -72,27 +72,25 @@ t_lexer	*tokenize(char *line, char **args)
 	j = 0;
 	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1)); // +1 if you want to null terminate
 	if (!ret)
-		printf("\nPreotection Missing\n");//											FIX!
+		free_fail(ret, args, line, i);
 	while (++i < count)
 	{
-		ret[i].cmd = (char **)malloc(sizeof(char *)
-				* (count_cmd(args, &j) + 1));
+		ret[i].path = NULL;
+		ret[i].cmd = (char **)malloc(sizeof(char *) * (c_cmd(args, &j) + 1));
 		if (!ret[i].cmd)
-			printf("\nPreotection Missing\n");//										FIX!
-		ret[i].ops = (char **)malloc(sizeof(char *)
-				* (count_ops(args, &j) + 1));
+			free_fail(ret, args, line, i);
+		ret[i].ops = (char **)malloc(sizeof(char *) * (c_ops(args, &j) + 1));
 		if (!ret[i].ops)
-			printf("\nPreotection Missing\n");//										FIX!
+			free_fail(ret, args, line, i);
 	}
-	return (token_fill(ret, args));
+	return (token_fill(ret, args, line));
 }
 
-t_lexer	*token_fill(t_lexer *ret, char **args)
+t_lexer	*token_fill(t_lexer *ret, char **args, char *line)
 {
 	int			i;
 	int			j;
 	int			z;
-	char		*path;
 
 	i = 0;
 	z = 0;
@@ -100,37 +98,32 @@ t_lexer	*token_fill(t_lexer *ret, char **args)
 	{
 		j = 0;
 		while (args[i] && !is_op(args[i][0]))
-		{
-			ret[z].cmd[j] = args[i];
-			i++;
-			j++;
-		}
+			ret[z].cmd[j++] = args[i++];
 		ret[z].cmd[j] = NULL;
 		j = 0;
 		while (args[i] && is_op(args[i][0]))
-		{
-			ret[z].ops[j] = args[i];
-			j++;
-			i++;
-		}
+			ret[z].ops[j++] = args[i++];
 		ret[z].ops[j] = NULL;
 		z++;
 	}
 	ret[z].cmd = NULL;
-	z = 0;
-	while (ret[z].cmd != NULL && ret[z].cmd[0] != NULL)
+	return (fill_paths(ret, args, line));
+}
+
+t_lexer	*fill_paths(t_lexer *ret, char **args, char *line)
+{
+	int	i;
+	int	z;
+
+	i = 0;
+	z = count_lex(line);
+	while (i < z)
 	{
-		path = path_finder(&ret[z], ret[z].cmd[0], getenv("PATH"));
-		if (!path)
-		{
-			z++;
-			continue ;
-		}
+		ret[i].path = path_finder(ret[i].cmd[0], getenv("PATH"));
+		if (!ret[i].path)
+			free_fail(ret, args, line, z - 1);
 		else
-		{
-			printf("PATH: %s\n", ret[z].path);
-			z++;
-		}
+			i++;
 	}
-	return (ret);
+	return(ret);
 }
