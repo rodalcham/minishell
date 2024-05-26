@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/24 09:04:47 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/25 13:16:36 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	free_fail(t_lexer *tokens, char **args, char *line, int pos);
 int		is_spc(char c);
 int		is_op(char c);
 char	**my_completion_function(const char *text, int start, int end);
+char	*make_unclosed_quotes(char *str);
+char	*handle_unclosed_quotes(char *str);
 
 //error handling
 void	ft_error(int	errno);

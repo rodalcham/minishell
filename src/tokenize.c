@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/24 09:07:48 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/24 13:35:47 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ t_lexer	*tokenize(char *line, char **args)
 	count = count_lex(line);
 	i = -1;
 	j = 0;
+	if (args[0][0] && is_op(args[0][0]))
+	{
+		printf("minishell: syntax error near unexpected token '%c'\n", args[0][0]);
+		ft_error(1);
+	}
 	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1)); // +1 if you want to null terminate
 	if (!ret)
 		free_fail(ret, args, line, i);
