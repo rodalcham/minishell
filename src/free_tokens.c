@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:16:14 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/24 09:55:48 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/27 12:33:42 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_fail(t_lexer *tokens, char **args, char *line, int pos)
 
 	i = -1;
 	free(line);
-	while(args[++i])
+	while (args[++i])
 		free(args[i]);
 	free(args);
 	i = 0;

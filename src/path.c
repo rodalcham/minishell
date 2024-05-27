@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/24 09:56:36 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/05/27 12:09:25 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ char	*path_finder(char *command, char *envp)
 	char	**paths;
 	char	*ret;
 
+	if (!command)
+		return (ft_strdup("not_found"));
 	paths = ft_split(envp, ':');
 	if (!paths)
 		return (NULL);
