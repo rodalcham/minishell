@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
 /*   Updated: 2024/05/27 15:24:36 by jkauker          ###   ########.fr       */
+=======
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
+/*   Updated: 2024/05/27 12:02:37 by rchavez          ###   ########.fr       */
+>>>>>>> 6d2afbacb42251a8bfabadb436ac20af335db2c9
 /*                                                                            */
 /* ************************************************************************** */
 
