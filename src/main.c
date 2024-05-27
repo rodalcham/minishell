@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/24 13:15:01 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/27 15:24:36 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,22 @@ void	main_loop(void)
 
 int	main(int argc, char **argv, char **envp)
 {
+	// t_envp	*envp_list;
+
 	argv = (void *)argv;
-	envp = (void *)envp;
 	if (argc != 1)
 		return (1);
+	envp = (void *)envp;
+	printf("moiinnn");
+	fflush(stdout);
+	// envp_list = ft_create_envp(envp);
 	// rl_attempted_completion_function = my_completion_function;
 	// rl_catch_signals = 0;
 	signal_handler();
 	intro();
 	main_loop();
 	printf("exit\n");
+	// ft_free_envp(envp_list);
 	system("leaks minishell");
 	return (0);
 }

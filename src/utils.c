@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/26 23:25:25 by leo              ###   ########.fr       */
+/*   Updated: 2024/05/27 15:54:54 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,50 +41,66 @@ int	is_op(char c)
 // 	return (matches);
 // }
 
-
-char *make_unclosed_quotes(char *str)
+char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 {
-    char *new_input;
-    char *new_str;
+	char	*new_input;
+	char	*new_str;
+	int		i;
 
-    new_input = readline("> ");
-    if (!new_input)
+	new_str = malloc(sizeof(char) * ft_strlen(str) + 1);
+	ft_strcpy(new_str, str);
+	ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
+	while (double_quotes == 1 || single == 1)
 	{
-        return (NULL);
+		new_input = readline("> ");
+		if (!new_input)
+			return (NULL);
+		new_str = realloc(new_str, sizeof(char) * (ft_strlen(new_str)
+					+ ft_strlen(new_input) + 2));
+		if (!new_str)
+		{
+			free(new_input);
+			return (NULL);
+		}
+		ft_strlcat(new_str, new_input, ft_strlen(new_str)
+			+ ft_strlen(new_input) + 1);
+		ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
+		i = 0;
+		while (new_input[i])
+		{
+			if (new_input[i] == '"' && double_quotes == 1)
+			{
+				double_quotes = 0;
+			}
+			else if (new_input[i] == '\'' && single == 1)
+			{
+				single = 0;
+			}
+			i++;
+		}
+		free(new_input);
 	}
-    new_str = malloc(sizeof(char) * (strlen(str) + strlen(new_input) + 2));
-    if (!new_str)
-    {
-        free(new_input);
-        return (NULL);
-    }
-    strcpy(new_str, str);
-    strcat(new_str, " ");    //if not in libft write them
-    strcat(new_str, new_input);
-    free(str);
-    free(new_input);
-	if (handle_unclosed_quotes(new_str)) 
-		return (make_unclosed_quotes(new_str));
-    return (new_str);
+	return (new_str);
 }
+
 char	*handle_unclosed_quotes(char *str)
 {
-    int	i;
-    int	single;
-    int	double_quotes;
+	int	i;
+	int	single;
+	int	double_quotes;
 
-    i = 0;
-    single = 0;
-    double_quotes = 0;
-    while (str[i])
-    {
-        if (str[i] == '\'' && double_quotes == 0)
-            single = !single;
-        if (str[i] == '\"' && single == 0)
-            double_quotes = !double_quotes;
-        i++;
-    }
-    if (single == 1 || double_quotes == 1)
-        str = make_unclosed_quotes(str);
-    return (str);
+	i = 0;
+	single = 0;
+	double_quotes = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' && double_quotes == 0)
+			single = !single;
+		if (str[i] == '\"' && single == 0)
+			double_quotes = !double_quotes;
+		i++;
+	}
+	if (single == 1 || double_quotes == 1)
+		str = make_unclosed_quotes(str, double_quotes, single);
+	return (str);
 }
