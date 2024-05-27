@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/22 16:05:08 by rchavez@stu      ###   ########.fr       */
+/*   Created: 2024/05/23 21:09:53 by rchavez@stu       #+#    #+#             */
+/*   Updated: 2024/05/24 09:56:26 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	handle_ctrlc(int signal)
+void	ft_error(int	errno)
 {
-	(void)signal;
-	write(1, "\n", 1);
-	// rl_on_new_line();
-	// rl_replace_line("", 0);
-	// rl_redisplay();
-	// handle free
-}
-
-void	handle_ctrl_backslash(int signal)
-{
-	(void)signal;
-}
-
-void	signal_handler(void)
-{
-	signal(SIGINT, handle_ctrlc);
-	signal(SIGQUIT, handle_ctrl_backslash);
+	if (errno == -1)
+		printf("\nMemory allocation failed.\n");
+	exit(0);
 }

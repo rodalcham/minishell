@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/20 15:54:52 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/27 11:46:31 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,34 @@ typedef struct s_lexer
 int		*get_run(void);
 
 //tokens
-t_lexer	*tokenize(char *line, char **args);
 int		count_lex(char *line);
-t_lexer	*token_fill(t_lexer *ret, char **args);
+t_lexer	*tokenize(char *line, char **args);
+t_lexer	*token_fill(t_lexer *ret, char **args, char *line);
+t_lexer	*fill_paths(t_lexer *ret, char **args, char *line);
 void	free_tokens(t_lexer *tokens, char **args, char *line);
+void	free_fail(t_lexer *tokens, char **args, char *line, int pos);
+
 
 //utils
 int		is_spc(char c);
 int		is_op(char c);
+char	**my_completion_function(const char *text, int start, int end);
+char	*make_unclosed_quotes(char *str);
+char	*handle_unclosed_quotes(char *str);
+
+//error handling
+void	ft_error(int	errno);
 
 //split
 char	**ft_split_args(char *str);
+char	**ft_splitfree(char **ret, size_t i);
 
 //signals
 void	signal_handler(void);
 void	handle_ctrl_backslash(int signal);
 void	handle_ctrlc(int signal);
+
+//path
+char	*path_finder(char *command, char *envp);
 
 #endif
