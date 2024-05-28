@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/27 15:21:44 by jkauker          ###   ########.fr       */
+/*   Updated: 2024/05/28 13:42:01 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*ft_envp_get_value(char *envp)
 	int		len;
 	char	*value;
 
-	printf("values");
 	value = NULL;
 	i = 0;
 	j = 0;
@@ -44,15 +43,15 @@ char	*ft_envp_get_value(char *envp)
 		i++;
 	while (envp[j] != 0)
 		j++;
+	if (envp[i] == 0)
+		return (NULL);
 	len = j - i;
 	value = malloc(sizeof(char) * (len + 1));
 	if (!value)
 		return (NULL);
-	if (envp[i] == 0)
-		return (NULL);
 	j = 0;
-	while (envp[i])
-		value[j] = envp[i];
+	while (envp[++i])
+		value[j++] = envp[i];
 	value[j] = 0;
 	return (value);
 }
@@ -62,7 +61,6 @@ char	*ft_envp_get_name(char *envp)
 	char	*name;
 	int		i;
 
-	printf("name");
 	name = NULL;
 	i = 0;
 	if (!envp)
@@ -92,7 +90,6 @@ t_envp	*ft_create_envp(char **envp)
 	j = 0;
 	head = NULL;
 	current = NULL;
-	printf("envp main");
 	while (envp[j])
 	{
 		new_node = malloc(sizeof(t_envp));

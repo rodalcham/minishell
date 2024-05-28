@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/27 12:09:25 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/05/28 13:41:05 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,19 @@ char	*path_finder(char *command, char *envp)
 		free(ret);
 	}
 	return (free(paths), ft_strdup("not_found"));
+}
+
+char	*env_get_by_name(char *name)
+{
+	t_envp	*head;
+
+	head = *get_envp();
+	while (head)
+	{
+		if (!ft_strncmp(head->name, name, ft_strlen(head->name))
+			&& (ft_strlen(name) == ft_strlen(head->name)))
+			return (head->value);
+		head = head->next;
+	}
+	return (NULL);
 }

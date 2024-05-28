@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/27 17:01:46 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/05/28 12:56:20 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ typedef struct s_lexer
 	char			**ops;
 }					t_lexer;
 
-//signals
+//fake globals
 int		*get_run(void);
+t_envp	**get_envp(void);
 
 //tokens
 int		count_lex(char *line);
@@ -79,6 +80,7 @@ void	handle_ctrlc(int signal);
 
 //path
 char	*path_finder(char *command, char *envp);
+char	*env_get_by_name(char *name);
 
 //envp
 t_envp	*ft_create_envp(char **envp);

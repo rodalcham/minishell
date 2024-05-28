@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/27 16:15:03 by lglauch          ###   ########.fr       */
-=======
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/27 12:24:53 by rchavez          ###   ########.fr       */
->>>>>>> 6d2afbacb42251a8bfabadb436ac20af335db2c9
+/*   Updated: 2024/05/28 12:56:42 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +119,7 @@ t_lexer	*fill_paths(t_lexer *ret, char **args, char *line)
 	z = count_lex(line);
 	while (i < z)
 	{
-		ret[i].path = path_finder(ret[i].cmd[0], getenv("PATH"));
+		ret[i].path = path_finder(ret[i].cmd[0], env_get_by_name("PATH"));
 		if (!ret[i].path)
 			free_fail(ret, args, line, z - 1);
 		else
