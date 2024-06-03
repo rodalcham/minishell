@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/28 12:56:20 by jkauker          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:14:31 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@
 # include <fcntl.h>
 # include <dirent.h>
 # include <unistd.h>
-
-// typedef struct s_lexer
-// {
-// 	s_lexer	*next;
-// 	s_lexer	*previous;
-// 	int		index;
-// 	char	**str;
-// }		t_lexer;
 
 typedef struct s_envp
 {
@@ -60,7 +52,6 @@ void	free_fail(t_lexer *tokens, char **args, char *line, int pos);
 //utils
 int		is_spc(char c);
 int		is_op(char c);
-char	**my_completion_function(const char *text, int start, int end);
 char	*make_unclosed_quotes(char *str, int double_quotes, int single);
 char	*handle_unclosed_quotes(char *str);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/28 13:41:55 by jkauker          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:26:55 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	main_loop(void)
 		tokens = tokenize(line, args);
 		if (!tokens)
 			printf("Error tokens returned NULL");
+		// expand_tokens(tokens);
 		int i = 0;
 		int j = 0;
         while (i < count_lex(line))
@@ -86,7 +87,8 @@ int	main(int argc, char **argv, char **envp)
 	intro();
 	main_loop();
 	printf("exit\n");
-	// ft_free_envp(envp_list);
+	// ft_free_envp(*get_envp());
+	// *get_envp() = NULL;
 	system("leaks minishell");
 	return (0);
 }

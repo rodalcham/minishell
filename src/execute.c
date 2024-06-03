@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/02 09:52:04 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/03 14:08:33 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +91,19 @@ void	resolve(t_lexer *tokens, int i)
 
 	}
 }
+
+
+pipe
+fork
+	dup2(output)
+	execve(ls)
+close(fd)
+pipe
+fork()
+	dup2(input)
+	dup2(output)
+	execve(grep)
+close(fd)
+fork
+	dup2(input)
+	execve(awk)

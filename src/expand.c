@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/03 11:19:55 by lglauch          ###   ########.fr       */
+/*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
+/*   Updated: 2024/06/03 17:16:14 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	handle_ctrlc(int signal)
+char	*expand_tokens(char *str, char *original, int count)
 {
-	(void)signal;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	//free later
-}
+	int		i;
+	int		j;
+	int		x;
+	char	*envp_name;
+	char	*envp_value;
+	char	*new;
 
-void	signal_handler(void)
-{
-	signal(SIGINT, handle_ctrlc);
-	signal(SIGQUIT, SIG_IGN);
+	i = 0;
+	j = 0;
+	x = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '"')
+	{
+		if (str[i] == '$' && str[i + 1] == '$')
+		{
+			envp_value = env_get_by_name("$$");
+			break ;
+		}
+		envp_name[j++] = str[i++];
+	}
+	envp_value = env_get_by_name(envp_name);
+	
 }
