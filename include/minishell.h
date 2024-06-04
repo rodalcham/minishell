@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/03 16:14:31 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/04 15:31:14 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,36 @@
 # include <dirent.h>
 # include <unistd.h>
 
+# define READ O_RDONLY
+# define WRITE (O_WRONLY | O_TRUNC | O_CREAT)
+# define APPEND (O_WRONLY | O_CREAT | O_APPEND)
+// # define HEREDOC 
+# define PERMISSIONS 0644
+
+
 typedef struct s_envp
 {
 	char			*value;
 	char			*name;
 	struct s_envp	*next;
-}			t_envp;
+}					t_envp;
+
+typedef struct s_file
+{
+	char			*filename;
+	int				mode;
+	int				fd;
+	struct s_file	*next;
+}					t_file;
 
 typedef struct s_lexer
 {
 	char			*path;
 	char			**cmd;
-	char			**ops;
+	t_file			*input;
+	t_file			*output;
+	char **ops;
+	struct s_lexer	*next;
 }					t_lexer;
 
 //fake globals
@@ -48,6 +66,9 @@ t_lexer	*token_fill(t_lexer *ret, char **args, char *line);
 t_lexer	*fill_paths(t_lexer *ret, char **args, char *line);
 void	free_tokens(t_lexer *tokens, char **args, char *line);
 void	free_fail(t_lexer *tokens, char **args, char *line, int pos);
+
+//files
+t_file	*new_file(void);
 
 //utils
 int		is_spc(char c);
