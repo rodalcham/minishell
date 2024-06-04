@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/03 16:14:31 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:49:14 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*handle_unclosed_quotes(char *str);
 
 //utils2
 char	*ft_strcpy(char *dest, char *src);
+char	*ft_strncpy(char *dest, char *src, size_t len);
 
 //error handling
 void	ft_error(int errno);
@@ -76,5 +77,8 @@ char	*env_get_by_name(char *name);
 //envp
 t_envp	*ft_create_envp(char **envp);
 void	ft_free_envp(t_envp *head);
+
+//expand
+char	*expand_tokens(char *str);
 
 #endif

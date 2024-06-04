@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:51:05 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/27 15:05:58 by jkauker          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:23:40 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,26 @@ char	*ft_strcpy(char *dest, char *src)
 		i++;
 	}
 	dest[i] = 0;
+	return (dest);
+}
+
+char	*ft_strncpy(char *dest, char *src, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	if (!src)
+		return (0);
+	while (src[i] && i < len)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < len)
+	{
+		dest[i] = 0;
+		i++;
+	}
 	return (dest);
 }
 

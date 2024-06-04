@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/03 17:18:12 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:29:22 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,6 @@ char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 			{
 				single = 0;
 			}
-			// else if (new_input[i] == '$' && double_quotes == 1)
-			// {
-			// 	tmp_str = new_str;
-			// 	new_str = expand_tokens(tmp_str + i, tmp_str, i);
-			// }
 			i++;
 		}
 		free(new_input);

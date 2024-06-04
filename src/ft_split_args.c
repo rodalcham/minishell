@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/05/27 14:56:19 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:49:27 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ char	**ft_split_args(char *str)
 	i = 0;
 	j = 0;
 	str = handle_unclosed_quotes(str);
+	str = expand_tokens(str);
 	count = arg_count(str);
 	ret = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!ret)
