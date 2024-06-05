@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/04 12:23:52 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/05 13:24:05 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	intro(void)
 	printf(" ( M | I | N | I | S | H | E | L | L )\n");
 	printf("  \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \n");
 	printf("    ********************************\n");
-	printf("\n    Welcome to Minishell by \033]8;;https://github.com/lglauch"
-		"\alglauch\033]8;;\a && ...\n\n");
+	printf("\n    Welcome to Minishell by \033]8;;https://github.com/rodalcham"
+		"\archavez\033]8;;\a && \033]8;;https://github.com/lglauch"
+		"\alglauch\033]8;;\a\n\n");
 	printf("    ********************************\n");
 }
 
@@ -47,7 +48,6 @@ void	main_loop(void)
 		tokens = tokenize(line, args);
 		if (!tokens)
 			printf("Error tokens returned NULL");
-		// expand_tokens(tokens);
 		int i = 0;
 		int j = 0;
         while (i < count_lex(line))
@@ -87,8 +87,7 @@ int	main(int argc, char **argv, char **envp)
 	intro();
 	main_loop();
 	printf("exit\n");
-	// ft_free_envp(*get_envp());
-	// *get_envp() = NULL;
+	// ft_free_envp(envp_list);
 	system("leaks minishell");
 	return (0);
 }
