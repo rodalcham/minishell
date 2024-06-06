@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/05 13:24:05 by leo              ###   ########.fr       */
+/*   Updated: 2024/06/06 13:44:59 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	main_loop(void)
 			add_history(line);
 		args = ft_split_args(line);
 		if (!args)
-			printf("Unprotected\n");/////             							    FIX!!!	
+			printf("Unprotected\n");/////             							    FIX!!!	// XXX: hi
 		tokens = tokenize(line, args);
 		if (!tokens)
 			printf("Error tokens returned NULL");

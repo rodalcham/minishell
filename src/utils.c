@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/04 13:29:22 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/06 16:55:57 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*handle_unclosed_quotes(char *str)
 		if (str[i] == '\'' && double_quotes == 0)
 			single = !single;
 		if (str[i] == '\"' && single == 0)
-			double_quotes = !double_quotes;
+			double_quotes += 1;
 		i++;
 	}
 	if (single == 1 || double_quotes == 1)

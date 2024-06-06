@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/05 17:53:51 by jkauker          ###   ########.fr       */
+/*   Updated: 2024/06/06 17:00:10 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char	*ft_inject_value(char *str, char *placeholder, char *envp_value)
 	if (rtr == NULL)
 		return (NULL);
 	ft_strncpy(rtr, str, pos - str);
-	rtr[pos - str] = 0;
 	ft_strlcat(rtr, envp_value, (pos) - (str) + envp_value_len + 1);
 	ft_strlcat(rtr, pos + placeholder_len,
 		str_len - placeholder_len + envp_value_len + 1);
+	rtr[str_len - placeholder_len + envp_value_len + 1] = 0;
 	return (rtr);
 }
 
@@ -45,11 +45,27 @@ char	*transform_variable(char *str, char *envp_name, char *envp_value)
 
 	placeholder = ft_strjoin("$", envp_name);
 	if (envp_value == NULL)
-		new = ft_inject_value(str, placeholder, placeholder);
+		new = ft_inject_value(str, placeholder, "");
 	else
 		new = ft_inject_value(str, placeholder, envp_value);
 	free (placeholder);
 	return (new);
+}
+
+int	is_within_single_quotes(char *str, int index)
+	{
+	int	i;
+	int	in_single_quotes;
+
+	i = 0;
+	in_single_quotes = 0;
+	while (i < index)
+	{
+		if (str[i] == '\'')
+			in_single_quotes = !in_single_quotes;
+		i++;
+	}
+	return (in_single_quotes);
 }
 
 char	*expand_tokens(char *str)
@@ -64,20 +80,16 @@ char	*expand_tokens(char *str)
 	new = ft_strdup(str);
 	while (str[i])
 	{
-		if (str[i++] != '$')
+		if (str[i++] != '$' || is_within_single_quotes(str, i))
 			continue ;
 		j = 0;
 		envp_name = malloc(sizeof(char) * ft_strlen(&str[i]) + 1);
-		while (str[i] && str[i] != ' ' && str[i] != '"' && str[i] != '$'
-			&& (ft_isalnum(str[i]) || str[i] != '_'))
+		while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 			envp_name[j++] = str[i++];
 		envp_name[j] = 0;
 		envp_value = env_get_by_name(envp_name);
-		char *tpm = transform_variable(new, envp_name, envp_value);
-		free (new);
-		new = tpm;
+		new = transform_variable(new, envp_name, envp_value);
 		free (envp_name);
 	}
-	printf("new: %s\n", new);
 	return (new);
 }

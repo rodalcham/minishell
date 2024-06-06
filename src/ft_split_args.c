@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/04 16:49:27 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/06 16:56:12 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,6 @@ char	**ft_split_args(char *str)
 			return (ft_splitfree(ret, i));
 		j += ft_argcpy(ret[i++], &str[j]);
 	}
+	free (str);
 	return (ret);
 }
