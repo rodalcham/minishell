@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/06 16:55:57 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/10 10:12:27 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 {
 	char	*new_input;
 	char	*new_str;
-	// char	*tmp_str;
 	int		i;
 
 	new_str = malloc(sizeof(char) * ft_strlen(str) + 2);

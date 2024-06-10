@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/10 12:21:27 by rchavez          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/06/10 13:34:01 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -28,7 +29,6 @@
 # define APPEND (O_WRONLY | O_CREAT | O_APPEND)
 // # define HEREDOC 
 # define PERMISSIONS 0644
-
 
 typedef struct s_envp
 {
@@ -51,13 +51,14 @@ typedef struct s_lexer
 	char			**cmd;
 	t_file			*input;
 	t_file			*output;
-	char **ops;
+	char 			**ops;
 	struct s_lexer	*next;
 }					t_lexer;
 
-//fake globals
+//helper values
 int		*get_run(void);
 t_envp	**get_envp(void);
+int		*get_exit_status(void);
 
 //tokens
 int		count_lex_t(char *line);
