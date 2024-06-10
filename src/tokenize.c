@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/03 16:57:51 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/10 11:18:33 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ t_lexer	*fill_paths(t_lexer *ret, char **args, char *line)
 
 	i = 0;
 	z = count_lex(line);
+	printf("\n%i\n", z);
 	while (i < z)
 	{
 		ret[i].path = path_finder(ret[i].cmd[0], env_get_by_name("PATH"));

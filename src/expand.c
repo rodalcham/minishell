@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/06 17:00:10 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/10 11:55:12 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_inject_value(char *str, char *placeholder, char *envp_value)
 	ft_strlcat(rtr, envp_value, (pos) - (str) + envp_value_len + 1);
 	ft_strlcat(rtr, pos + placeholder_len,
 		str_len - placeholder_len + envp_value_len + 1);
-	rtr[str_len - placeholder_len + envp_value_len + 1] = 0;
+	rtr[str_len - placeholder_len + envp_value_len] = 0;
 	return (rtr);
 }
 
@@ -87,7 +87,10 @@ char	*expand_tokens(char *str)
 		while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 			envp_name[j++] = str[i++];
 		envp_name[j] = 0;
-		envp_value = env_get_by_name(envp_name);
+		if (ft_strncmp(envp_name, "?", 1) == 0)
+			envp_value = ft_itoa(*get_exit_status());
+		else
+			envp_value = env_get_by_name(envp_name);
 		new = transform_variable(new, envp_name, envp_value);
 		free (envp_name);
 	}

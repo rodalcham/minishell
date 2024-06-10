@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/05/28 12:40:56 by jkauker          ###   ########.fr       */
+/*   Updated: 2024/06/10 11:16:15 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,11 @@ t_envp	**get_envp(void)
 	static t_envp	*envp = NULL;
 
 	return (&envp);
+}
+
+int	*get_exit_status(void)
+{
+	static int	status = 0;
+
+	return (&status);
 }

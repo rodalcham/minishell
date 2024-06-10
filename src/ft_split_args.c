@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/06 16:56:12 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/10 11:13:58 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,10 @@ int	ft_argcpy(char *dst, char *src)
 		i++;
 		dst[i] = src[i];
 		if (x > 2 && x != sep(src[i + 1]))
+		{
+			dst[++i] = '\0';
 			return (1);
+		}	
 		while (src[++i] && x != sep(src[i]))
 			dst[i] = src[i];
 		if (x == sep(src[i++]))

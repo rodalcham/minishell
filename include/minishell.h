@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/09 13:23:35 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/10 11:16:57 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 // # define HEREDOC 
 # define PERMISSIONS 0644
 
-
 typedef struct s_envp
 {
 	char			*value;
@@ -51,13 +50,14 @@ typedef struct s_lexer
 	char			**cmd;
 	t_file			*input;
 	t_file			*output;
-	char **ops;
+	char 			**ops;
 	struct s_lexer	*next;
 }					t_lexer;
 
-//fake globals
+//helper values
 int		*get_run(void);
 t_envp	**get_envp(void);
+int		*get_exit_status(void);
 
 //tokens
 int		count_lex(char *line);
