@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/04 17:26:38 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/09 13:23:35 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,11 @@ void	free_tokens(t_lexer *tokens, char **args, char *line);
 void	free_fail(t_lexer *tokens, char **args, char *line, int pos);
 
 //files
-t_file	*new_file(void);
+t_file	*new_file(t_file *head);
+void	set_file(t_file *file, char *file_n, int fd_n, int mode_n);
+
+//io_handler
+void	add_input(t_lexer *lex, char **args, int *i);
 
 //utils
 int		is_spc(char c);
