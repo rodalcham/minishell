@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_handler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/09 13:57:49 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/10 12:24:58 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,10 @@ void	add_output(t_lexer *lex, char **args, int *i)
 	}
 	set_file(lex->input, args[*i], fd, mod);
 	(*i)++;
+}
+
+void	here_doc(t_lexer *lex, char **args, int *i)
+{
+	if (lex && args && i)
+		printf("\nMISSING: HEREDOC\n");
 }

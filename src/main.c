@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/06 13:44:59 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/10 13:24:18 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,34 +45,35 @@ void	main_loop(void)
 		args = ft_split_args(line);
 		if (!args)
 			printf("Unprotected\n");/////             							    FIX!!!	// XXX: hi
-		tokens = tokenize(line, args);
-		if (!tokens)
-			printf("Error tokens returned NULL");
-		int i = 0;
-		int j = 0;
-        while (i < count_lex(line))
-        {
-			j = 0;
-			printf("\ntoken[%i].path : %s\n", i, tokens[i].path);
-			while (tokens[i].cmd[j])
-			{
-            	printf("\ntoken[%i].cmd[%i] : %s\n", i, j, tokens[i].cmd[j]);
-				j++;
-			}
-			j = 0;
-			while (tokens[i].ops[j])
-			{
-            	printf("\ntoken[%i].ops[%i] : %s\n", i, j, tokens[i].ops[j]);
-				j++;
-			}
-            i++;
-        }
-		if (ft_strncmp(line, "exit", 4) == 0 && line[4] == 0)
-		{
-			free_tokens(tokens, args, line);
-			break ;
-		}
-	free_tokens(tokens, args, line);
+		tokens = lex(args);
+		// tokens = tokenize(line, args);
+		// if (!tokens)
+			// printf("Error tokens returned NULL");
+		// int i = 0;
+		// int j = 0;
+        // while (i < count_lex_t(line))
+        // {
+		// 	j = 0;
+		// 	printf("\ntoken[%i].path : %s\n", i, tokens[i].path);
+		// 	while (tokens[i].cmd[j])
+		// 	{
+        //     	printf("\ntoken[%i].cmd[%i] : %s\n", i, j, tokens[i].cmd[j]);
+		// 		j++;
+		// 	}
+		// 	j = 0;
+		// 	while (tokens[i].ops[j])
+		// 	{
+        //     	printf("\ntoken[%i].ops[%i] : %s\n", i, j, tokens[i].ops[j]);
+		// 		j++;
+		// 	}
+        //     i++;
+        // }
+		// if (ft_strncmp(line, "exit", 4) == 0 && line[4] == 0)
+		// {
+		// 	free_tokens(tokens, args, line);
+		// 	break ;
+		// }
+	// free_tokens(tokens, args, line);
 	}
 }
 

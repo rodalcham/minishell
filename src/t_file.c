@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_file.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:06:55 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/09 13:21:31 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/10 10:57:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_file	*new_file(t_file *head)
 		return (NULL);
 	ret->next = NULL;
 	if (!head)
-		return(ret);
+		return (ret);
 	temp = head;
-	while(temp->next)
+	while (temp->next)
 		temp = temp->next;
 	temp-> next = ret;
 	return (head);

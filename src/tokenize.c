@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 10:07:51 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/03 16:57:51 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/10 12:19:06 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	count_lex(char *line)
+int	count_lex_t(char *line)
 {
 	int	i;
 	int	last;
@@ -67,7 +67,7 @@ t_lexer	*tokenize(char *line, char **args)
 	int		j;
 	int		count;
 
-	count = count_lex(line);
+	count = count_lex_t(line);
 	i = -1;
 	j = 0;
 	ret = (t_lexer *)malloc(sizeof(t_lexer) * (count + 1)); // +1 if you want to null terminate
@@ -116,7 +116,7 @@ t_lexer	*fill_paths(t_lexer *ret, char **args, char *line)
 	int	z;
 
 	i = 0;
-	z = count_lex(line);
+	z = count_lex_t(line);
 	while (i < z)
 	{
 		ret[i].path = path_finder(ret[i].cmd[0], env_get_by_name("PATH"));
