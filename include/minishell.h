@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 15:13:37 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/10 11:16:57 by lglauch          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/06/10 13:34:01 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -60,12 +61,18 @@ t_envp	**get_envp(void);
 int		*get_exit_status(void);
 
 //tokens
-int		count_lex(char *line);
+int		count_lex_t(char *line);
 t_lexer	*tokenize(char *line, char **args);
 t_lexer	*token_fill(t_lexer *ret, char **args, char *line);
 t_lexer	*fill_paths(t_lexer *ret, char **args, char *line);
 void	free_tokens(t_lexer *tokens, char **args, char *line);
 void	free_fail(t_lexer *tokens, char **args, char *line, int pos);
+
+//t_lexer
+t_lexer	*lex(char **args);
+t_lexer	*init_lexer(int num);
+int		count_lex(char **args);
+void	handle_ops_open(t_lexer *lex, char **args, int *i);
 
 //files
 t_file	*new_file(t_file *head);
@@ -73,6 +80,8 @@ void	set_file(t_file *file, char *file_n, int fd_n, int mode_n);
 
 //io_handler
 void	add_input(t_lexer *lex, char **args, int *i);
+void	add_output(t_lexer *lex, char **args, int *i);
+void	here_doc(t_lexer *lex, char **args, int *i);
 
 //utils
 int		is_spc(char c);

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:16:14 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/05/27 12:33:42 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/10 12:19:22 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_tokens(t_lexer *tokens, char **args, char *line)
 	int	j;
 
 	i = 0;
-	j = count_lex(line);
+	j = count_lex_t(line);
 	while (i < j)
 	{
 		free(tokens[i].cmd);
