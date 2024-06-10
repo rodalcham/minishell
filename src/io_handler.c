@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/10 14:21:48 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:57:28 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	add_output(t_lexer *lex, char **args, int *i)
 				printf("\nFREE AND RETURN\n");
 		}
 	}
-	set_file(lex->input, args[*i - 1], fd, mod);
+	set_file(lex->output, args[*i - 1], fd, mod);
 }
 
 void	here_doc(t_lexer *lex, char **args, int *i)
