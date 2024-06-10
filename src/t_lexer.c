@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/10 12:23:50 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/10 13:41:47 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_lexer	*lex(char **args)
 	{
 		handle_ops_open(temp, args, &i);
 		j = 0;
-		while (args[i] && !is_op(args[i][0]))
-			temp->cmd[j++] = args[i++];
-		temp->cmd[j] = NULL;
+		// while (args[i] && !is_op(args[i][0]))
+		// 	temp->cmd[j++] = args[i++];
+		// temp->cmd[j] = NULL;
 		// handle_ops_close(temp, args, &i);
 		i++;
 	}
@@ -83,6 +83,7 @@ void	handle_ops_open(t_lexer *lex, char **args, int *i)
 		//add write pipe
 		//go to next and add read pipe
 	}
+	(*i)++;
 }
 
 int	count_lex(char **args)
