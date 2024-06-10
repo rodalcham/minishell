@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
+#    By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/06/10 12:20:55 by rchavez          ###   ########.fr        #
+#    Updated: 2024/06/10 14:43:29 by lglauch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 CFLAGS	:= -Wextra -Wall -Werror
 SRCS	:= src/main.c src/globals.c src/utils.c src/ft_split_args.c src/tokenize.c src/signals.c src/path.c\
 libft/ft_split.c libft/ft_strlen.c libft/ft_strncmp.c src/free_tokens.c src/ft_error.c\
-src/utils2.c src/envp.c src/expand.c src/t_lexer.c src/t_file.c src/io_handler.c
+src/utils2.c src/envp.c src/expand.c src/t_lexer.c src/t_file.c src/io_handler.c src/out_handler.c
 OBJS	:= ${SRCS:src/%.c=src/%.o}
 
 all: $(NAME)
