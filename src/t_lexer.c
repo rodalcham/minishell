@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/10 13:41:47 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:47:42 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_lexer	*lex(char **args)
 		// 	temp->cmd[j++] = args[i++];
 		// temp->cmd[j] = NULL;
 		// handle_ops_close(temp, args, &i);
-		i++;
+		if (args[i])
+			i++;
 	}
 	return (head);
 }
@@ -83,7 +84,7 @@ void	handle_ops_open(t_lexer *lex, char **args, int *i)
 		//add write pipe
 		//go to next and add read pipe
 	}
-	(*i)++;
+	// (*i)++;
 }
 
 int	count_lex(char **args)
