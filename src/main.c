@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/10 13:24:18 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/10 13:51:27 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ void	main_loop(void)
 		if (!args)
 			printf("Unprotected\n");/////             							    FIX!!!	// XXX: hi
 		tokens = lex(args);
+		while (tokens)
+		{
+			while (tokens->input)
+			{
+				printf("\nINPUT : %s\n", tokens->input->filename);
+				tokens->input = tokens->input->next;
+			}
+			while (tokens->output)
+			{
+				printf("\nOUTPUT : %s\n", tokens->output->filename);
+				tokens->output = tokens->output->next;
+			}
+			tokens = tokens->next;
+		}
 		// tokens = tokenize(line, args);
 		// if (!tokens)
 			// printf("Error tokens returned NULL");

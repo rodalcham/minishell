@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:06:55 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/10 10:57:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:12:32 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	set_file(t_file *head, char *file_n, int mode_n, int fd_n)
 	file = head;
 	while (file->next)
 		file = file->next;
+	printf("\nDEBUG\n");
 	file->filename = file_n;
 	file->mode = mode_n;
 	file->fd = fd_n;

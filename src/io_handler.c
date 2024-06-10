@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/10 12:24:58 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:21:48 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	add_input(t_lexer *lex, char **args, int *i)
 		printf("\nFREE AND RETURN\n");
 	else
 	{
-		while (args[*(++i)] && !is_op(args[*i][0]))
+		while (args[++(*i)] && !is_op(args[*i][0]))
 		{
 			if (fd)
 				close(fd);
@@ -31,8 +31,7 @@ void	add_input(t_lexer *lex, char **args, int *i)
 				printf("\nFREE AND RETURN\n");
 		}
 	}
-	set_file(lex->input, args[*i], fd, READ);
-	(*i)++;
+	set_file(lex->input, args[*i - 1], fd, READ);
 }
 
 void	add_output(t_lexer *lex, char **args, int *i)
@@ -50,17 +49,16 @@ void	add_output(t_lexer *lex, char **args, int *i)
 		printf("\nFREE AND RETURN\n");
 	else
 	{
-		while (args[*(++i)] && !is_op(args[*i][0]))
+		while (args[++(*i)] && !is_op(args[*i][0]))
 		{
 			if (fd)
 				close(fd);
-			fd = open(args[*i], mod);
+			fd = open(args[*i], mod, PERMISSIONS);
 			if (fd < 0)
 				printf("\nFREE AND RETURN\n");
 		}
 	}
-	set_file(lex->input, args[*i], fd, mod);
-	(*i)++;
+	set_file(lex->input, args[*i - 1], fd, mod);
 }
 
 void	here_doc(t_lexer *lex, char **args, int *i)
