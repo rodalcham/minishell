@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:47:07 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/10 14:41:33 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/11 14:40:50 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_get_fd(char *op, char *input)
 {
 	int	fd;
 
+	fd = 0;
 	if (ft_strncmp(op, ">", 1) == 0)
 		fd = open(input, O_WRONLY | O_CREAT | O_TRUNC, PERMISSIONS);
 	else if (ft_strncmp(op, ">>", 2) == 0)
@@ -27,7 +28,6 @@ int	ft_get_fd(char *op, char *input)
 void	out_to_file(char *quitter, char *op)
 {
 	char	*input;
-	int		i;
 	int		fd;
 
 	while (1)

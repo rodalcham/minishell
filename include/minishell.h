@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/11 11:46:54 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/11 13:10:40 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,9 @@ void	ft_free_envp(t_envp *head);
 
 //expand
 char	*expand_tokens(char *str);
+
+//builtins
+int		echo_command(t_lexer *lexer);
+int		write_and_check(int fd, const void *buf, size_t count);
 
 #endif
