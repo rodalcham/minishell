@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/10 13:51:27 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:24:03 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ void	main_loop(void)
 		tokens = lex(args);
 		while (tokens)
 		{
+			if (tokens->cmd)
+			{
+				int i = 0;
+				printf("\nCOMMAND :");
+				while (tokens->cmd[i])
+					printf(" %s", tokens->cmd[i++]);
+				printf("\n");
+			}
 			while (tokens->input)
 			{
 				printf("\nINPUT : %s\n", tokens->input->filename);

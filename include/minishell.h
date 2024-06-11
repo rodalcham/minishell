@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/10 13:34:01 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:19:00 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_lexer	*lex(char **args);
 t_lexer	*init_lexer(int num);
 int		count_lex(char **args);
 void	handle_ops_open(t_lexer *lex, char **args, int *i);
+char	**add_cmd(char **cmd, char *new);
 
 //files
 t_file	*new_file(t_file *head);
