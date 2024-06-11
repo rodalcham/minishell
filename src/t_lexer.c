@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/11 11:45:52 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 13:34:44 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_lexer	*lex(char **args)
 				temp = temp->next;
 		}
 		else
-			temp->cmd = add_cmd(temp->cmd, args[i]);
+			temp->cmd = add_cmd(temp, args[i]);
 		if (args[i])
 			i++;
 	}
@@ -40,9 +40,9 @@ t_lexer	*lex(char **args)
 t_lexer	*init_lexer(int num)
 {
 	t_lexer	*head;
-	t_lexer *temp;
+	t_lexer	*temp;
 	t_lexer	*prev;
-	int	i;
+	int		i;
 
 	i = 0;
 	head = NULL;
@@ -60,7 +60,7 @@ t_lexer	*init_lexer(int num)
 		temp->input = NULL;
 		temp->output = NULL;
 		temp->next = NULL;
-		prev=temp;
+		prev = temp;
 		i++;
 	}
 	return (head);
@@ -78,11 +78,7 @@ void	handle_ops_open(t_lexer *lex, char **args, int *i)
 	else if (args[*i][0] == '>')
 		add_output(lex, args, i);
 	else if (args[*i][0] == '|')
-	{
-		//startpipe
-		//add write pipe
-		//go to next and add read pipe
-	}
+		add_pipe(lex);
 }
 
 int	count_lex(char **args)
@@ -101,7 +97,7 @@ int	count_lex(char **args)
 	return (count);
 }
 
-char	**add_cmd(char **cmd, char *str)
+char	**add_cmd(t_lexer *lex, char *str)
 {
 	int		i;
 	int		size;
@@ -109,19 +105,23 @@ char	**add_cmd(char **cmd, char *str)
 
 	i = -1;
 	size = 0;
-	while (cmd && cmd[size])
+	while (lex->cmd && lex->cmd[size])
 		size++;
-	if (str)
-		size++;
-	ret = (char **)malloc(sizeof(char *) * (size + 1));
+	ret = (char **)malloc(sizeof(char *) * (size + 2));
 	if (!ret)
 		printf("\nFREE AND RETURN\n");
-	while (cmd && cmd[++i])
-		ret[i] = cmd[i];
-	if (!cmd)
+	while (lex->cmd && lex->cmd[++i])
+		ret[i] = lex->cmd[i];
+	if (!lex->cmd)
 		i++;
 	ret[i++] = str;
 	ret[i] = NULL;
-	free(cmd);
+	if (!lex->cmd)
+	{
+		lex->path = path_finder(ret[0], env_get_by_name("PATH"));
+		if (!lex->path)
+			printf("\nFREE AND RETURN\n");
+	}
+	free(lex->cmd);
 	return (ret);
 }

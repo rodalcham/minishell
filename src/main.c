@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/11 11:24:03 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 13:39:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,56 +46,7 @@ void	main_loop(void)
 		if (!args)
 			printf("Unprotected\n");/////             							    FIX!!!	// XXX: hi
 		tokens = lex(args);
-		while (tokens)
-		{
-			if (tokens->cmd)
-			{
-				int i = 0;
-				printf("\nCOMMAND :");
-				while (tokens->cmd[i])
-					printf(" %s", tokens->cmd[i++]);
-				printf("\n");
-			}
-			while (tokens->input)
-			{
-				printf("\nINPUT : %s\n", tokens->input->filename);
-				tokens->input = tokens->input->next;
-			}
-			while (tokens->output)
-			{
-				printf("\nOUTPUT : %s\n", tokens->output->filename);
-				tokens->output = tokens->output->next;
-			}
-			tokens = tokens->next;
-		}
-		// tokens = tokenize(line, args);
-		// if (!tokens)
-			// printf("Error tokens returned NULL");
-		// int i = 0;
-		// int j = 0;
-        // while (i < count_lex_t(line))
-        // {
-		// 	j = 0;
-		// 	printf("\ntoken[%i].path : %s\n", i, tokens[i].path);
-		// 	while (tokens[i].cmd[j])
-		// 	{
-        //     	printf("\ntoken[%i].cmd[%i] : %s\n", i, j, tokens[i].cmd[j]);
-		// 		j++;
-		// 	}
-		// 	j = 0;
-		// 	while (tokens[i].ops[j])
-		// 	{
-        //     	printf("\ntoken[%i].ops[%i] : %s\n", i, j, tokens[i].ops[j]);
-		// 		j++;
-		// 	}
-        //     i++;
-        // }
-		// if (ft_strncmp(line, "exit", 4) == 0 && line[4] == 0)
-		// {
-		// 	free_tokens(tokens, args, line);
-		// 	break ;
-		// }
-	// free_tokens(tokens, args, line);
+		execute(tokens);
 	}
 }
 

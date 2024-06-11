@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/11 12:07:55 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 12:28:57 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,21 @@ void	here_doc(t_lexer *lex, char **args, int *i)
 {
 	if (lex && args && i)
 		printf("\nMISSING: HEREDOC\n");
+}
+
+void	add_pipe(t_lexer *lex)
+{
+	int	p_fd[2];
+
+	if (lex->output)
+		return ;
+	if (pipe(p_fd) < 0)
+		printf("\nFREE AND RETURN\n");
+	lex->output = new_file(lex->output);
+	set_file(lex->output, "PIPE", p_fd[1], WRITE);
+	if (lex->next)
+	{
+		lex->next->input = new_file(lex->next->input);
+		set_file(lex->next->input, "PIPE", p_fd[0], READ);
+	}
 }

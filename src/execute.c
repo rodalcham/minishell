@@ -3,107 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/03 14:08:33 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/11 14:36:17 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	execute(t_lexer *tokens, int count)
+void	execute(t_lexer *tokens)
 {
-	int	i;
+	t_lexer	*temp;
 
-	i = 0;
-	while (i < count)
+	temp = tokens;
+	while (temp)
 	{
-		prepare(tokens, i);
-		if (tokens[i].path)
+		exec_do(temp);
+		if (temp->input)
+			close(temp->input->fd);
+		if (temp->output)
+			close(temp->output->fd);
+		temp = temp->next;
+	}
+}
+
+void	exec_do(t_lexer *temp)
+{
+	int	t_pid;
+
+	t_pid = fork();
+	if (t_pid == 0)
+	{
+		printf("\nDEBUG\n");
+		if (temp->input)
+			if (dup2(temp->input->fd, STDIN_FILENO) < 0)
+				printf("\nFREE AND RETURN\n");
+		if (temp->output)
+			if (dup2(temp->output->fd, STDOUT_FILENO) < 0)
+				printf("\nFREE AND ARETURN\n");
+		//if (is_builtin)
+		//do_builtin \n else
+		if (temp->path && ft_strncmp(temp->path, "not_found", 9))
 		{
-			//fork and execve
+			if (execve(temp->path, temp->cmd, NULL) < 0)
+				printf("\nFREE AND RETURN\n");
 		}
-		resolve(tokens, i);
-		i++;
-	}
-}
-
-void	prepare(t_lexer *tokens, int i)
-{
-	int	fd;
-	int pipes[2];
-
-	if (!tokens[i].ops || !tokens[i].ops[0] || !tokens[i].ops[0][0])
-		return ;
-	if (tokens[i].ops[0][0] == '<' && tokens[i].ops[0][1] == '<')
-	{
-		//heredoc
-	}
-	else if (tokens[i].ops[0][0] == '>')
-	{
-		if (tokens[i].ops[0][1] == '>')	
-			fd = open(tokens[i + 1].cmd[0], O_CREAT | O_APPEND | O_WRONLY);
 		else
-			fd = open(tokens[i + 1].cmd[0], O_CREAT | O_WRONLY | O_TRUNC);
-		if (fd < 0)
-			//free and return
-		dup2(fd, STDOUT_FILENO);
+			printf("\nFREE AND RETURN\n");
 	}
-	else if (tokens[i].ops[0][0] == '<')
-	{
-		fd = open(tokens[i + 1].cmd[0], O_RDONLY);
-		if (fd < 0)
-			//free and return
-		dup2(fd, STDIN_FILENO);
-	}
-	else if (tokens[i].ops[0][0] == '|')
-	{
-		if (pipe(pipes) < 0)
-			//free and return
-		
-
-	}
+	else if (t_pid < 0)
+		printf("\nFREE AMD RETURN\n");
+	else
+		temp->pid = t_pid;
 }
-
-void	resolve(t_lexer *tokens, int i)
-{
-	if (!tokens[i].ops || !tokens[i].ops[0] || !tokens[i].ops[0][0])
-		return ;
-	if (tokens[i].ops[0][0] == '<' && tokens[i].ops[0][1] == '<')
-	{
-		//heredoc
-	}
-	else if (tokens[i].ops[0][0] == '>' && tokens[i].ops[0][1] == '>')
-	{
-
-	}
-	else if (tokens[i].ops[0][0] == '<')
-	{
-
-	}
-	else if (tokens[i].ops[0][0] == '>')
-	{
-
-	}
-	else if (tokens[i].ops[0][0] == '|')
-	{
-
-	}
-}
-
-
-pipe
-fork
-	dup2(output)
-	execve(ls)
-close(fd)
-pipe
-fork()
-	dup2(input)
-	dup2(output)
-	execve(grep)
-close(fd)
-fork
-	dup2(input)
-	execve(awk)
