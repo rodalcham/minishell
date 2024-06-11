@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/11 11:45:52 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 12:25:52 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,7 @@ void	handle_ops_open(t_lexer *lex, char **args, int *i)
 	else if (args[*i][0] == '>')
 		add_output(lex, args, i);
 	else if (args[*i][0] == '|')
-	{
-		//startpipe
-		//add write pipe
-		//go to next and add read pipe
-	}
+		add_pipe(lex);
 }
 
 int	count_lex(char **args)

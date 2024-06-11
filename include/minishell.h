@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/11 11:45:21 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 12:26:07 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	set_file(t_file *file, char *file_n, int fd_n, int mode_n);
 void	add_input(t_lexer *lex, char **args, int *i);
 void	add_output(t_lexer *lex, char **args, int *i);
 void	here_doc(t_lexer *lex, char **args, int *i);
+void	add_pipe(t_lexer *lex);
 
 //utils
 int		is_spc(char c);
