@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/11 15:51:07 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 16:05:32 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	execute(t_lexer *tokens)
 		exec_do(temp);
 		// if (temp->input)
 		// 	close(temp->input->fd);
-		// if (temp->output)
-		// 	close(temp->output->fd);
+		if (temp->output)
+			close(temp->output->fd);
 		temp = temp->next;
 	}
 	temp = tokens;
