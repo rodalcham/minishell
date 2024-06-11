@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/10 13:41:47 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:18:37 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_lexer	*lex(char **args)
 {
 	int		i;
-	int		j;
 	t_lexer	*head;
 	t_lexer	*temp;
 
@@ -24,13 +23,16 @@ t_lexer	*lex(char **args)
 	temp = head;
 	while (args[i])
 	{
-		handle_ops_open(temp, args, &i);
-		j = 0;
-		// while (args[i] && !is_op(args[i][0]))
-		// 	temp->cmd[j++] = args[i++];
-		// temp->cmd[j] = NULL;
-		// handle_ops_close(temp, args, &i);
-		i++;
+		if (is_op(args[i][0]))
+		{
+			handle_ops_open(temp, args, &i);
+			if (args[i][0] == '|')
+				temp = temp->next;
+		}
+		else
+			temp->cmd = add_cmd(temp->cmd, args[i]);
+		if (args[i])
+			i++;
 	}
 	return (head);
 }
@@ -66,8 +68,6 @@ t_lexer	*init_lexer(int num)
 
 void	handle_ops_open(t_lexer *lex, char **args, int *i)
 {
-	if (!is_op(args[*i][0]))
-		return ;
 	if (args[*i][0] == '<')
 	{
 		if (args[*i][1] == '<')
@@ -83,7 +83,6 @@ void	handle_ops_open(t_lexer *lex, char **args, int *i)
 		//add write pipe
 		//go to next and add read pipe
 	}
-	(*i)++;
 }
 
 int	count_lex(char **args)
@@ -92,24 +91,37 @@ int	count_lex(char **args)
 	int	count;
 
 	i = 0;
-	count = 0;
+	count = 1;
 	while (args[i])
 	{
-		if (args[i][0] == '<' || args[i][0] == '>')
-		{
-			if (args[i + 1])
-				i += 2;
-			else
-				i++;
-		}
-		else if (args[i][0] == '|')
-			i++;
-		else
-		{
+		if (args[i][0] == '|')
 			count++;
-			while (args[i] && !is_op(args[i][0]))
-				i++;
-		}
+		i++;
 	}
 	return (count);
+}
+
+char	**add_cmd(char **cmd, char *new)
+{
+	int		i;
+	int		size;
+	char	**ret;
+
+	i = -1;
+	size = 0;
+	while (cmd && cmd[size])
+		size++;
+	if (new)
+		size++;
+	ret = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!ret)
+		printf("\nFREE AND RETURN\n");
+	while (cmd && cmd[++i])
+		ret[i] = cmd[i];
+	if (!cmd)
+		i++;
+	ret[i++] = new;
+	ret[i] = NULL;
+	free(cmd);
+	return (ret);
 }
