@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/11 12:26:07 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 14:02:27 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_lexer
 	char			**cmd;
 	t_file			*input;
 	t_file			*output;
-	char 			**ops;
+	int				pid;
 	struct s_lexer	*next;
 }					t_lexer;
 
@@ -73,7 +73,7 @@ t_lexer	*lex(char **args);
 t_lexer	*init_lexer(int num);
 int		count_lex(char **args);
 void	handle_ops_open(t_lexer *lex, char **args, int *i);
-char	**add_cmd(char **cmd, char *str);
+char	**add_cmd(t_lexer *lex, char *str);
 
 //files
 t_file	*new_file(t_file *head);
@@ -84,6 +84,10 @@ void	add_input(t_lexer *lex, char **args, int *i);
 void	add_output(t_lexer *lex, char **args, int *i);
 void	here_doc(t_lexer *lex, char **args, int *i);
 void	add_pipe(t_lexer *lex);
+
+//execute
+void	execute(t_lexer *tokens);
+void	exec_do(t_lexer *temp);
 
 //utils
 int		is_spc(char c);
