@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/11 11:18:37 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:45:52 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_lexer	*lex(char **args)
 		if (is_op(args[i][0]))
 		{
 			handle_ops_open(temp, args, &i);
-			if (args[i][0] == '|')
+			if (args[i] && args[i][0] == '|')
 				temp = temp->next;
 		}
 		else
@@ -101,7 +101,7 @@ int	count_lex(char **args)
 	return (count);
 }
 
-char	**add_cmd(char **cmd, char *new)
+char	**add_cmd(char **cmd, char *str)
 {
 	int		i;
 	int		size;
@@ -111,7 +111,7 @@ char	**add_cmd(char **cmd, char *new)
 	size = 0;
 	while (cmd && cmd[size])
 		size++;
-	if (new)
+	if (str)
 		size++;
 	ret = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!ret)
@@ -120,7 +120,7 @@ char	**add_cmd(char **cmd, char *new)
 		ret[i] = cmd[i];
 	if (!cmd)
 		i++;
-	ret[i++] = new;
+	ret[i++] = str;
 	ret[i] = NULL;
 	free(cmd);
 	return (ret);

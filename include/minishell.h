@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/11 11:19:00 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:45:21 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_lexer	*lex(char **args);
 t_lexer	*init_lexer(int num);
 int		count_lex(char **args);
 void	handle_ops_open(t_lexer *lex, char **args, int *i);
-char	**add_cmd(char **cmd, char *new);
+char	**add_cmd(char **cmd, char *str);
 
 //files
 t_file	*new_file(t_file *head);
