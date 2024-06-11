@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/11 14:36:17 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:51:07 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@ void	execute(t_lexer *tokens)
 	while (temp)
 	{
 		exec_do(temp);
-		if (temp->input)
-			close(temp->input->fd);
-		if (temp->output)
-			close(temp->output->fd);
+		// if (temp->input)
+		// 	close(temp->input->fd);
+		// if (temp->output)
+		// 	close(temp->output->fd);
+		temp = temp->next;
+	}
+	temp = tokens;
+	while (temp)
+	{
+		waitpid(temp->pid, get_exit_status(), 0);
 		temp = temp->next;
 	}
 }
@@ -35,7 +41,6 @@ void	exec_do(t_lexer *temp)
 	t_pid = fork();
 	if (t_pid == 0)
 	{
-		printf("\nDEBUG\n");
 		if (temp->input)
 			if (dup2(temp->input->fd, STDIN_FILENO) < 0)
 				printf("\nFREE AND RETURN\n");

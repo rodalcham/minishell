@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/10 10:12:27 by jkauker          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:28:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ char	*handle_unclosed_quotes(char *str)
 	i = 0;
 	single = 0;
 	double_quotes = 0;
+	if (!str || !str[0])
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '\'' && double_quotes == 0)

@@ -55,6 +55,7 @@ dkms.conf
 *.swn
 *.bak
 *.orig
+.devcontainer
 
 # Build output directories
 build/

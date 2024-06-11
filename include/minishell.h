@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/11 14:43:40 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:49:10 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <fcntl.h>
 # include <dirent.h>
 # include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 # define READ O_RDONLY
 # define WRITE (O_WRONLY | O_TRUNC | O_CREAT)
