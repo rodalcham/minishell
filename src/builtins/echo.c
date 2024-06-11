@@ -6,17 +6,17 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/10 16:06:56 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/11 12:12:02 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_echo(char *str)
-{
-	int	exit_status;
+// int	ft_echo(char *str)
+// {
+// 	int	exit_status;
 
-	int i = 0;
+// 	int i = 0;
 
-	write(1)
-}
+// 	write(1)
+// }
