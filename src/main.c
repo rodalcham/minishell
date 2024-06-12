@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/11 12:56:36 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/12 13:23:44 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	main_loop(void)
 	while (*get_run() == 1)
 	{
 		line = readline("🐚  ");
-		// if (!line)
-		// 	break ;
+		if (!line)
+			break ;
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
 		args = ft_split_args(line);
