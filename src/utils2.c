@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:51:05 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/13 12:09:02 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 12:40:30 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,26 @@ char	*ft_strncpy(char *dest, char *src, size_t len)
 		i++;
 	}
 	return (dest);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int			j;
+	int			i;
+
+	i = 0;
+	j = ft_strlen((char *)s);
+	while (i <= j)
+	{
+		if (s[i] == (char)c)
+		{
+			return ((char *)&s[i]);
+		}
+		i++;
+	}
+	if ((char)c == 0)
+		return ((char *)&s[i]);
+	return (NULL);
 }
 
 // void	*ft_realloc(void *ptr, size_t size)

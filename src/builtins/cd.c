@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/12 13:21:37 by leo              ###   ########.fr       */
+/*   Updated: 2024/06/13 12:03:29 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	cd_command(t_lexer *lexer)
 {
 	char	*path;
 
-	path = get_envp_by_name("HOME");
+	path = env_get_by_name("HOME");
 	if (lexer->cmd[1] == NULL)
 	{
 		if (ft_strncmp(path, "", 1) == 0)

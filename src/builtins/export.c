@@ -3,16 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/06/12 15:02:05 by leo              ###   ########.fr       */
+/*   Updated: 2024/06/13 13:36:23 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+void	envp_add(char *name, char *value)
+{
+	t_envp	*new_node;
+	t_envp	*envp_list;
+
+	new_node = malloc(sizeof(t_envp));
+	if (new_node == NULL)
+	{
+		printf("Malloc error in envp_add");
+		return ;
+	}
+	new_node->name = ft_strdup(name);
+	new_node->value = ft_strdup(value);
+	new_node->next = NULL;
+	envp_list = *get_envp();
+	if (envp_list == NULL)
+	{
+		*get_envp() = new_node;
+		return ;
+	}
+	while (envp_list->next != NULL)
+	{
+		envp_list = envp_list->next;
+	}
+	envp_list->next = new_node;
+}
+
 int	export_command(t_lexer *lexer)
 {
-    
+	char	*cmd;
+	char	*new;
+
+	cmd = lexer->cmd[1];
+	new = ft_strchr(cmd, '=');
+	if (new != NULL)
+	{
+		*new = 0;
+		new++;
+	}
+	if (env_get_by_name(cmd))
+	{
+		printf("Unkown variable");
+		return (1);
+	}
+	envp_add(cmd, new);
+	return (0);
 }

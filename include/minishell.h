@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/13 12:33:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 12:40:47 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	*handle_unclosed_quotes(char *str);
 //utils2
 char	*ft_strcpy(char *dest, char *src);
 char	*ft_strncpy(char *dest, char *src, size_t len);
+char	*ft_strchr(const char *s, int c);
 
 //error handling
 void	ft_error(int errno);
