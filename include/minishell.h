@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/11 15:49:10 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 11:04:48 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <fcntl.h>
 # include <dirent.h>
 # include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # define READ O_RDONLY
 # define WRITE (O_WRONLY | O_TRUNC | O_CREAT)
@@ -42,8 +42,7 @@ typedef struct s_file
 {
 	char			*filename;
 	int				mode;
-	int				fd;
-	struct s_file	*next;
+	int				*fd;
 }					t_file;
 
 typedef struct s_lexer
@@ -77,7 +76,7 @@ void	handle_ops_open(t_lexer *lex, char **args, int *i);
 char	**add_cmd(t_lexer *lex, char *str);
 
 //files
-t_file	*new_file(t_file *head);
+t_file	*new_file();
 void	set_file(t_file *file, char *file_n, int fd_n, int mode_n);
 
 //io_handler

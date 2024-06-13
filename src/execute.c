@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/11 16:05:32 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 10:42:23 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@ void	execute(t_lexer *tokens)
 	while (temp)
 	{
 		exec_do(temp);
-		// if (temp->input)
-		// 	close(temp->input->fd);
 		if (temp->output)
-			close(temp->output->fd);
+		{
+			printf("\nFD : %i\n", *temp->output->fd);
+			close(*temp->output->fd);
+		}
 		temp = temp->next;
 	}
 	temp = tokens;
 	while (temp)
 	{
 		waitpid(temp->pid, get_exit_status(), 0);
+		if (temp->input)
+			close(*temp->input->fd);
 		temp = temp->next;
 	}
 }
@@ -42,11 +45,11 @@ void	exec_do(t_lexer *temp)
 	if (t_pid == 0)
 	{
 		if (temp->input)
-			if (dup2(temp->input->fd, STDIN_FILENO) < 0)
+			if (dup2(*temp->input->fd, STDIN_FILENO) < 0)
 				printf("\nFREE AND RETURN\n");
 		if (temp->output)
-			if (dup2(temp->output->fd, STDOUT_FILENO) < 0)
-				printf("\nFREE AND ARETURN\n");
+			if (dup2(*temp->output->fd, STDOUT_FILENO) < 0)
+				printf("\nFD : %i\n", *temp->output->fd);
 		//if (is_builtin)
 		//do_builtin \n else
 		if (temp->path && ft_strncmp(temp->path, "not_found", 9))

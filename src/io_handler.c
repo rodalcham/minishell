@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/11 12:28:57 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 11:05:52 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void	add_input(t_lexer *lex, char **args, int *i)
 	(*i)++;
 	if (!lex->input)
 		lex->input = new_file(lex->input);
+	else
+		close(*lex->input->fd);
 	fd = open(args[*i], READ);
 	if (fd < 0)
 		printf("\nFREE AND RETURN\n");
-	set_file(lex->input, args[*i], fd, READ);
+	set_file(lex->input, args[*i], READ, fd);
 }
 
 void	add_output(t_lexer *lex, char **args, int *i)
@@ -39,10 +41,12 @@ void	add_output(t_lexer *lex, char **args, int *i)
 		mod = WRITE;
 	if (!lex->output)
 		lex->output = new_file(lex->output);
+	else
+		close(*lex->input->fd);
 	fd = open(args[*i], mod, PERMISSIONS);
 	if (fd < 0)
 		printf("\nFREE AND RETURN\n");
-	set_file(lex->output, args[*i], fd, mod);
+	set_file(lex->output, args[*i], mod, fd);
 }
 
 void	here_doc(t_lexer *lex, char **args, int *i)
@@ -60,10 +64,10 @@ void	add_pipe(t_lexer *lex)
 	if (pipe(p_fd) < 0)
 		printf("\nFREE AND RETURN\n");
 	lex->output = new_file(lex->output);
-	set_file(lex->output, "PIPE", p_fd[1], WRITE);
+	set_file(lex->output, "PIPE", WRITE, p_fd[1]);
 	if (lex->next)
 	{
 		lex->next->input = new_file(lex->next->input);
-		set_file(lex->next->input, "PIPE", p_fd[0], READ);
+		set_file(lex->next->input, "PIPE", READ, p_fd[0]);
 	}
 }
