@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/11 15:30:22 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 12:07:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	ft_argcpy(char *dst, char *src)
 		{
 			dst[++i] = '\0';
 			return (1);
-		}	
+		}
 		while (src[++i] && x != sep(src[i]))
 			dst[i] = src[i];
 		if (x == sep(src[i++]))
@@ -129,7 +129,7 @@ int	ft_argcpy(char *dst, char *src)
 	return (i);
 }
 
-char	**ft_split_args(char *str)
+char	**ft_split_args(char *str) 														//FIX ">"
 {
 	int		i;
 	size_t	j;
