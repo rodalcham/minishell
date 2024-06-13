@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/13 12:29:29 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 12:33:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,6 @@ int		*get_run(void);
 t_envp	**get_envp(void);
 int		*get_exit_status(void);
 
-//tokens
-int		count_lex_t(char *line);
-t_lexer	*tokenize(char *line, char **args);
-t_lexer	*token_fill(t_lexer *ret, char **args, char *line);
-t_lexer	*fill_paths(t_lexer *ret, char **args, char *line);
-void	free_tokens(t_lexer *tokens, char **args, char *line);
-void	free_fail(t_lexer *tokens, char **args, char *line, int pos);
-
 //t_lexer
 t_lexer	*lex(char **args);
 t_lexer	*init_lexer(int num);
@@ -76,7 +68,7 @@ void	handle_ops_open(t_lexer *lex, char **args, int *i);
 char	**add_cmd(t_lexer *lex, char *str);
 
 //files
-t_file	*new_file();
+t_file	*new_file(void);
 void	set_file(t_file *file, char *file_n, int fd_n, int mode_n);
 
 //io_handler
