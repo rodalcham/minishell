@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/13 12:28:19 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 13:21:54 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	add_input(t_lexer *lex, char **args, int *i)
 	fd = 0;
 	(*i)++;
 	if (!lex->input)
-		lex->input = new_file(lex->input);
+		lex->input = new_file();
 	else
 		close(lex->input->fd);
 	fd = open(args[*i], READ);
@@ -40,7 +40,7 @@ void	add_output(t_lexer *lex, char **args, int *i)
 	else
 		mod = WRITE;
 	if (!lex->output)
-		lex->output = new_file(lex->output);
+		lex->output = new_file();
 	else
 		close(lex->input->fd);
 	fd = open(args[*i], mod, PERMISSIONS);
@@ -63,11 +63,11 @@ void	add_pipe(t_lexer *lex)
 		return ;
 	if (pipe(p_fd) < 0)
 		printf("\nFREE AND RETURN\n");
-	lex->output = new_file(lex->output);
+	lex->output = new_file();
 	set_file(lex->output, "PIPE", WRITE, p_fd[1]);
 	if (lex->next)
 	{
-		lex->next->input = new_file(lex->next->input);
+		lex->next->input = new_file();
 		set_file(lex->next->input, "PIPE", READ, p_fd[0]);
 	}
 }

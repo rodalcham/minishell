@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/13 11:59:06 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/13 14:37:57 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ void	intro(void)
 
 void	main_loop(void)
 {
-	char	*line;
-	t_lexer	*tokens;
-	char	**args;
-
-	line = NULL;
+	static char		*line;
+	static t_lexer	*tokens;
+	static char		**args;
+	int				status;
 
 	while (*get_run() == 1)
 	{
@@ -42,13 +41,17 @@ void	main_loop(void)
 		while (line && !line[0])
 			line = readline("🐚  ");
 		if (!line)
-			break ;	if (line && ft_strlen(line) > 0)
+			break ;
+		if (line && ft_strlen(line) > 0)
 			add_history(line);
 		args = ft_split_args(line);
 		if (!args)
-			printf("Unprotected\n");/////             							    FIX!!!	// XXX: hi
+			free_all(line, args, tokens, -1);
 		tokens = lex(args);
-		execute(tokens);
+		status = execute(tokens);
+		if (status)
+			free_all(line, args, tokens, status);
+		free_all(line, args, tokens, 0);
 	}
 }
 
