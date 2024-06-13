@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/13 11:04:48 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 12:29:29 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_file
 {
 	char			*filename;
 	int				mode;
-	int				*fd;
+	int				fd;
 }					t_file;
 
 typedef struct s_lexer

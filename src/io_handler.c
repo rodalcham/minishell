@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/13 11:05:52 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 12:28:19 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add_input(t_lexer *lex, char **args, int *i)
 	if (!lex->input)
 		lex->input = new_file(lex->input);
 	else
-		close(*lex->input->fd);
+		close(lex->input->fd);
 	fd = open(args[*i], READ);
 	if (fd < 0)
 		printf("\nFREE AND RETURN\n");
@@ -42,7 +42,7 @@ void	add_output(t_lexer *lex, char **args, int *i)
 	if (!lex->output)
 		lex->output = new_file(lex->output);
 	else
-		close(*lex->input->fd);
+		close(lex->input->fd);
 	fd = open(args[*i], mod, PERMISSIONS);
 	if (fd < 0)
 		printf("\nFREE AND RETURN\n");

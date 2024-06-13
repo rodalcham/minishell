@@ -1,31 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_file.c                                           :+:      :+:    :+:   */
+/*   t_lexer_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 15:06:55 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/13 12:27:47 by rchavez          ###   ########.fr       */
+/*   Created: 2024/06/13 12:23:04 by rchavez           #+#    #+#             */
+/*   Updated: 2024/06/13 12:24:13 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_file	*new_file(void)
-{
-	t_file	*ret;
-
-	ret = (t_file *)malloc(sizeof(t_file));
-	if (!ret)
-		printf("\nFREE AND RETURN\n");
-	ret->fd = 0;
-	return (ret);
-}
-
-void	set_file(t_file *file, char *file_n, int mode_n, int fd_n)
-{
-	file->filename = file_n;
-	file->mode = mode_n;
-	file->fd = fd_n;
-}
