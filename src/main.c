@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/13 14:51:32 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/13 14:55:57 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	intro();
 	main_loop();
 	printf("exit\n");
-	// ft_free_envp(envp_list);
+	ft_free_envp(*get_envp());
 	system("leaks minishell");
 	return (0);
 }

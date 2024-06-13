@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:09:53 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/13 14:49:50 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 14:53:26 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_error(int errno)
 		printf("\nDUP2: CANNOT REDIRECT INPUT/OUTPUT.\n");
 	else if (errno == -4)
 		printf("\nEXECVE: FAILED TO REPLACE PROCESS.\n");
-	ft_free_envp(get_envp());
+	ft_free_envp(*get_envp());
 	exit(0);
 }
