@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/03 16:34:43 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/13 14:44:44 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_free_envp(t_envp *head)
 {
-	printf("free nodes");
 	t_envp	*tmp;
 
 	while (head != NULL)

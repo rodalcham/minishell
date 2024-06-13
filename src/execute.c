@@ -6,20 +6,23 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/13 12:30:19 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 14:41:29 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	execute(t_lexer *tokens)
+int	execute(t_lexer *tokens)
 {
 	t_lexer	*temp;
+	int		status;
 
 	temp = tokens;
 	while (temp)
 	{
-		exec_do(temp);
+		status = exec_do(temp);
+		if (status)
+			return (status);
 		if (temp->output)
 			close(temp->output->fd);
 		temp = temp->next;
@@ -32,33 +35,31 @@ void	execute(t_lexer *tokens)
 			close(temp->input->fd);
 		temp = temp->next;
 	}
+	return (0);
 }
 
-void	exec_do(t_lexer *temp)
+int	exec_do(t_lexer *temp)
 {
-	int	t_pid;
-
-	t_pid = fork();
-	if (t_pid == 0)
+	if (!ft_strncmp(temp->path, "not_found", 9)) //&!isbuiltin
+	{
+		printf("%s : COMMAND NOT FOUND\n", temp->cmd[0]);
+		return (0);
+	}
+	temp->pid = fork();
+	if (temp->pid == 0)
 	{
 		if (temp->input)
 			if (dup2(temp->input->fd, STDIN_FILENO) < 0)
-				printf("\nFREE AND RETURN\n");
+				return (-3);
 		if (temp->output)
 			if (dup2(temp->output->fd, STDOUT_FILENO) < 0)
-				printf("\nFD : %i\n", temp->output->fd);
+				return (-3);
 		//if (is_builtin)
 		//do_builtin \n else
-		if (temp->path && ft_strncmp(temp->path, "not_found", 9))
-		{
-			if (execve(temp->path, temp->cmd, NULL) < 0)
-				printf("\nFREE AND RETURN\n");
-		}
-		else
-			printf("\nFREE AND RETURN\n");
+		if (execve(temp->path, temp->cmd, NULL) < 0)
+			return (-4);
 	}
-	else if (t_pid < 0)
-		printf("\nFREE AMD RETURN\n");
-	else
-		temp->pid = t_pid;
+	else if (temp->pid < 0)
+		return (-2);
+	return (0);
 }
