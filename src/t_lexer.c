@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/11 13:34:44 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:03:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ t_lexer	*init_lexer(int num)
 	t_lexer	*prev;
 	int		i;
 
-	i = 0;
+	i = -1;
 	head = NULL;
-	while (i < num)
+	while (++i < num)
 	{
 		temp = (t_lexer *)malloc(sizeof(t_lexer));
 		if (!temp)
@@ -60,8 +60,8 @@ t_lexer	*init_lexer(int num)
 		temp->input = NULL;
 		temp->output = NULL;
 		temp->next = NULL;
+		temp->pid = 0;
 		prev = temp;
-		i++;
 	}
 	return (head);
 }

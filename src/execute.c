@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/13 14:41:29 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:04:44 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	execute(t_lexer *tokens)
 	temp = tokens;
 	while (temp)
 	{
-		waitpid(temp->pid, get_exit_status(), 0);
+		if (temp->pid)
+			waitpid(temp->pid, get_exit_status(), 0);
 		if (temp->input)
 			close(temp->input->fd);
 		temp = temp->next;
