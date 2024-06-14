@@ -6,13 +6,13 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/13 15:03:39 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/14 14:42:44 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_lexer	*lex(char **args)
+t_lexer	*lex(char **args, int *status)
 {
 	int		i;
 	t_lexer	*head;
@@ -20,17 +20,23 @@ t_lexer	*lex(char **args)
 
 	i = 0;
 	head = init_lexer(count_lex(args));
+	if (!head)
+		return (*status = -1, NULL);
 	temp = head;
-	while (args[i])
+	while (args[i] && *status >= 0)
 	{
 		if (is_op(args[i][0]))
 		{
-			handle_ops_open(temp, args, &i);
+			*status = handle_ops_open(temp, args, &i);
 			if (args[i] && args[i][0] == '|')
 				temp = temp->next;
 		}
 		else
+		{
 			temp->cmd = add_cmd(temp, args[i]);
+			if (!temp->cmd)
+				return (*status = -1, head);
+		}
 		if (args[i])
 			i++;
 	}
@@ -50,7 +56,10 @@ t_lexer	*init_lexer(int num)
 	{
 		temp = (t_lexer *)malloc(sizeof(t_lexer));
 		if (!temp)
-			printf("\nFREE AND RETURN\n");
+		{
+			prev->next = NULL;
+			return (free_lexer(head), NULL);
+		}
 		if (!head)
 			head = temp;
 		else
@@ -66,19 +75,20 @@ t_lexer	*init_lexer(int num)
 	return (head);
 }
 
-void	handle_ops_open(t_lexer *lex, char **args, int *i)
+int	handle_ops_open(t_lexer *lex, char **args, int *i)
 {
 	if (args[*i][0] == '<')
 	{
 		if (args[*i][1] == '<')
-			here_doc(lex, args, i);
+			return (here_doc(lex, args, i));
 		else
-			add_input(lex, args, i);
+			return (add_input(lex, args, i));
 	}
 	else if (args[*i][0] == '>')
-		add_output(lex, args, i);
+		return (add_output(lex, args, i));
 	else if (args[*i][0] == '|')
-		add_pipe(lex);
+		return (add_pipe(lex));
+	return (0);
 }
 
 int	count_lex(char **args)
@@ -109,7 +119,7 @@ char	**add_cmd(t_lexer *lex, char *str)
 		size++;
 	ret = (char **)malloc(sizeof(char *) * (size + 2));
 	if (!ret)
-		printf("\nFREE AND RETURN\n");
+		return (free(lex->cmd), NULL);
 	while (lex->cmd && lex->cmd[++i])
 		ret[i] = lex->cmd[i];
 	if (!lex->cmd)
@@ -120,7 +130,7 @@ char	**add_cmd(t_lexer *lex, char *str)
 	{
 		lex->path = path_finder(ret[0], env_get_by_name("PATH"));
 		if (!lex->path)
-			printf("\nFREE AND RETURN\n");
+			return (free(ret), free(lex->cmd), NULL);
 	}
 	free(lex->cmd);
 	return (ret);

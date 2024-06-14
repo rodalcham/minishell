@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/13 14:55:57 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/14 14:39:57 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	main_loop(void)
 
 	while (*get_run() == 1)
 	{
+		status = 0;
 		line = readline("🐚  ");
 		while (line && !line[0])
 			line = readline("🐚  ");
@@ -47,9 +48,10 @@ void	main_loop(void)
 		args = ft_split_args(line);
 		if (!args)
 			free_all(line, args, tokens, -1);
-		tokens = lex(args);
-		status = execute(tokens);
-		if (status)
+		tokens = lex(args, &status);
+		if (!status)
+			status = execute(tokens);
+		if (status < 0)
 			free_all(line, args, tokens, status);
 		free_all(line, args, tokens, 0);
 	}

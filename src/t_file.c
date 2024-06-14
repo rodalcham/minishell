@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:06:55 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/13 12:27:47 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/14 11:39:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_file	*new_file(void)
 
 	ret = (t_file *)malloc(sizeof(t_file));
 	if (!ret)
-		printf("\nFREE AND RETURN\n");
+		return (NULL);
 	ret->fd = 0;
 	return (ret);
 }

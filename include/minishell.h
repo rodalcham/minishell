@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/13 14:52:10 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/14 14:42:28 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,25 @@ t_envp	**get_envp(void);
 int		*get_exit_status(void);
 
 //t_lexer
-t_lexer	*lex(char **args);
 t_lexer	*init_lexer(int num);
 int		count_lex(char **args);
-void	handle_ops_open(t_lexer *lex, char **args, int *i);
+t_lexer	*lex(char **args, int *status);
 char	**add_cmd(t_lexer *lex, char *str);
+int	handle_ops_open(t_lexer *lex, char **args, int *i);
 
-//signal_free
+//free_all
 void	free_all(char *line, char **args, t_lexer *head, int errno);
+void	free_lexer(t_lexer *head);
 
 //files
 t_file	*new_file(void);
 void	set_file(t_file *file, char *file_n, int fd_n, int mode_n);
 
 //io_handler
-void	add_input(t_lexer *lex, char **args, int *i);
-void	add_output(t_lexer *lex, char **args, int *i);
-void	here_doc(t_lexer *lex, char **args, int *i);
-void	add_pipe(t_lexer *lex);
+int		add_input(t_lexer *lex, char **args, int *i);
+int		add_output(t_lexer *lex, char **args, int *i);
+int		here_doc(t_lexer *lex, char **args, int *i);
+int		add_pipe(t_lexer *lex);
 
 //execute
 int		execute(t_lexer *tokens);

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/13 15:04:44 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/14 15:03:01 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	execute(t_lexer *tokens)
 	temp = tokens;
 	while (temp)
 	{
-		if (temp->pid)
+		if (temp->pid != 0)
 			waitpid(temp->pid, get_exit_status(), 0);
 		if (temp->input)
 			close(temp->input->fd);
@@ -46,6 +46,9 @@ int	exec_do(t_lexer *temp)
 		printf("%s : COMMAND NOT FOUND\n", temp->cmd[0]);
 		return (0);
 	}
+	if ((temp->input && temp->input->fd < 0)
+		|| (temp->output && temp->output->fd < 0))
+		return (0);
 	temp->pid = fork();
 	if (temp->pid == 0)
 	{
