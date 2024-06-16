@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/13 14:44:44 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:46:26 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,9 @@ t_envp	*ft_create_envp(char **envp)
 		j++;
 	}
 	return (head);
+}
+
+void	init_env(char **env)
+{
+	*ft_env() = env;
 }

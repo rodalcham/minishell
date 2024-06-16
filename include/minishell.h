@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/16 13:50:24 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:47:22 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ typedef struct s_lexer
 	struct s_lexer	*next;
 }					t_lexer;
 
-//helper values
+//globals
 int		*get_run(void);
 t_envp	**get_envp(void);
 int		*get_exit_status(void);
+char	***ft_env(void);
 
 //validate
 char	*get_line(void);
@@ -91,6 +92,7 @@ int		exec_do(t_lexer *temp);
 //utils
 int		is_spc(char c);
 int		is_op(char c);
+int		sep(char c);
 char	*make_unclosed_quotes(char *str, int double_quotes, int single);
 char	*handle_unclosed_quotes(char *str);
 
@@ -117,6 +119,7 @@ char	*env_get_by_name(char *name);
 //envp
 t_envp	*ft_create_envp(char **envp);
 void	ft_free_envp(t_envp *head);
+void	init_env(char **env);
 
 //expand
 char	*expand_tokens(char *str);

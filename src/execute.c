@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/14 15:03:01 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:48:10 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	exec_do(t_lexer *temp)
 				return (-3);
 		//if (is_builtin)
 		//do_builtin \n else
-		if (execve(temp->path, temp->cmd, NULL) < 0)
+		if (execve(temp->path, temp->cmd, *ft_env()) < 0)
 			return (-4);
 	}
 	else if (temp->pid < 0)

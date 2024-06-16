@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/13 12:08:45 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:25:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ int	is_op(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
 		return (1);
+	return (0);
+}
+
+int	sep(char c)
+{
+	if (c == '\'')
+		return (1);
+	if (c == '\"')
+		return (2);
+	if (c == '<')
+		return (3);
+	if (c == '>')
+		return (4);
+	if (c == '|')
+		return (5);
 	return (0);
 }
 

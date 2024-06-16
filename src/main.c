@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/16 13:17:41 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:46:45 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (1);
 	*get_envp() = ft_create_envp(envp);
+	init_env(envp);
 	// rl_catch_signals = 0;
 	signal_handler();
 	intro();

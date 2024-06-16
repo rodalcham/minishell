@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/10 11:16:15 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:45:53 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,11 @@ int	*get_exit_status(void)
 	static int	status = 0;
 
 	return (&status);
+}
+
+char	***ft_env(void)
+{
+	static char	**env = NULL;
+
+	return (&env);
 }

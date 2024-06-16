@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/16 11:09:23 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:24:48 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,6 @@ char	**ft_splitfree(char **ret, size_t i)
 	}
 	free(ret);
 	return (NULL);
-}
-
-int	sep(char c)
-{
-	if (c == '\'')
-		return (1);
-	if (c == '\"')
-		return (2);
-	if (c == '<')
-		return (3);
-	if (c == '>')
-		return (4);
-	if (c == '|')
-		return (5);
-	return (0);
 }
 
 int	arg_count(char *s)

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:47:07 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/16 11:06:54 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:10:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	out_to_file(char *quitter, char *op)
 
 	while (1)
 	{
-		input = readline("");
+		input = get_line();
 		if (!input)
 		{
 			printf("Readline failed in out_function\n");
