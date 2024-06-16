@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/16 14:47:22 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 15:00:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define READ O_RDONLY
 # define WRITE (O_WRONLY | O_TRUNC | O_CREAT)
-# define APPEND (O_WRONLY | O_CREAT | O_APPEND)
+# define APPEND (O_WRONLY | O_APPEND | O_CREAT)
 // # define HEREDOC 
 # define PERMISSIONS 0644
 

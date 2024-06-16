@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/16 13:05:09 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 15:06:40 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	add_output(t_lexer *lex, char **args, int *i)
 		|| (lex->output && lex->output->fd < 0))
 		return (0);
 	fd = 0;
-	(*i)++;
 	if (args[*i][1] == '>')
 		mod = APPEND;
 	else
 		mod = WRITE;
+	(*i)++;
 	fd = open(args[*i], mod, PERMISSIONS);
 	if (fd < 0)
 		printf("%s : No such file or directory.\n", args[*i]);
