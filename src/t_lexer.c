@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/14 14:42:44 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 12:59:57 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_lexer	*lex(char **args, int *status)
 	t_lexer	*head;
 	t_lexer	*temp;
 
-	i = 0;
+	i = -1;
 	head = init_lexer(count_lex(args));
 	if (!head)
 		return (*status = -1, NULL);
 	temp = head;
-	while (args[i] && *status >= 0)
+	while (args[++i] && *status >= 0)
 	{
 		if (is_op(args[i][0]))
 		{
@@ -37,8 +37,6 @@ t_lexer	*lex(char **args, int *status)
 			if (!temp->cmd)
 				return (*status = -1, head);
 		}
-		if (args[i])
-			i++;
 	}
 	return (head);
 }

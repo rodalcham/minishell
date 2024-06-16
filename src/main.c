@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/14 14:39:57 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 13:17:41 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	main_loop(void)
 	while (*get_run() == 1)
 	{
 		status = 0;
-		line = readline("🐚  ");
-		while (line && !line[0])
-			line = readline("🐚  ");
+		line = get_line();
 		if (!line)
 			break ;
 		if (line && ft_strlen(line) > 0)

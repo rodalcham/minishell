@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/06/14 14:42:28 by rchavez          ###   ########.fr       */
+/*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
+/*   Updated: 2024/06/16 13:50:24 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ int		*get_run(void);
 t_envp	**get_envp(void);
 int		*get_exit_status(void);
 
+//validate
+char	*get_line(void);
+
 //t_lexer
 t_lexer	*init_lexer(int num);
 int		count_lex(char **args);
 t_lexer	*lex(char **args, int *status);
 char	**add_cmd(t_lexer *lex, char *str);
-int	handle_ops_open(t_lexer *lex, char **args, int *i);
+int		handle_ops_open(t_lexer *lex, char **args, int *i);
 
 //free_all
 void	free_all(char *line, char **args, t_lexer *head, int errno);

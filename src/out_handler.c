@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   out_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:47:07 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/11 14:40:50 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/16 11:06:54 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 int	ft_get_fd(char *op, char *input)
 {
