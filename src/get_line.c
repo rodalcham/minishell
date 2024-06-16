@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/16 13:55:02 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/16 14:03:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*get_line(void)
 	inv = is_invalid(line);
 	while ((line && !line[0]) || inv)
 	{
+		free(line);
 		if (inv)
 			say_invalid(line, inv);
 		line = readline("🐚  ");
