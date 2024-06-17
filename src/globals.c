@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/16 14:45:53 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 14:53:01 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	*get_exit_status(void)
 {
 	static int	status = 0;
 
+	printf("Exit status = %d\n", status);
 	return (&status);
 }
 

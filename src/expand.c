@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 13:58:56 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 14:50:59 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,29 @@ char	*expand_tokens(char *str)
 	{
 		if (str[i++] != '$' || is_within_single_quotes(str, i))
 			continue ;
-		j = 0;
-		envp_name = malloc(sizeof(char) * ft_strlen(&str[i]) + 1);
-		while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-			envp_name[j++] = str[i++];
-		envp_name[j] = 0;
-		if (ft_strncmp(envp_name, "?", 1) == 0)
+		if (str[i] == '?')
+		{
+			envp_name = ft_strdup("?");
+			i += 1;
+		}
+		else
+		{
+			j = 0;
+			envp_name = malloc(sizeof(char) * ft_strlen(&str[i]) + 1);
+			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+				envp_name[j++] = str[i++];
+			envp_name[j] = 0;
+		}
+		printf ("ENVP_NAME  test = %s\n", envp_name);
+		if (ft_strcmp(envp_name, "?") == 0)
+		{
+			printf ("ENVP_NAME = %s\n", envp_name);
 			envp_value = ft_itoa(*get_exit_status());
+		}
 		else
 			envp_value = env_get_by_name(envp_name);
 		new = transform_variable(new, envp_name, envp_value);
+		printf("ENVP_VALUE = %s\n", envp_value);
 		free (envp_name);
 	}
 	return (new);
