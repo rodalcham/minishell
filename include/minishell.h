@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/17 13:18:34 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:27:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ char	*expand_tokens(char *str);
 int		echo_command(t_lexer *lexer);
 int		ft_check_commands(t_lexer *lexer);
 int		call_functions(t_lexer *lexer);
-int		write_and_check(int fd, const void *buf, size_t count);
 int		cd_command(t_lexer *lexer);
 int		env_command(void);
 int		export_command(t_lexer *lexer);

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:53:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 13:24:54 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:30:57 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	call_functions(t_lexer *lexer)
 	int	exit_code;
 
 	exit_code = -1;
-	printf("\nHELLO\n");
 	i = ft_check_commands(lexer);
 	if (i == 1)
 		exit_code = echo_command(lexer);
