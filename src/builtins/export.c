@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/06/13 13:36:23 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 11:43:05 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ void	envp_add(char *name, char *value)
 	envp_list->next = new_node;
 }
 
+void	envp_update_value(char *name, char *value)
+{
+	t_envp	*envp_list;
+
+	envp_list = *get_envp();
+	while (envp_list != NULL)
+	{
+		if (ft_strncmp(envp_list->name, name, ft_strlen(envp_list->name)) == 0)
+		{
+			free(envp_list->value);
+			envp_list->value = ft_strdup(value);
+			break ;
+		}
+		envp_list = envp_list->next;
+	}
+}
+
+
 int	export_command(t_lexer *lexer)
 {
 	char	*cmd;
@@ -53,9 +71,11 @@ int	export_command(t_lexer *lexer)
 	}
 	if (env_get_by_name(cmd))
 	{
-		printf("Unkown variable");
-		return (1);
+		envp_update_value(cmd, new);
 	}
-	envp_add(cmd, new);
+	else
+	{
+		envp_add(cmd, new);
+	}
 	return (0);
 }

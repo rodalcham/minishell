@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:53:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/11 14:41:27 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:39:13 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@
 // 	if (i == 6)
 // 		exit_code = env_command(lexer);
 // 	if (i == 7)
-// 		exit_code = exit_command(lexer);
+// 		return (-10);
 // 	return (exit_code);
 // }
