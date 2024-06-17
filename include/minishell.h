@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/16 15:00:12 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:18:01 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ void	set_file(t_file *file, char *file_n, int fd_n, int mode_n);
 //io_handler
 int		add_input(t_lexer *lex, char **args, int *i);
 int		add_output(t_lexer *lex, char **args, int *i);
-int		here_doc(t_lexer *lex, char **args, int *i);
+int		add_heredoc(t_lexer *lex, char **args, int *i);
 int		add_pipe(t_lexer *lex);
+
+//heredoc
+int		do_heredoc(int fd, char *eof);
 
 //execute
 int		execute(t_lexer *tokens);

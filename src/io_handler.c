@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/16 15:06:40 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:17:44 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,28 @@ int	add_output(t_lexer *lex, char **args, int *i)
 	return (0);
 }
 
-int	here_doc(t_lexer *lex, char **args, int *i)
+int	add_heredoc(t_lexer *lex, char **args, int *i)
 {
-	if (lex && args && i)
-		printf("\nMISSING: HEREDOC\n");
-	return (0);
+	int	p_fd[2];
+
+	if ((lex->input && lex->input->fd < 0)
+		|| (lex->output && lex->output->fd < 0))
+		return (0);
+	if (pipe(p_fd) < 0)
+		return (-5);
+	(*i)++;
+	if (do_heredoc(p_fd[1], args[*i]) < 0)
+	{
+		close(p_fd[0]);
+		return (0);
+	}
+	if (!lex->input)
+		lex->input = new_file();
+	else
+		close(lex->input->fd);
+	if (!lex->input)
+		return (-1);
+	set_file(lex->input, "Heredoc", READ, p_fd[0]);
 }
 
 int	add_pipe(t_lexer *lex)

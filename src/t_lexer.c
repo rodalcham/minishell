@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/16 12:59:57 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:17:54 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	handle_ops_open(t_lexer *lex, char **args, int *i)
 	if (args[*i][0] == '<')
 	{
 		if (args[*i][1] == '<')
-			return (here_doc(lex, args, i));
+			return (add_heredoc(lex, args, i));
 		else
 			return (add_input(lex, args, i));
 	}
