@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/16 14:46:26 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 10:56:49 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	ft_free_envp(t_envp *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp->name);
-		free(tmp->value);
+		if (tmp->name)
+			free(tmp->name);
+		if (tmp->value)
+			free(tmp->value);
 		free(tmp);
 	}
 }
@@ -86,20 +88,23 @@ t_envp	*ft_create_envp(char **envp)
 	t_envp	*new_node;
 	int		j;
 
-	j = 0;
+	j = -1;
 	head = NULL;
 	current = NULL;
-	while (envp[j])
+	while (envp[++j])
 	{
 		new_node = malloc(sizeof(t_envp));
-		new_node->name = ft_envp_get_name(envp[j]);
-		new_node->value = ft_envp_get_value(envp[j]);
 		if (head == NULL)
 			head = new_node;
 		else
 			current->next = new_node;
+		if (!new_node)
+			return (ft_free_envp(head), NULL);
+		new_node->name = ft_envp_get_name(envp[j]);
+		new_node->value = ft_envp_get_value(envp[j]);
+		if (!new_node->name || !new_node->value)
+			return (ft_free_envp(head), NULL);
 		current = new_node;
-		j++;
 	}
 	return (head);
 }

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:09:53 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/14 11:36:02 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 10:58:31 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	ft_error(int errno)
 	else if (errno == -5)
 		printf("\nPIPE: MEMORY EXHAUSTED.\n");
 	ft_free_envp(*get_envp());
-	exit(0);
+	exit(*get_exit_status());
 }
