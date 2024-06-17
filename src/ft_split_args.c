@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/16 14:24:48 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 16:28:18 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,24 @@ int	ft_argcpy(char *dst, char *src)
 	int	i;
 	int	x;
 
-	i = -1;
-	if (!src || !dst || !src[0])
-		return (0);
+	i = 0;
 	x = sep(src[0]);
-	if (x && i++)
+	if (x)
 	{
-		dst[i] = src[i];
-		if (x > 2 && x != sep(src[i + 1]))
+		if (x > 2)
 		{
-			dst[++i] = '\0';
-			return (1);
-		}
-		while (src[++i] && x != sep(src[i]))
 			dst[i] = src[i];
-		if (x == sep(src[i++]))
-			dst[i - 1] = src[i - 1];
+			if (x == sep(src[i + 1]) && ++i)
+				dst[i] = src[i];
+			dst[++i] = '\0';
+			return (i);
+		}
+		while (src[i + 1] && x != sep(src[i + 1]) && ++i)
+			dst[i - 1] = src[i];
 	}
 	else
-		while (src[++i] && !is_spc(src[i]) && !sep(src[i]))
-			dst[i] = src[i];
+		while (src[i] && !is_spc(src[i]) && !sep(src[i++]))
+			dst[i - 1] = src[i - 1];
 	dst[i] = '\0';
 	return (i);
 }
