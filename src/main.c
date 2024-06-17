@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 13:17:21 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:26:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	main_loop(void)
 		line = get_line();
 		if (!line)
 			break ;
-		if(!ft_strcmp(line, "exit"))
+		if(!ft_strncmp(line, "exit ", 5))
 			return (free(line));
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
@@ -72,6 +72,6 @@ int	main(int argc, char **argv, char **envp)
 	main_loop();
 	printf("exit\n");
 	ft_free_envp(*get_envp());
-	system("leaks minishell");
+	// system("leaks minishell");
 	return (*get_exit_status());
 }

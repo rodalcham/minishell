@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/17 12:55:08 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:22:27 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	execute(t_lexer *tokens)
 			waitpid(temp->pid, get_exit_status(), 0);
 		if (temp->input)
 			close(temp->input->fd);
+		// printf("Exit status of %s : %d\n", temp->cmd[0], *get_exit_status());
 		temp = temp->next;
 	}
 	return (0);

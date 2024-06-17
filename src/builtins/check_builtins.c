@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:53:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 13:30:57 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:18:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	call_functions(t_lexer *lexer)
 	int	i;
 	int	exit_code;
 
-	exit_code = -1;
+	exit_code = 0;
 	i = ft_check_commands(lexer);
 	if (i == 1)
 		exit_code = echo_command(lexer);
@@ -51,10 +51,5 @@ int	call_functions(t_lexer *lexer)
 		exit_code = unset_command(lexer);
 	if (i == 6)
 		exit_code = env_command();
-	if (exit_code != -1)
-	{
-		*get_exit_status() = exit_code;
-		exit(exit_code);
-	}
-	return (0);
+	exit(exit_code);
 }

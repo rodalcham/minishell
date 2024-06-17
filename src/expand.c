@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 14:50:59 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:23:42 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,11 @@ char	*expand_tokens(char *str)
 				envp_name[j++] = str[i++];
 			envp_name[j] = 0;
 		}
-		printf ("ENVP_NAME  test = %s\n", envp_name);
 		if (ft_strcmp(envp_name, "?") == 0)
-		{
-			printf ("ENVP_NAME = %s\n", envp_name);
 			envp_value = ft_itoa(*get_exit_status());
-		}
 		else
 			envp_value = env_get_by_name(envp_name);
 		new = transform_variable(new, envp_name, envp_value);
-		printf("ENVP_VALUE = %s\n", envp_value);
 		free (envp_name);
 	}
 	return (new);

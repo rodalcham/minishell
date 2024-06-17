@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 13:41:44 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:02:29 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	echo_command(t_lexer *lexer)
 		}
 	}
 	if (newline && printf("\n"))
-		return (1);
-	exit (0);
+		return (0);
+	return (0);
 }
