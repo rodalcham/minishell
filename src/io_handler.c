@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/17 12:17:44 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:25:30 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	add_heredoc(t_lexer *lex, char **args, int *i)
 	if (!lex->input)
 		return (-1);
 	set_file(lex->input, "Heredoc", READ, p_fd[0]);
+	return(0);
 }
 
 int	add_pipe(t_lexer *lex)
