@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 13:34:34 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:41:44 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ int	echo_command(t_lexer *lexer)
 
 	i = 1;
 	newline = 1;
-	while (lexer->cmd[i] && !ft_strcmp(lexer->cmd[i], "-n"))
+	if (lexer->cmd[i] && !ft_strcmp(lexer->cmd[i], "-n"))
 		newline = 0;
 	while (lexer->cmd[i])
 	{
 		while (lexer->cmd[i])
 		{
-			if (write_and_check(1, lexer->cmd[i++], 1))
+			if (printf("%s", lexer->cmd[i++]) == -1)
 				return (1);
-		}
-		if (lexer->cmd[++i])
-		{
-			if (write_and_check(1, " ", 1))
-				return (1);
+			if (lexer->cmd[i])
+			{
+				if (printf(" ") == -1)
+					return (1);
+			}
 		}
 	}
-	if (newline && write_and_check(1, "\n", 1))
+	if (newline && printf("\n"))
 		return (1);
 	exit (0);
 }
