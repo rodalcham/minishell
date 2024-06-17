@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/17 12:18:01 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:18:34 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ char	*handle_unclosed_quotes(char *str);
 char	*ft_strcpy(char *dest, char *src);
 char	*ft_strncpy(char *dest, char *src, size_t len);
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(char *s1, char *s2);
 
 //error handling
 void	ft_error(int errno);
@@ -129,6 +130,13 @@ char	*expand_tokens(char *str);
 
 //builtins
 int		echo_command(t_lexer *lexer);
+int		ft_check_commands(t_lexer *lexer);
+int		call_functions(t_lexer *lexer);
 int		write_and_check(int fd, const void *buf, size_t count);
+int		cd_command(t_lexer *lexer);
+int		env_command(void);
+int		export_command(t_lexer *lexer);
+int		pwd_command(void);
+int		unset_command(t_lexer *lexer);
 
 #endif

@@ -3,56 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:53:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 12:39:13 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:19:55 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// int	ft_check_commands(t_lexer *lexer)
-// {
-// 	if (lexer->cmd)
-// 	{
-// 		if (ft_strncmp(lexer->cmd[0], "echo", ft_strlen("echo")) == 0)
-// 			return (1);
-// 		if (ft_strncmp(lexer->cmd[0], "cd", ft_strlen("cd")) == 0)
-// 			return (2);
-// 		if (ft_strncmp(lexer->cmd[0], "pwd", ft_strlen("pwd")) == 0)
-// 			return (3);
-// 		if (ft_strncmp(lexer->cmd[0], "export", ft_strlen("export")) == 0)
-// 			return (4);
-// 		if (ft_strncmp(lexer->cmd[0], "unset", ft_strlen("unset")) == 0)
-// 			return (5);
-// 		if (ft_strncmp(lexer->cmd[0], "env", ft_strlen("env")) == 0)
-// 			return (6);
-// 		if (ft_strncmp(lexer->cmd[0], "exit", ft_strlen("exit")) == 0)
-// 			return (7);
-// 	}
-// 	return (0);
-// }
+int	ft_check_commands(t_lexer *lexer)
+{
+	if (lexer && lexer->cmd)
+	{
+		if (ft_strcmp(lexer->cmd[0], "echo") == 0)
+			return (1);
+		if (ft_strcmp(lexer->cmd[0], "cd") == 0)
+			return (2);
+		if (ft_strcmp(lexer->cmd[0], "pwd") == 0)
+			return (3);
+		if (ft_strcmp(lexer->cmd[0], "export") == 0)
+			return (4);
+		if (ft_strcmp(lexer->cmd[0], "unset") == 0)
+			return (5);
+		if (ft_strcmp(lexer->cmd[0], "env") == 0)
+			return (6);
+	}
+	return (0);
+}
 
-// int	call_functions(t_lexer *lexer)
-// {
-// 	int	i;
-// 	int	exit_code;
+int	call_functions(t_lexer *lexer)
+{
+	int	i;
+	int	exit_code;
 
-// 	i = ft_check_commands(lexer);
-// 	if (i == 1)
-// 		exit_code = echo_command(lexer);
-// 	if (i == 2)
-// 		exit_code = cd_command(lexer);
-// 	if (i == 3)
-// 		exit_code = pwd_command(lexer);
-// 	if (i == 4)
-// 		exit_code = export_command(lexer);
-// 	if (i == 5)
-// 		exit_code = unset_command(lexer);
-// 	if (i == 6)
-// 		exit_code = env_command(lexer);
-// 	if (i == 7)
-// 		return (-10);
-// 	return (exit_code);
-// }
+	exit_code = -1;
+	printf("\nHELLO\n");
+	i = ft_check_commands(lexer);
+	if (i == 1)
+		exit_code = echo_command(lexer);
+	if (i == 2)
+		exit_code = cd_command(lexer);
+	if (i == 3)
+		exit_code = pwd_command();
+	if (i == 4)
+		exit_code = export_command(lexer);
+	if (i == 5)
+		exit_code = unset_command(lexer);
+	if (i == 6)
+		exit_code = env_command();
+	if (exit_code != -1)
+		exit(exit_code);
+	return (0);
+}

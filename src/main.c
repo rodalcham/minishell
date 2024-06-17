@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 11:26:08 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:17:21 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	main_loop(void)
 		line = get_line();
 		if (!line)
 			break ;
+		if(!ft_strcmp(line, "exit"))
+			return (free(line));
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
 		args = ft_split_args(line);

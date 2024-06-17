@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:51:05 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/13 12:40:30 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:18:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,14 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-// void	*ft_realloc(void *ptr, size_t size)
-// {
-// 	void	*new_ptr;
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
 
-// 	if (size == 0)
-// 	{
-// 		free (ptr);
-// 		return (NULL);
-// 	}
-// 	new_ptr = malloc(size);
-// 	if (new_ptr)
-// 	{
-// 		if (ptr)
-// 		{
-// 			ft_memcpy(new_ptr, ptr, size);
-// 			free (ptr);
-// 		}
-// 		else
-// 			printf("Unable to allocate memory in ft_realloc");
-// 	}
-// 	return (new_ptr);
-// }
+	i = 0;
+	if (!s1 || !s2)
+		return (0);
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}

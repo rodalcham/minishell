@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/16 14:48:10 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 12:55:08 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	execute(t_lexer *tokens)
 
 int	exec_do(t_lexer *temp)
 {
-	if (!ft_strncmp(temp->path, "not_found", 9)) //&!isbuiltin
+	if (!ft_strncmp(temp->path, "not_found", 9) && !ft_check_commands(temp))
 	{
 		printf("%s : COMMAND NOT FOUND\n", temp->cmd[0]);
 		return (0);
@@ -58,9 +58,9 @@ int	exec_do(t_lexer *temp)
 		if (temp->output)
 			if (dup2(temp->output->fd, STDOUT_FILENO) < 0)
 				return (-3);
-		//if (is_builtin)
-		//do_builtin \n else
-		if (execve(temp->path, temp->cmd, *ft_env()) < 0)
+		if (ft_check_commands(temp))
+			return (call_functions(temp));
+		else if (execve(temp->path, temp->cmd, *ft_env()) < 0)
 			return (-4);
 	}
 	else if (temp->pid < 0)

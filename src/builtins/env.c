@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:25:08 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 12:29:59 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:00:02 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	env_command(t_lexer *lexer)
+int	env_command(void)
 {
 	t_envp	*list;
 
