@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 15:26:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 16:34:45 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,32 @@ void	main_loop(void)
 	}
 }
 
+void	make_shlvl(char	**envp)
+{
+	int		i;
+	int		j;
+	int		value;
+	char	*lvl;
+
+	i = 0;
+	j = 0;
+	value = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "SHLVL=", ft_strlen("SHLVL=")) == 0)
+		{
+			value = ft_atoi(envp[i] + ft_strlen("SHLVL="));
+			value++;
+			lvl = malloc(sizeof(char) * 6 + ft_strlen(ft_itoa(value)));
+			ft_strlcat(lvl, "SHLVL=", 6);
+			ft_strlcat(lvl, ft_itoa(value), ft_strlen(ft_itoa(value)) + 1);
+			ft_strlcat(lvl, "\n", 1);
+			envp[i] = lvl;
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	argv = (void *)argv;
@@ -66,6 +92,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!*get_envp())
 		ft_error(-1);
 	init_env(envp);
+	make_shlvl(envp);
 	// rl_catch_signals = 0;
 	signal_handler();
 	intro();

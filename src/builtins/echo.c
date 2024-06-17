@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 15:02:29 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 16:43:43 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	echo_command(t_lexer *lexer)
 	i = 1;
 	newline = 1;
 	if (lexer->cmd[i] && !ft_strcmp(lexer->cmd[i], "-n"))
+	{
 		newline = 0;
+		i++;
+	}
 	while (lexer->cmd[i])
 	{
 		while (lexer->cmd[i])

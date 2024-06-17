@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 15:23:42 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/17 15:42:24 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,30 @@ int	is_within_single_quotes(char *str, int index)
 	return (in_single_quotes);
 }
 
+char	*extract_env_name(char *str, int *i)
+{
+	int		j;
+	char	*envp_name;
+
+	if (str[*i] == '?')
+	{
+		envp_name = ft_strdup("?");
+		(*i)++;
+	}
+	else
+	{
+		j = 0;
+		envp_name = malloc(sizeof(char) * ft_strlen(&str[*i]) + 1);
+		while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
+			envp_name[j++] = str[(*i)++];
+		envp_name[j] = '\0';
+	}
+	return (envp_name);
+}
+
 char	*expand_tokens(char *str)
 {
 	int		i;
-	int		j;
 	char	*envp_name;
 	char	*envp_value;
 	char	*new;
@@ -80,27 +100,19 @@ char	*expand_tokens(char *str)
 	new = ft_strdup(str);
 	while (str[i])
 	{
-		if (str[i++] != '$' || is_within_single_quotes(str, i))
+		if (str[i] != '$' || is_within_single_quotes(str, i + 1))
+		{
+			i++;
 			continue ;
-		if (str[i] == '?')
-		{
-			envp_name = ft_strdup("?");
-			i += 1;
 		}
-		else
-		{
-			j = 0;
-			envp_name = malloc(sizeof(char) * ft_strlen(&str[i]) + 1);
-			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-				envp_name[j++] = str[i++];
-			envp_name[j] = 0;
-		}
+		i++;
+		envp_name = extract_env_name(str, &i);
 		if (ft_strcmp(envp_name, "?") == 0)
 			envp_value = ft_itoa(*get_exit_status());
 		else
 			envp_value = env_get_by_name(envp_name);
 		new = transform_variable(new, envp_name, envp_value);
-		free (envp_name);
+		free(envp_name);
 	}
 	return (new);
 }
