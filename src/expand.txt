@@ -29,5 +29,5 @@ ctrl + \ and then ctrl + d = wrong output?
 || = operator[0] + |, operator[1] = |
 because || is included in bonus not in mandatory
 
-// unclosed quotes
+// unclose_mockd quotes
 // study execve function

@@ -6,11 +6,13 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 16:13:50 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/18 16:15:40 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int sep(char c);
 
 int	is_invalid(char *line)
 {
@@ -73,4 +75,24 @@ char	*get_line(void)
 		inv = is_invalid(line);
 	}
 	return (line);
+}
+
+int	open_mock(char *str, int mode, int per)
+{
+	int fd;
+
+	if (per)
+		fd = open(str, mode, per);
+	else
+		fd = open(str, mode);
+	printf("\nFile %s opened with code %i\n", str, fd);
+	return (fd);
+}
+int	close_mock(int fd)
+{
+	int i;
+
+	i = close(fd);
+	printf("\nFile %i closed with code %i\n", fd, i);
+	return (i);
 }
