@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 14:18:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 16:07:50 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,6 @@ char	**ft_split_args(char *str)
 
 	i = 0;
 	j = 0;
-	str = handle_unclosed_quotes(str);
-	str = expand_tokens(str);
 	count = arg_count(str);
 	ret = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!ret)
@@ -138,6 +136,5 @@ char	**ft_split_args(char *str)
 			return (ft_splitfree(ret, i));
 		j += ft_argcpy(ret[i++], &str[j]);
 	}
-	free (str);
 	return (ret);
 }

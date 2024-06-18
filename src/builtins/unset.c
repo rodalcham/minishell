@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:46:15 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 12:17:38 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/18 13:20:52 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ void	remove_envp(char *name)
 {
 	t_envp	*envp_list;
 	t_envp	*tmp;
-	t_envp	*prev;
 
 	tmp = NULL;
-	prev = NULL;
 	envp_list = *get_envp();
 	if (envp_list == NULL)
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/18 14:42:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 16:11:30 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ int	is_within_single_quotes(char *str, int index)
 	int	i;
 	int	in_single_quotes;
 	int	double_quotes;
-	int	should_expand;
 
 	i = 0;
-	should_expand = 0;
 	double_quotes = 0;
 	in_single_quotes = 0;
 	while (i < index)
@@ -70,15 +68,11 @@ int	is_within_single_quotes(char *str, int index)
 			double_quotes = !double_quotes;
 		if (str[i] == '\'' && double_quotes == 0)
 			in_single_quotes = !in_single_quotes;
-		if (str[i] == '$')
-			if (!in_single_quotes)
-			{
-				should_expand = 1;
-				break ;
-			}
+		if (str[i] == '$' && !in_single_quotes)
+			return (1);
 		i++;
 	}
-	return (should_expand);
+	return (0);
 }
 
 char	*extract_env_name(char *str, int *i)
@@ -110,6 +104,8 @@ char	*expand_tokens(char *str)
 	char	*new;
 
 	i = 0;
+	if (!str || !str[0])
+		return (0);
 	new = ft_strdup(str);
 	while (str[i])
 	{

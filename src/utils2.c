@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:51:05 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/18 14:22:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 13:59:35 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,12 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (0);
+	if (!s1)
+		return (s2[0] * -1);
+	if (!s2)
+		return (s1[0]);
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
@@ -85,9 +89,12 @@ char	*ft_quote_strip(char *s)
 	int	i;
 	int	j;
 
-	i = ft_strlen(s);
+	if (ft_strcmp(s, "") == 0)
+		i = 0;
+	else
+		i = ft_strlen(s);
 	j = 0;
-	if ((s[0] == '\"' || s[0] == '\'') && (s[i - 1] == s[0]))
+	if (s && (s[0] == '\"' || s[0] == '\'') && (s[i - 1] == s[0]))
 	{
 		while (j < i)
 		{

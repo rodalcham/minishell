@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 14:18:55 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 16:13:50 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,21 @@ char	*get_line(void)
 	int		inv;
 
 	line = readline("🐚 ");
+	if (!line)
+		return (NULL);
+	line = handle_unclosed_quotes(line);
+	line = expand_tokens(line);
 	inv = is_invalid(line);
-	while ((line && !line[0]) || inv)
+	while (!line || !line[0] || inv)
 	{
 		free(line);
 		if (inv)
 			say_invalid(line, inv);
 		line = readline("🐚 ");
+		if (!line)
+			return (NULL);
+		line = handle_unclosed_quotes(line);
+		line = expand_tokens(line);
 		inv = is_invalid(line);
 	}
 	return (line);
