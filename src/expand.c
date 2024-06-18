@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 15:42:24 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/18 13:21:18 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,28 @@ int	is_within_single_quotes(char *str, int index)
 	{
 	int	i;
 	int	in_single_quotes;
+	int	double_quotes;
+	int	should_expand;
 
 	i = 0;
+	should_expand = 0;
+	double_quotes = 0;
 	in_single_quotes = 0;
 	while (i < index)
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\"' && in_single_quotes == 0)
+			double_quotes = !double_quotes;
+		if (str[i] == '\'' && double_quotes == 0)
 			in_single_quotes = !in_single_quotes;
+		if (str[i] == '$')
+			if (!in_single_quotes)
+			{
+				should_expand = 1;
+				break ;
+			}
 		i++;
 	}
-	return (in_single_quotes);
+	return (should_expand);
 }
 
 char	*extract_env_name(char *str, int *i)
@@ -100,7 +112,7 @@ char	*expand_tokens(char *str)
 	new = ft_strdup(str);
 	while (str[i])
 	{
-		if (str[i] != '$' || is_within_single_quotes(str, i + 1))
+		if (str[i] != '$' || !is_within_single_quotes(str, i + 1))
 		{
 			i++;
 			continue ;
