@@ -3,6 +3,7 @@
 *.ko
 *.obj
 *.elf
+obj
 
 # Linker output
 *.ilk
@@ -18,6 +19,7 @@
 *.a
 *.la
 *.lo
+libftnew
 
 # Shared objects (inc. Windows DLLs)
 *.dll

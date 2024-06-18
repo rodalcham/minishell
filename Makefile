@@ -6,7 +6,7 @@
 #    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/06/18 13:16:32 by rchavez          ###   ########.fr        #
+#    Updated: 2024/06/18 13:22:54 by rchavez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,10 +46,18 @@ $(LIB) :
 	@git submodule add -f https://github.com/lglauch/libftnew.git
 	
 $(OBJ_F) : 
-	@mkdir obj
+	@if [ -d "$(OBJ_F)" ]; then \
+		echo "Directory '$(OBJ_F)' exists"; \
+	else \
+		mkdir $(OBJ_F); \
+	fi
 
 $(OBJ_FB) : $(OBJ_F)
-	@mkdir obj/builtins
+	@if [ -d "$(OBJ_FB)" ]; then \
+		echo "Directory '$(OBJ_FB)' exists"; \
+	else \
+		mkdir $(OBJ_FB); \
+	fi
 
 obj/%.o: src/%.c
 	$(CC) $(CFLAGS) -o $@ -c $<
