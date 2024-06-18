@@ -6,7 +6,7 @@
 #    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/06/18 12:33:55 by rchavez          ###   ########.fr        #
+#    Updated: 2024/06/18 12:50:47 by rchavez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ src/builtins/pwd.c src/builtins/unset.c src/builtins/exit.c
 
 OBJS	:= ${SRCS:src%.c=obj%.o}
 
-all: $(NAME)
+OBJ_F := obj
+
+all:$(OBJ_F) $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
@@ -40,16 +42,20 @@ $(LIBFT) : $(LIB)
 $(LIB) : 
 	@touch .gitmodules
 	@git submodule add -f https://github.com/lglauch/libftnew.git
+	
+$(OBJ_F) : 
+	@mkdir obj
+	@mkdir obj/builtins
 
 obj/%.o: src/%.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 	cd $(LIB) && make clean
-	rm -rf $(OBJS)
+	rm -rf $(OBJ_F)
 
 fclean: clean
-	cd $(LIB) && make fclean
+	rm -rf $(LIB)
 	rm -rf $(NAME)
 
 re: clean all
