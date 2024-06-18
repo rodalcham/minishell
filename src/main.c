@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 16:34:45 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/18 12:17:29 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,27 @@ void	main_loop(void)
 void	make_shlvl(char	**envp)
 {
 	int		i;
-	int		j;
 	int		value;
 	char	*lvl;
+	char	*value_str;
+	size_t	lvl_size;
 
 	i = 0;
-	j = 0;
-	value = 0;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "SHLVL=", ft_strlen("SHLVL=")) == 0)
 		{
-			value = ft_atoi(envp[i] + ft_strlen("SHLVL="));
-			value++;
-			lvl = malloc(sizeof(char) * 6 + ft_strlen(ft_itoa(value)));
-			ft_strlcat(lvl, "SHLVL=", 6);
-			ft_strlcat(lvl, ft_itoa(value), ft_strlen(ft_itoa(value)) + 1);
-			ft_strlcat(lvl, "\n", 1);
-			envp[i] = lvl;
+			value = ft_atoi(envp[i] + ft_strlen("SHLVL=")) + 1;
+			value_str = ft_itoa(value);
+			lvl_size = ft_strlen("SHLVL=") + ft_strlen(value_str) + 1;
+			lvl = malloc(lvl_size);
+			if (lvl)
+			{
+				ft_strlcpy(lvl, "SHLVL=", lvl_size);
+				ft_strlcat(lvl, value_str, lvl_size);
+				envp[i] = lvl;
+			}
+			free(value_str);
 		}
 		i++;
 	}
@@ -99,6 +102,6 @@ int	main(int argc, char **argv, char **envp)
 	main_loop();
 	printf("exit\n");
 	ft_free_envp(*get_envp());
-	// system("leaks minishell");
+	system("leaks minishell");
 	return (*get_exit_status());
 }
