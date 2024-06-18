@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:51:05 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 13:18:12 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 11:44:44 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,23 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+char	*ft_quote_strip(char *s)
+{
+	int	i;
+	int	j;
+
+	i = ft_strlen(s);
+	j = 0;
+	if ((s[0] == '\"' || s[0] == '\'') && (s[i - 1] == s[0]))
+	{
+		while (j < i)
+		{
+			s[j] = s[j + 1];
+			j++;
+		}
+		s[i - 2] = '\0';
+	}
+	return (s);
 }

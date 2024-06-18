@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/17 13:27:12 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 12:37:53 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
+# include "../libftnew/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
@@ -74,6 +74,8 @@ int		handle_ops_open(t_lexer *lex, char **args, int *i);
 //free_all
 void	free_all(char *line, char **args, t_lexer *head, int errno);
 void	free_lexer(t_lexer *head);
+void	free_args(char **args);
+void	free_line(char *line);
 
 //files
 t_file	*new_file(void);
@@ -104,6 +106,7 @@ char	*ft_strcpy(char *dest, char *src);
 char	*ft_strncpy(char *dest, char *src, size_t len);
 char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(char *s1, char *s2);
+char	*ft_quote_strip(char *str);
 
 //error handling
 void	ft_error(int errno);
@@ -137,5 +140,6 @@ int		env_command(void);
 int		export_command(t_lexer *lexer);
 int		pwd_command(void);
 int		unset_command(t_lexer *lexer);
+void	ft_exit(char *line, char **args);
 
 #endif

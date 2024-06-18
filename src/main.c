@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 16:34:45 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/18 12:39:18 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	main_loop(void)
 		line = get_line();
 		if (!line)
 			break ;
-		if(!ft_strncmp(line, "exit ", 5))
-			return (free(line));
 		if (line && ft_strlen(line) > 0)
 			add_history(line);
 		args = ft_split_args(line);
 		if (!args)
 			free_all(line, args, tokens, -1);
+		if (!ft_strcmp(args[0], "exit"))
+			return (ft_exit(line, args));
 		tokens = lex(args, &status);
 		if (!status)
 			status = execute(tokens);
