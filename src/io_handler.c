@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/18 11:49:28 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:16:33 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	add_input(t_lexer *lex, char **args, int *i)
 	fd = 0;
 	(*i)++;
 	args[*i] = ft_quote_strip(args[*i]);
-	fd = open(args[*i], READ);
+	fd = open_mock(args[*i], READ, 0);
 	if (fd < 0)
 		printf("%s : No such file or directory.\n", args[*i]);
 	if (!lex->input)
 		lex->input = new_file();
 	else
-		close(lex->input->fd);
+		close_mock(lex->input->fd);
 	if (!lex->input)
 		return (-1);
 	set_file(lex->input, args[*i], READ, fd);
@@ -50,13 +50,13 @@ int	add_output(t_lexer *lex, char **args, int *i)
 		mod = WRITE;
 	(*i)++;
 	args[*i] = ft_quote_strip(args[*i]);
-	fd = open(args[*i], mod, PERMISSIONS);
+	fd = open_mock(args[*i], mod, PERMISSIONS);
 	if (fd < 0)
 		printf("%s : No such file or directory.\n", args[*i]);
 	if (!lex->output)
 		lex->output = new_file();
 	else
-		close(lex->input->fd);
+		close_mock(lex->input->fd);
 	if (!lex->output)
 		return (-1);
 	set_file(lex->output, args[*i], mod, fd);
@@ -72,17 +72,18 @@ int	add_heredoc(t_lexer *lex, char **args, int *i)
 		return (0);
 	if (pipe(p_fd) < 0)
 		return (-5);
+	printf("\nPipe opened files %i and %i\n", p_fd[1], p_fd[0]);
 	(*i)++;
 	args[*i] = ft_quote_strip(args[*i]);
 	if (do_heredoc(p_fd[1], args[*i]) < 0)
 	{
-		close(p_fd[0]);
+		close_mock(p_fd[0]);
 		return (0);
 	}
 	if (!lex->input)
 		lex->input = new_file();
 	else
-		close(lex->input->fd);
+		close_mock(lex->input->fd);
 	if (!lex->input)
 		return (-1);
 	set_file(lex->input, "Heredoc", READ, p_fd[0]);
@@ -95,6 +96,7 @@ int	add_pipe(t_lexer *lex)
 
 	if (pipe(p_fd) < 0)
 		return (-5);
+	printf("\nPipe opened files %i and %i\n", p_fd[1], p_fd[0]);
 	if (!lex->output)
 	{
 		lex->output = new_file();
@@ -103,7 +105,7 @@ int	add_pipe(t_lexer *lex)
 		set_file(lex->output, "PIPE", WRITE, p_fd[1]);
 	}
 	else
-		close(p_fd[1]);
+		close_mock(p_fd[1]);
 	if (lex->next)
 	{
 		lex->next->input = new_file();

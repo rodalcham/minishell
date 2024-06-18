@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 14:18:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:10:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char	**ft_split_args(char *str)
 
 	i = 0;
 	j = 0;
-	str = handle_unclosed_quotes(str);
+	str = handle_unclose_mockd_quotes(str);
 	str = expand_tokens(str);
 	count = arg_count(str);
 	ret = (char **)malloc(sizeof(char *) * (count + 1));

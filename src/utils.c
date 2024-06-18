@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/16 14:25:12 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:10:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	sep(char c)
 	return (0);
 }
 
-char	*make_unclosed_quotes(char *str, int double_quotes, int single)
+char	*make_unclose_mockd_quotes(char *str, int double_quotes, int single)
 {
 	char	*new_input;
 	char	*new_str;
@@ -85,7 +85,7 @@ char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 	return (new_str);
 }
 
-char	*handle_unclosed_quotes(char *str)
+char	*handle_unclose_mockd_quotes(char *str)
 {
 	int	i;
 	int	single;
@@ -105,6 +105,6 @@ char	*handle_unclosed_quotes(char *str)
 		i++;
 	}
 	if (single == 1 || double_quotes == 1)
-		str = make_unclosed_quotes(str, double_quotes, single);
+		str = make_unclose_mockd_quotes(str, double_quotes, single);
 	return (str);
 }

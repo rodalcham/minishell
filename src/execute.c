@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/17 15:22:27 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:10:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	execute(t_lexer *tokens)
 		if (status)
 			return (status);
 		if (temp->output)
-			close(temp->output->fd);
+			close_mock(temp->output->fd);
 		temp = temp->next;
 	}
 	temp = tokens;
@@ -33,7 +33,7 @@ int	execute(t_lexer *tokens)
 		if (temp->pid != 0)
 			waitpid(temp->pid, get_exit_status(), 0);
 		if (temp->input)
-			close(temp->input->fd);
+			close_mock(temp->input->fd);
 		// printf("Exit status of %s : %d\n", temp->cmd[0], *get_exit_status());
 		temp = temp->next;
 	}

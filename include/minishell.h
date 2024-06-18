@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 12:37:53 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:11:23 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,17 @@ t_envp	**get_envp(void);
 int		*get_exit_status(void);
 char	***ft_env(void);
 
-//validate
+//get_line
 char	*get_line(void);
+int		open_mock(char *str, int mode, int per);   									//rm
+int		close_mock(int fd);   						//rm
 
 //t_lexer
 t_lexer	*init_lexer(int num);
 int		count_lex(char **args);
 t_lexer	*lex(char **args, int *status);
 char	**add_cmd(t_lexer *lex, char *str);
-int		handle_ops_open(t_lexer *lex, char **args, int *i);
+int		handle_ops_open_mock(t_lexer *lex, char **args, int *i);
 
 //free_all
 void	free_all(char *line, char **args, t_lexer *head, int errno);
@@ -98,8 +100,8 @@ int		exec_do(t_lexer *temp);
 int		is_spc(char c);
 int		is_op(char c);
 int		sep(char c);
-char	*make_unclosed_quotes(char *str, int double_quotes, int single);
-char	*handle_unclosed_quotes(char *str);
+char	*make_unclose_mockd_quotes(char *str, int double_quotes, int single);
+char	*handle_unclose_mockd_quotes(char *str);
 
 //utils2
 char	*ft_strcpy(char *dest, char *src);
