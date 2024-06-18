@@ -1,0 +1,3 @@
+[submodule "libftnew"]
+	path = libftnew
+	url = https://github.com/lglauch/libftnew.git

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/16 14:17:52 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 11:22:30 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,27 @@
 int	is_invalid(char *line)
 {
 	int	i;
-	int	op;
+	int x;
 
-	i = -1;
-	op = 0;
-	if (!line)
+	if (!line || !line[0])
 		return (0);
+	i = -1;
+	x = 0;
 	while (line[++i])
 	{
-		if (is_spc(line[i]))
-			continue ;
-		if (is_op(line[i]))
+		if (x > 2 && sep(line[i]) > 2)
+			return (i);
+		x = sep(line[i]);
+		if (x == 1 || x == 2)
 		{
-			if (op)
-				return (i);
-			op = 1;
-			if ((line[i] == '<' || line[i] == '>') && line[i] == line[i + 1])
+			i++;
+			while (line[i] && x != sep(line[i]))
 				i++;
 		}
-		else
-			op = 0;
+		else if (x == 3 || x == 4)
+			if (x == sep(line[i + 1]))
+				i++;
 	}
-	if (op)
-		return (-1);
 	return (0);
 }
 

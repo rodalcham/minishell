@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 17:18:54 by lglauch           #+#    #+#             */
-/*   Updated: 2023/10/17 18:19:00 by lglauch          ###   ########.fr       */
+/*   Created: 2024/06/18 11:57:54 by rchavez           #+#    #+#             */
+/*   Updated: 2024/06/18 12:38:57 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/minishell.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	ft_exit(char *line, char **args)
 {
-	size_t			i;
-	unsigned char	*sn;
-
-	i = 0;
-	sn = (unsigned char *)s;
-	while (i < n)
-	{
-		if (sn[i] == (unsigned char)c)
-			return (sn + i);
-		i++;
-	}
-	return (NULL);
+	if (args[1])
+		*get_exit_status() = ft_atoi(args[1]);
+	free_line(line);
+	free_args(args);
 }

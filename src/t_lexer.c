@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/17 12:17:54 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 11:25:58 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char	**add_cmd(t_lexer *lex, char *str)
 		ret[i] = lex->cmd[i];
 	if (!lex->cmd)
 		i++;
-	ret[i++] = str;
+	ret[i++] = ft_quote_strip(str);
 	ret[i] = NULL;
 	if (!lex->cmd)
 	{
