@@ -6,7 +6,7 @@
 #    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/06/18 12:50:47 by rchavez          ###   ########.fr        #
+#    Updated: 2024/06/18 13:16:32 by rchavez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ OBJS	:= ${SRCS:src%.c=obj%.o}
 
 OBJ_F := obj
 
-all:$(OBJ_F) $(NAME)
+OBJ_FB := obj/builtins
+
+all:$(OBJ_F) $(OBJ_FB) $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
@@ -45,20 +47,30 @@ $(LIB) :
 	
 $(OBJ_F) : 
 	@mkdir obj
+
+$(OBJ_FB) : $(OBJ_F)
 	@mkdir obj/builtins
 
 obj/%.o: src/%.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	cd $(LIB) && make clean
+	@if [ -d "$(LIB)" ]; then \
+		cd $(LIB) && make clean; \
+	else \
+		echo "Directory '$(LIB)' cannot be cleaned"; \
+	fi
 	rm -rf $(OBJ_F)
 
 fclean: clean
-	rm -rf $(LIB)
+	@if [ -d "$(LIB)" ]; then \
+		rm -fr $(LIB); \
+	else \
+		echo "Directory '$(LIB)' cannot be removed."; \
+	fi
 	rm -rf $(NAME)
 
-re: clean all
+re: fclean all
 
 debug: CFLAGS += -g -O0
 debug: fclean $(NAME)
