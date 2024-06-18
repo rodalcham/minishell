@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/18 13:21:18 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/18 14:42:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*ft_inject_value(char *str, char *placeholder, char *envp_value)
 	if (rtr == NULL)
 		return (NULL);
 	ft_strncpy(rtr, str, pos - str);
+	rtr[pos - str] = '\0';
 	ft_strlcat(rtr, envp_value, (pos) - (str) + envp_value_len + 1);
 	ft_strlcat(rtr, pos + placeholder_len,
 		str_len - placeholder_len + envp_value_len + 1);
@@ -112,11 +113,8 @@ char	*expand_tokens(char *str)
 	new = ft_strdup(str);
 	while (str[i])
 	{
-		if (str[i] != '$' || !is_within_single_quotes(str, i + 1))
-		{
-			i++;
+		if ((str[i] != '$' || !is_within_single_quotes(str, i + 1)) && ++i)
 			continue ;
-		}
 		i++;
 		envp_name = extract_env_name(str, &i);
 		if (ft_strcmp(envp_name, "?") == 0)
