@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/18 14:59:01 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/19 11:40:03 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,49 @@ int	execute(t_lexer *tokens)
 	while (temp)
 	{
 		status = exec_do(temp);
+		if (temp->input)
+			close(temp->input->fd);
+		if (temp->output)
+			close(temp->output->fd);
 		if (status)
 			return (status);
-		if (temp->output)
-			close_mock(temp->output->fd);
 		temp = temp->next;
 	}
 	temp = tokens;
 	while (temp)
 	{
 		if (temp->pid != 0)
-			waitpid(temp->pid, get_exit_status(), 1);
-		if (temp->input)
-			close_mock(temp->input->fd);
-		// printf("Exit status of %s : %d\n", temp->cmd[0], *get_exit_status());
+			waitpid(temp->pid, get_exit_status(), 0);
 		temp = temp->next;
 	}
 	return (0);
+}
+
+int	replace_io(t_lexer *temp)
+{
+	if (temp->input)
+	{
+		if (dup2(temp->input->fd, STDIN_FILENO) < 0)
+			return (-3);
+		close(temp->input->fd);
+	}
+	if (temp->output)
+	{
+		if (dup2(temp->output->fd, STDOUT_FILENO) < 0)
+			return (-3);
+		close(temp->output->fd);
+		if (!ft_strcmp(temp->output->filename, "PIPE")
+			&& !ft_strcmp(temp->next->input->filename, "PIPE"))
+			close(temp->next->input->fd);
+	}
+	return(0);
 }
 
 int	exec_do(t_lexer *temp)
 {
 	if (!ft_strncmp(temp->path, "not_found", 9) && !ft_check_commands(temp))
 	{
-		printf("%s : COMMAND NOT FOUND\n", temp->cmd[0]);
+		printf("%s : command not found\n", temp->cmd[0]);
 		return (0);
 	}
 	if ((temp->input && temp->input->fd < 0)
@@ -53,12 +72,8 @@ int	exec_do(t_lexer *temp)
 	temp->pid = fork();
 	if (temp->pid == 0)
 	{
-		if (temp->input)
-			if (dup2(temp->input->fd, STDIN_FILENO) < 0)
-				return (-3);
-		if (temp->output)
-			if (dup2(temp->output->fd, STDOUT_FILENO) < 0)
-				return (-3);
+		if (replace_io(temp) < 0)
+			return (-3);	
 		if (ft_check_commands(temp))
 			return (call_functions(temp));
 		else if (execve(temp->path, temp->cmd, *ft_env()) < 0)

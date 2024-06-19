@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:47:07 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/18 15:10:39 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 17:09:08 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_get_fd(char *op, char *input)
 
 	fd = 0;
 	if (ft_strncmp(op, ">", 1) == 0)
-		fd = open_mock(input, O_WRONLY | O_CREAT | O_TRUNC, PERMISSIONS);
+		fd = open(input, O_WRONLY | O_CREAT | O_TRUNC, PERMISSIONS);
 	else if (ft_strncmp(op, ">>", 2) == 0)
-		fd = open_mock(input, O_WRONLY | O_CREAT | O_APPEND, PERMISSIONS);
+		fd = open(input, O_WRONLY | O_CREAT | O_APPEND, PERMISSIONS);
 	return (fd);
 }
 
@@ -45,7 +45,7 @@ void	out_to_file(char *quitter, char *op)
 		fd = ft_get_fd(op, input);
 		write(fd, input, ft_strlen(input));
 		write(fd, "\n", 1);
-		close_mock(fd);
+		close(fd);
 		free(input);
 	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+         #
+#    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/06/18 13:34:57 by lglauch          ###   ########.fr        #
+#    Updated: 2024/06/19 11:46:59 by rchavez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJ_F := obj
 
 OBJ_FB := obj/builtins
 
-all:$(OBJ_F) $(OBJ_FB) $(NAME)
+all: $(OBJ_FB) $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline

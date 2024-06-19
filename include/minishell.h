@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 16:18:19 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/18 17:09:28 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,13 @@ char	***ft_env(void);
 
 //get_line
 char	*get_line(void);
-int		open_mock(char *str, int mode, int per);   									//rm
-int		close_mock(int fd);   						//rm
 
 //t_lexer
 t_lexer	*init_lexer(int num);
 int		count_lex(char **args);
 t_lexer	*lex(char **args, int *status);
 char	**add_cmd(t_lexer *lex, char *str);
-int		handle_ops_open_mock(t_lexer *lex, char **args, int *i);
+int		handle_ops_open(t_lexer *lex, char **args, int *i);
 
 //free_all
 void	free_all(char *line, char **args, t_lexer *head, int errno);

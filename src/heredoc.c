@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 15:10:39 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 17:09:08 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	do_heredoc(int fd, char *eof)
 		line = readline("> ");
 	}
 	free(line);
-	close_mock(fd);
+	close(fd);
 	if (written < 0)
 		return (-1);
 	return (0);

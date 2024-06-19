@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 15:10:27 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/18 17:08:56 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_lexer	*lex(char **args, int *status)
 	{
 		if (is_op(args[i][0]))
 		{
-			*status = handle_ops_open_mock(temp, args, &i);
+			*status = handle_ops_open(temp, args, &i);
 			if (args[i] && args[i][0] == '|')
 				temp = temp->next;
 		}
@@ -73,7 +73,7 @@ t_lexer	*init_lexer(int num)
 	return (head);
 }
 
-int	handle_ops_open_mock(t_lexer *lex, char **args, int *i)
+int	handle_ops_open(t_lexer *lex, char **args, int *i)
 {
 	if (args[*i][0] == '<')
 	{
