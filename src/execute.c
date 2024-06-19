@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/19 12:53:05 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 11:10:03 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	replace_io(t_lexer *temp)
 			&& !ft_strcmp(temp->next->input->filename, "PIPE"))
 			close(temp->next->input->fd);
 	}
-	return(0);
+	return (0);
 }
 
 int	exec_do(t_lexer *temp)
