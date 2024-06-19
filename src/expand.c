@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/18 16:11:30 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/19 11:16:37 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ char	*extract_env_name(char *str, int *i)
 	}
 	else
 	{
+		if (!ft_isalnum(str[*i]) && str[*i] != '_')
+			return (ft_strdup("$"));
 		j = 0;
 		envp_name = malloc(sizeof(char) * ft_strlen(&str[*i]) + 1);
 		while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
