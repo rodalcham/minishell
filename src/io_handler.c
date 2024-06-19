@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/18 17:10:07 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 13:08:33 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	add_output(t_lexer *lex, char **args, int *i)
 	if (!lex->output)
 		lex->output = new_file();
 	else
-		close(lex->input->fd);
+		close(lex->output->fd);
 	if (!lex->output)
 		return (-1);
 	set_file(lex->output, args[*i], mod, fd);

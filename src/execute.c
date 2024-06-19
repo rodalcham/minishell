@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/19 12:53:05 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 12:59:27 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	exec_do(t_lexer *temp)
 	if (temp->pid == 0)
 	{
 		if (replace_io(temp) < 0)
-			return (-3);	
+			return (-3);
 		if (ft_check_commands(temp))
 			return (call_functions(temp));
 		else if (execve(temp->path, temp->cmd, *ft_env()) < 0)
