@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/19 14:16:13 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:39:49 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,23 @@ int	replace_io(t_lexer *temp)
 	return (0);
 }
 
+int	say_not_found(t_lexer *temp)
+{
+	if (access(temp->cmd[0], F_OK) == 0)
+		printf("%s : Permission denied\n", temp->cmd[0]);
+	else if (temp->cmd[0][0] == '/' || temp->cmd[0][0] == '.')
+		printf("%s : no such file or directory\n", temp->cmd[0]);
+	else
+		printf("%s : command not found\n", temp->cmd[0]);
+	*get_exit_status() = 127;
+	return (0);
+}
+
 int	exec_do(t_lexer *temp)
 {
 	if ((!temp->cmd[0][0]) || (!ft_strncmp(temp->path, "not_found", 9)
 		&& !ft_check_commands(temp)))
-	{
-		*get_exit_status() = 127;
-		printf("%s : command not found\n", temp->cmd[0]);
-		return (0);
-	}
+		return (say_not_found(temp));
 	if ((temp->input && temp->input->fd < 0)
 		|| (temp->output && temp->output->fd < 0)
 		|| (!ft_strncmp(temp->path, "not_valid", 9)))

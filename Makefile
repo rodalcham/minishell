@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
+#    By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/06/19 14:16:47 by rchavez          ###   ########.fr        #
+#    Updated: 2024/06/19 16:44:10 by rchavez@stu      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,16 +46,12 @@ $(LIB) :
 	@git submodule add -f https://github.com/lglauch/libftnew.git
 	
 $(OBJ_F) : 
-	@if [ -d "$(OBJ_F)" ]; then \
-		echo "Directory '$(OBJ_F)' exists"; \
-	else \
+	@if [ ! -d $(OBJ_F) ]; then \
 		mkdir $(OBJ_F); \
 	fi
 
 $(OBJ_FB) : $(OBJ_F)
-	@if [ -d "$(OBJ_FB)" ]; then \
-		echo "Directory '$(OBJ_FB)' exists"; \
-	else \
+	@if [ ! -d $(OBJ_FB) ]; then \
 		mkdir $(OBJ_FB); \
 	fi
 

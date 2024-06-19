@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/19 14:20:05 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:30:33 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,16 @@ char	*handle_absolute_path(char *command)
 			break;
 		i--;
 	}
-	if (i >= 0)
-	{
-		while (path[++i])
-			command[j++] = path[i];
-		command[j] = '\0'; 
-	}
 	if (access(path, X_OK) == 0)
+	{
+		if (i >= 0)
+		{
+			while (path[++i])
+				command[j++] = path[i];
+			command[j] = '\0'; 
+		}
 		return (handle_dir(path));
+	}
 	return(free(path), ft_strdup("not_found"));
 }
 
