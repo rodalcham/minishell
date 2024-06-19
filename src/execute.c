@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/19 11:40:03 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 12:43:21 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	replace_io(t_lexer *temp)
 
 int	exec_do(t_lexer *temp)
 {
-	if (!ft_strncmp(temp->path, "not_found", 9) && !ft_check_commands(temp))
+	if ((!temp->cmd[0][0]) || (!ft_strncmp(temp->path, "not_found", 9)
+		&& !ft_check_commands(temp)))
 	{
 		printf("%s : command not found\n", temp->cmd[0]);
 		return (0);

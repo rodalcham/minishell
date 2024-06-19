@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/18 15:48:16 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/19 12:45:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,34 @@ size_t	ft_countwords(char const *s, char c)
 	return (x);
 }
 
+char	*handle_absolute_path(char *command)
+{
+	char	*path;
+	int		i;
+	int		j;
+
+	path = ft_strdup(command);
+	if (!path)
+		return (NULL);
+	i = ft_strlen(command);
+	j = 0;
+	while (i)
+	{
+		if (path[i] == '/')
+			break;
+		i--;
+	}
+	if (i >= 0)
+	{
+		while (path[++i])
+			command[j++] = path[i];
+		command[j] = '\0'; 
+	}
+	if (access(path, X_OK) == 0)
+		return (path);
+	return(ft_strdup("not_found"));
+}
+
 char	*path_finder(char *command, char *envp)
 {
 	int		i;
@@ -62,6 +90,8 @@ char	*path_finder(char *command, char *envp)
 
 	if (!command)
 		return (ft_strdup("not_found"));
+	if	(command[0] == '.' || command[0] == '/')
+		return (handle_absolute_path(command));
 	paths = ft_split(envp, ':');
 	if (!paths)
 		return (NULL);
@@ -72,10 +102,7 @@ char	*path_finder(char *command, char *envp)
 		if (!ret)
 			return (ft_splitfree(paths, i), NULL);
 		if (access(ret, X_OK) == 0)
-		{
-			ft_splitfree(paths, i + 1);
-			return (ret);
-		}
+			return (ft_splitfree(paths, i + 1), ret);
 		free(paths[i]);
 		free(ret);
 	}
