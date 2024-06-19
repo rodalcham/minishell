@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/18 16:16:40 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:49:50 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ int	main(int argc, char **argv, char **envp)
 	printf("exit\n");
 	ft_free_envp(*get_envp());
 	// system("leaks minishell");
-	return (*get_exit_status());
+	exit (*get_exit_status());
 }

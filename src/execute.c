@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/19 16:39:49 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/19 16:47:38 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,13 @@ int	replace_io(t_lexer *temp)
 
 int	say_not_found(t_lexer *temp)
 {
-	if (access(temp->cmd[0], F_OK) == 0)
-		printf("%s : Permission denied\n", temp->cmd[0]);
-	else if (temp->cmd[0][0] == '/' || temp->cmd[0][0] == '.')
-		printf("%s : no such file or directory\n", temp->cmd[0]);
+	if (temp->cmd[0][0] == '/' || temp->cmd[0][0] == '.')
+	{
+		if (access(temp->cmd[0], F_OK) == 0)
+			printf("%s : Permission denied\n", temp->cmd[0]);
+		else
+			printf("%s : no such file or directory\n", temp->cmd[0]);
+	}
 	else
 		printf("%s : command not found\n", temp->cmd[0]);
 	*get_exit_status() = 127;
