@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/19 13:21:50 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 14:16:13 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,13 @@ int	exec_do(t_lexer *temp)
 	if ((!temp->cmd[0][0]) || (!ft_strncmp(temp->path, "not_found", 9)
 		&& !ft_check_commands(temp)))
 	{
+		*get_exit_status() = 127;
 		printf("%s : command not found\n", temp->cmd[0]);
 		return (0);
 	}
 	if ((temp->input && temp->input->fd < 0)
-		|| (temp->output && temp->output->fd < 0))
+		|| (temp->output && temp->output->fd < 0)
+		|| (!ft_strncmp(temp->path, "not_valid", 9)))
 		return (0);
 	temp->pid = fork();
 	if (temp->pid == 0)

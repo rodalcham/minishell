@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 17:09:28 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 14:00:45 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 
 # define READ O_RDONLY
 # define WRITE (O_WRONLY | O_TRUNC | O_CREAT)
@@ -107,6 +108,9 @@ char	*ft_strncpy(char *dest, char *src, size_t len);
 char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_quote_strip(char *str);
+
+//helper
+size_t	ft_countwords(char const *s, char c);
 
 //error handling
 void	ft_error(int errno);

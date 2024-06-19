@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/19 12:45:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/19 14:20:05 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,27 @@ char	*ft_pathjoin(char *path, char *cmd)
 	return (ret);
 }
 
-size_t	ft_countwords(char const *s, char c)
+char *handle_dir(char *path)
 {
-	size_t	x;
-	size_t	i;
+	struct stat statbuf;
 
-	x = 0;
-	i = 0;
-	if (*s)
-		i++;
-	while (s[i])
+	if (stat(path, &statbuf) == -1)
+		return (free(path), NULL);
+	if (path[0] != '.')
+		return (path);
+	if (!S_ISREG(statbuf.st_mode))
 	{
-		if (s[i] == c && s[i - 1] != c)
-			x++;
-		i++;
-	}
-	if (*s && s[i] == '\0' && s[i - 1] != c)
-		x++;
-	return (x);
+		if (S_ISDIR(statbuf.st_mode)) 
+        	printf("%s is a directory\n", path);
+		else if (S_ISLNK(statbuf.st_mode)) 
+    	    printf("%s is a symbolic link\n", path);
+		else 
+        	printf("%s is not a file\n", path);
+		*get_exit_status() = 126;
+		free(path);
+		path = ft_strdup("not_valid");
+    }
+	return (path);
 }
 
 char	*handle_absolute_path(char *command)
@@ -78,8 +81,8 @@ char	*handle_absolute_path(char *command)
 		command[j] = '\0'; 
 	}
 	if (access(path, X_OK) == 0)
-		return (path);
-	return(ft_strdup("not_found"));
+		return (handle_dir(path));
+	return(free(path), ft_strdup("not_found"));
 }
 
 char	*path_finder(char *command, char *envp)
