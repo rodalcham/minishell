@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/19 16:30:33 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/21 11:59:10 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,19 @@ char	*path_finder(char *command, char *envp)
 
 char	*env_get_by_name(char *name)
 {
-	t_envp	*head;
+	int		i;
+	char	**env;
+	size_t	name_len;
 
-	head = *get_envp();
-	while (head)
+	env = *ft_env();
+	i = 0;
+	name_len = ft_strlen(name);
+	while (env[i])
 	{
-		if (!ft_strncmp(head->name, name, ft_strlen(head->name))
-			&& (ft_strlen(name) == ft_strlen(head->name)))
-			return (head->value);
-		head = head->next;
+		if (!ft_strncmp(env[i], name, name_len)
+			&& env[i][name_len] == '=')
+			return (env[i] + name_len + 1);
+		i++;
 	}
 	return (ft_strdup(""));
 }

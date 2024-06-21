@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/13 12:03:29 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/21 11:56:46 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,7 @@ int	cd_command(t_lexer *lexer)
 			printf("cd: HOME not set\n");
 			return (1);
 		}
-		{
-			printf("cd: HOME not set\n");
-			return (1);
-		}
-		if (chdir(path) == -1)
+		else if (chdir(path) == -1)
 		{
 			printf("cd: %s: No such file or directory\n", path);
 			return (1);

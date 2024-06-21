@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:33:05 by leo               #+#    #+#             */
-/*   Updated: 2024/06/17 13:00:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/21 11:17:58 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	pwd_command(void)
 		printf("pwd: error retrieving current directory\n");
 		return (1);
 	}
-	printf("%s\n", path);
+	printf("%s\n", path);	
 	free(path);
 	return (0);
 }

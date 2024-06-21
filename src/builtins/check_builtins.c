@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:53:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 15:18:39 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/21 11:48:46 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int	call_functions(t_lexer *lexer)
 	if (i == 1)
 		exit_code = echo_command(lexer);
 	if (i == 2)
+	{
 		exit_code = cd_command(lexer);
+		return (exit_code);
+	}
 	if (i == 3)
 		exit_code = pwd_command();
 	if (i == 4)

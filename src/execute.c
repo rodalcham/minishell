@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/19 16:47:38 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/21 12:01:35 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	exec_do(t_lexer *temp)
 		|| (temp->output && temp->output->fd < 0)
 		|| (!ft_strncmp(temp->path, "not_valid", 9)))
 		return (0);
-	temp->pid = fork();
+	if (ft_strcmp("cd", temp->cmd[0]))
+		temp->pid = fork();
 	if (temp->pid == 0)
 	{
 		if (replace_io(temp) < 0)

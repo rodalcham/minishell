@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/19 16:49:50 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/21 12:09:23 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	main_loop(void)
 		line = get_line();
 		if (!line)
 			break ;
-		if (line && ft_strlen(line) > 0)
-			add_history(line);
 		args = ft_split_args(line);
 		if (!args)
 			free_all(line, args, tokens, -1);

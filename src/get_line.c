@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/18 17:28:25 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/21 12:21:09 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int sep(char c);
 
 int	is_invalid(char *line)
 {
@@ -53,28 +51,39 @@ void	say_invalid(char *line, int i)
 	printf("'\n");
 }
 
-char	*get_line(void)
+char	*take_line(int *inv)
 {
 	char	*line;
-	int		inv;
 
 	line = readline("🐚 ");
 	if (!line)
 		return (NULL);
 	line = handle_unclosed_quotes(line);
-	line = expand_tokens(line);
-	inv = is_invalid(line);
+	if (line && ft_strlen(line) > 0)
+			add_history(line);
+	*inv = is_invalid(line);
+	if (!*inv)
+		line = expand_tokens(line);
+	return (line);
+}
+
+char	*get_line(void)
+{
+	char	*line;
+	int		inv;
+
+	inv = 0;
+	line = take_line(&inv);
+	if (!line)
+		return (NULL);
 	while (!line || !line[0] || inv)
 	{
-		free(line);
 		if (inv)
 			say_invalid(line, inv);
-		line = readline("🐚 ");
+		free(line);
+		line = take_line(&inv);
 		if (!line)
 			return (NULL);
-		line = handle_unclosed_quotes(line);
-		line = expand_tokens(line);
-		inv = is_invalid(line);
 	}
 	return (line);
 }
