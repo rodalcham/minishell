@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:53:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/21 11:48:46 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/23 11:02:02 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int	call_functions(t_lexer *lexer)
 	if (i == 3)
 		exit_code = pwd_command();
 	if (i == 4)
+	{
 		exit_code = export_command(lexer);
+		return (exit_code);
+	}
 	if (i == 5)
 		exit_code = unset_command(lexer);
 	if (i == 6)

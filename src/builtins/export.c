@@ -3,40 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/06/17 12:58:13 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/23 11:38:53 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	envp_add(char *name, char *value)
+int	env_len(char **env)
 {
-	t_envp	*new_node;
-	t_envp	*envp_list;
+	int i;
 
-	new_node = malloc(sizeof(t_envp));
-	if (new_node == NULL)
+	i = 0;
+	if (!env)
+		return (0);
+	while (env[i])
+		i++;
+	return (i + 1);
+}
+
+int	envp_add(char *cmd, char **env)
+{
+	char	**new;
+	char	*eq;
+	int		i;
+
+	new = (char **)malloc(sizeof(char *) * (env_len(env) + 1));
+	if (!new)
+		return (-1);
+	eq = ft_strchr(cmd, '=');
+	if (eq && eq != cmd && *(eq - 1) == '+')
 	{
-		printf("Malloc error in envp_add");
-		return ;
+		eq--;
+		while (*(++eq))
+			*(eq - 1) = *(eq);
+		*(eq - 1) = '\0';
 	}
-	new_node->name = ft_strdup(name);
-	new_node->value = ft_strdup(value);
-	new_node->next = NULL;
-	envp_list = *get_envp();
-	if (envp_list == NULL)
-	{
-		*get_envp() = new_node;
-		return ;
-	}
-	while (envp_list->next != NULL)
-	{
-		envp_list = envp_list->next;
-	}
-	envp_list->next = new_node;
+	i = -1;
+	while (env[++i])
+		new[i] = env[i];
+	new[i] = ft_strdup(cmd);
+	if (!new[i])
+		return (free(new), -1);
+	new[++i] = NULL;
+	*ft_env() = new;
+	return (0);
 }
 
 void	envp_update_value(char *name, char *value)
@@ -59,22 +72,24 @@ void	envp_update_value(char *name, char *value)
 int	export_command(t_lexer *lexer)
 {
 	char	*cmd;
-	char	*new;
+	char	*eq;
 
 	cmd = lexer->cmd[1];
-	new = ft_strchr(cmd, '=');
-	if (new != NULL)
+	if (!cmd)
 	{
-		*new = 0;
-		new++;
+		printf("export : INVALID USAGE\n");
+		return (0);
 	}
-	if (env_get_by_name(cmd))
+	eq = ft_strchr(cmd, '=');
+	if (eq && *(eq - 1) == '-')
 	{
-		envp_update_value(cmd, new);
+		printf("export : '%s' : not a valid identifier\n", cmd);
+		return (0);
 	}
+	if (env_get_by_name(cmd)[0]) //not working
+		printf("ENV : %s\n", env_get_by_name(cmd));
 	else
-	{
-		envp_add(cmd, new);
-	}
+		if (envp_add(cmd, *ft_env()) < 0)
+			return (-1);
 	return (0);
 }

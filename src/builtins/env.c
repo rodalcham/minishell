@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:25:08 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 13:00:02 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/23 09:25:43 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 int	env_command(void)
 {
-	t_envp	*list;
+	char	**list;
+	int		i;
 
-	list = *get_envp();
+	list = *ft_env();
 	if (list == NULL)
 		return (1);
-	while (list != NULL)
+	i = 0;
+	while (list[i])
 	{
-		printf("%s=%s\n", list->name, list->value);
-		list = list->next;
+		printf("%s\n", list[i]);
+		i++;
 	}
 	return (0);
 }
