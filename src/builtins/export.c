@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/06/23 11:38:53 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/23 21:56:26 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,55 @@ int	env_len(char **env)
 	return (i + 1);
 }
 
-int	envp_add(char *cmd, char **env)
+int	env_cmp(char *s1, char *s2)
+{
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	if (!s1 || !s2)
+		return (0);
+	while(s1[i] && s2[i] && s1[i] != '=' && s2[i] != '='
+		&& s1[i] != '+' && s2[i] != '+')
+	{
+		if (s1[i] != s2[i])
+			ret = s1[i] - s2[i];
+		i++;
+	}
+	if (!ret)
+		ret = s1[i] - s2[i];
+	if (s1[i] == '=' || s1[i] == '+')
+		ret -= s1[i];
+	if (s2[i] == '=' || s2[i] == '+')
+		ret += s2[i];
+	return (ret);
+}
+
+int env_pos(char **env, char *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (!env)
+		return (-1);
+	while (env[i])
+	{
+		if (!env_cmp(env[i], cmd))
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int	envp_add(char **env, char *cmd, int pos, char *eq)
 {
 	char	**new;
-	char	*eq;
 	int		i;
 
 	new = (char **)malloc(sizeof(char *) * (env_len(env) + 1));
 	if (!new)
 		return (-1);
-	eq = ft_strchr(cmd, '=');
 	if (eq && eq != cmd && *(eq - 1) == '+')
 	{
 		eq--;
@@ -49,47 +88,53 @@ int	envp_add(char *cmd, char **env)
 		return (free(new), -1);
 	new[++i] = NULL;
 	*ft_env() = new;
+	if (pos >= 0)
+		free(env);
 	return (0);
 }
 
-void	envp_update_value(char *name, char *value)
+int	envp_update_value(char **env, char *cmd, int pos, char *eq)
 {
-	t_envp	*envp_list;
+	char *new;
 
-	envp_list = *get_envp();
-	while (envp_list != NULL)
-	{
-		if (ft_strncmp(envp_list->name, name, ft_strlen(envp_list->name)) == 0)
-		{
-			free(envp_list->value);
-			envp_list->value = ft_strdup(value);
-			break ;
-		}
-		envp_list = envp_list->next;
-	}
+	new = NULL;
+	if (eq && eq != cmd && *(eq - 1) == '+' && *(eq + 1))
+		new = ft_strjoin(env[pos], (eq + 1));
+	else if (eq)
+		new = ft_strdup(cmd);
+	else
+		return (0);
+	if (!new)
+		return (-1);
+	free(env[pos]);
+	env[pos] = new;
+	return (0);
 }
 
-int	export_command(t_lexer *lexer)
+int	export_command(t_lexer *lexer) // doesnt handle quotes after =
 {
 	char	*cmd;
 	char	*eq;
+	int		pos;
 
-	cmd = lexer->cmd[1];
-	if (!cmd)
+	if (!lexer->cmd[1] || lexer->cmd[2])
 	{
 		printf("export : INVALID USAGE\n");
-		return (0);
+		return (*get_exit_status() = 0);
 	}
+	cmd = lexer->cmd[1];
 	eq = ft_strchr(cmd, '=');
-	if (eq && *(eq - 1) == '-')
+	if ((eq && eq != cmd && *(eq - 1) == '-')
+		|| (!eq && (ft_strchr(cmd, '+') || ft_strchr(cmd, '-'))))
 	{
 		printf("export : '%s' : not a valid identifier\n", cmd);
-		return (0);
+		return (*get_exit_status() = 1);
 	}
-	if (env_get_by_name(cmd)[0]) //not working
-		printf("ENV : %s\n", env_get_by_name(cmd));
+	if (!eq || lexer->next)
+		return (*get_exit_status() = 0);
+	pos = env_pos(*ft_env(), cmd);
+	if (pos >= 0) 
+		return (envp_update_value(*ft_env(), cmd, pos, eq));
 	else
-		if (envp_add(cmd, *ft_env()) < 0)
-			return (-1);
-	return (0);
+		return (envp_add(*ft_env(), cmd, pos, eq));
 }
