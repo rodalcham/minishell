@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/24 13:17:06 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/24 13:18:44 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*take_line(int *inv)
 
 	line = readline("🐚 ");
 	if (!line)
-		return (printf("HEY\n"), NULL);
+		return (NULL);
 	line = handle_unclosed_quotes(line);
 	if (line && ft_strlen(line) > 0)
 		add_history(line);
