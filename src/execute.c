@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/23 21:17:41 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/24 08:48:09 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	execute(t_lexer *tokens)
 
 int	replace_io(t_lexer *temp)
 {
+	if (!ft_strcmp("cd", temp->cmd[0]) || !ft_strcmp("export", temp->cmd[0]))
+		return (0);
 	if (temp->input)
 	{
 		if (dup2(temp->input->fd, STDIN_FILENO) < 0)

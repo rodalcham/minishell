@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/19 14:00:45 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/23 22:35:09 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		*get_run(void);
 t_envp	**get_envp(void);
 int		*get_exit_status(void);
 char	***ft_env(void);
+char	**last_line(void);
 
 //get_line
 char	*get_line(void);

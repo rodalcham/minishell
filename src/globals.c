@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 15:12:09 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/23 22:33:45 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ int	*get_run(void)
 	static int	run = 1;
 
 	return (&run);
+}
+
+char	**last_line(void)
+{
+	static char	*str = NULL;
+
+	return (&str);
 }
 
 t_envp	**get_envp(void)

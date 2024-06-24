@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/21 12:21:09 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/24 08:42:49 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ char	*take_line(int *inv)
 		return (NULL);
 	line = handle_unclosed_quotes(line);
 	if (line && ft_strlen(line) > 0)
-			add_history(line);
+		add_history(line);
 	*inv = is_invalid(line);
 	if (!*inv)
 		line = expand_tokens(line);
+	*last_line() = line;
 	return (line);
 }
 
