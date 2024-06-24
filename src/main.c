@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/21 12:09:23 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/24 12:48:31 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	main_loop(void)
 		if (!args)
 			free_all(line, args, tokens, -1);
 		if (line && line[0] && !ft_strcmp(ft_quote_strip(args[0]), "exit"))
-			return (ft_exit(line, args));
+			exit(ft_exit(line, args));
 		tokens = lex(args, &status);
 		if (!status)
 			status = execute(tokens);
