@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/19 11:16:37 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/24 13:17:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,10 @@ char	*expand_tokens(char *str)
 	char	*new;
 
 	i = 0;
-	if (!str || !str[0])
+	if (!str)
 		return (0);
+	if (!str[0])
+		return (str);
 	new = ft_strdup(str);
 	while (str[i])
 	{

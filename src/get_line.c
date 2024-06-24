@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/24 12:37:29 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/24 13:17:06 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,16 @@ int	is_invalid(char *line)
 	x = 0;
 	while (line[++i])
 	{
+		if (is_spc(line[i]))
+			continue ;
 		if (x > 2 && sep(line[i]) > 2)
 			return (i);
 		x = sep(line[i]);
-		if (x == 1 || x == 2)
-		{
-			i++;
+		if ((x == 1 || x == 2) && ++i)
 			while (line[i] && x != sep(line[i]))
 				i++;
-		}
-		else if (x == 3 || x == 4)
-			if (x == sep(line[i + 1]))
-				i++;
+		else if ((x == 3 || x == 4) && x == sep(line[i + 1]))
+			i++;
 	}
 	if (x > 2)
 		return (-1);
@@ -57,7 +55,7 @@ char	*take_line(int *inv)
 
 	line = readline("🐚 ");
 	if (!line)
-		return (NULL);
+		return (printf("HEY\n"), NULL);
 	line = handle_unclosed_quotes(line);
 	if (line && ft_strlen(line) > 0)
 		add_history(line);
@@ -76,7 +74,7 @@ char	*get_line(void)
 	inv = 0;
 	line = take_line(&inv);
 	if (!line)
-		return (printf("\n"), NULL);
+		return (NULL);
 	while (!line || !line[0] || inv)
 	{
 		if (inv)
