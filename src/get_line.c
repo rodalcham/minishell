@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/24 08:42:49 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/24 12:37:29 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*get_line(void)
 	inv = 0;
 	line = take_line(&inv);
 	if (!line)
-		return (NULL);
+		return (printf("\n"), NULL);
 	while (!line || !line[0] || inv)
 	{
 		if (inv)

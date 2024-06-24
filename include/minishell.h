@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/23 22:35:09 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/24 12:35:46 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char	*ft_quote_strip(char *str);
 
 //helper
 size_t	ft_countwords(char const *s, char c);
+char	*remove_quotes(char *str);
 
 //error handling
 void	ft_error(int errno);
@@ -145,6 +146,6 @@ int		env_command(void);
 int		export_command(t_lexer *lexer);
 int		pwd_command(void);
 int		unset_command(t_lexer *lexer);
-void	ft_exit(char *line, char **args);
+int		ft_exit(char *line, char **args);
 
 #endif
