@@ -20,6 +20,7 @@ obj
 *.la
 *.lo
 libftnew
+libft
 
 # Shared objects (inc. Windows DLLs)
 *.dll
