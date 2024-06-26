@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/26 13:32:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:16:47 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "../ft_malloc/ft_malloc.h"
-# include "../libftnew/libft.h"
+# include "../MLibft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>

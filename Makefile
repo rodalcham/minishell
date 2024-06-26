@@ -6,7 +6,7 @@
 #    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/06/26 10:12:18 by rchavez          ###   ########.fr        #
+#    Updated: 2024/06/26 16:20:15 by rchavez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,10 @@ CFLAGS	:= -Wextra -Wall -Werror
 
 CC := cc
 
-LIB := libftnew
+LIB := ./MLibft
 
-MLIB := ft_malloc
+LIBFT := ./MLibft/libft.a
 
-LIBFT := libftnew/libft.a
-
-MFT := ft_malloc/ft_malloc.a
 
 SRCS	:= src/main.c src/globals.c src/utils.c src/ft_split_args.c\
 src/signals.c src/path.c src/ft_error.c src/utils2.c src/envp.c src/expand.c\
@@ -39,22 +36,15 @@ OBJ_FB := obj/builtins
 
 all: $(OBJ_FB) $(NAME)
 
-$(NAME): $(LIBFT) $(MFT) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MFT) -lreadline
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
 
 $(LIBFT) : $(LIB)
 	cd $(LIB) && make
 
-$(LIB) : 
+$(LIB) :
 	@touch .gitmodules
-	@git submodule add -f https://github.com/lglauch/libftnew.git
-
-$(MFT) : $(MLIB)
-	cd $(MLIB) && make
-
-$(MLIB) :
-	@touch .gitmodules
-	@git submodule add -f https://github.com/rodalcham/ft_malloc.git
+	@git submodule add -f https://github.com/rodalcham/MLibft.git
 	
 $(OBJ_F) : 
 	@if [ ! -d $(OBJ_F) ]; then \
@@ -75,11 +65,6 @@ clean:
 	else \
 		echo "Directory '$(LIB)' cannot be cleaned"; \
 	fi
-	@if [ -d "$(MLIB)" ]; then \
-		cd $(MLIB) && make clean; \
-	else \
-		echo "Directory '$(MLIB)' cannot be cleaned"; \
-	fi
 	rm -rf $(OBJ_F)
 
 fclean: clean
@@ -87,11 +72,6 @@ fclean: clean
 		rm -fr $(LIB); \
 	else \
 		echo "Directory '$(LIB)' cannot be removed."; \
-	fi
-	@if [ -d "$(MLIB)" ]; then \
-		rm -fr $(MLIB); \
-	else \
-		echo "Directory '$(MLIB)' cannot be removed."; \
 	fi
 	rm -rf $(NAME)
 
