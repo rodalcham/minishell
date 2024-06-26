@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/25 14:56:00 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/26 14:00:01 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,61 @@
 // 		return (0);
 // 	return (0);
 // }
+int	check_input(char *line, size_t i)
+{
+	size_t	j;
+
+	j = i + 2;
+	while (line[j] && !is_spc(line[j]))
+	{
+		if (line[j] != 'n')
+			return (1);
+		j++;
+	}
+	return (0);
+}
 
 void	remove_n_flag(char *line, int *index)
 {
-	while (line[*index] && line[*index] == '-'
-		&& line[*index + 1] == 'n' && is_spc(line[*index + 2]))
+	size_t	i;
+	int		flag;
+	int		count;
+
+	flag = 0;
+	count = 0;
+	i = *index;
+	if (!line || !*line)
+		return ;
+	while (line[i] == '-' && line[i + 1] == 'n')
 	{
-		*index += 3;
-		remove_n_flag(line, index);
+		if (line[i + 2] == ' ' || line[i + 2] == 0 || line[i + 2] == 'n')
+		{
+			if (check_input(line, i) == 0)
+			{
+				i += 2;
+				flag = 1;
+				while (line[i] == 'n')
+				{
+					i++;
+					count++;
+				}
+				if (line[i] != ' ' && line[i] != 0)
+					flag = 0;
+				while (flag && line[i] == ' ')
+					i++;
+				if (!flag)
+					break ;
+			}
+			else
+				break ;
+		}
+		else
+			break ;
 	}
+	if (!flag)
+		*index = i - count;
+	else
+		*index = i;
 }
 
 char	*transform_correct(char *line, int n)
@@ -69,10 +115,10 @@ char	*transform_correct(char *line, int n)
 	{
 		while (is_spc(line[i]) && is_spc(line[i + 1]) && !single && !doubl)
 			i++;
-		if (n > 0 && line[i] && line[i] == '-' && line[i + 1] == 'n' && is_spc(line[i + 2]))
+		if (n == 0)
 		{
 			remove_n_flag(line, &i);
-			n = 0;
+			n = 1;
 		}
 		if (line[i] == '\"' && single == 0)
 		{
@@ -102,27 +148,38 @@ char	*transform_correct(char *line, int n)
 	return (new_str);
 }
 
+int	is_n_flag(char *str)
+{
+	if (str[0] != '-')
+		return (0);
+	str++;
+	while (*str)
+	{
+		if (*str != 'n')
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	echo_command(t_lexer *lexer)
 {
 	int		i;
 	int		newline;
 	char	*line;
-	int		skip_n;
 
 	i = 1;
 	newline = 1;
-	skip_n = 0;
-	if (lexer->cmd[i] && !ft_strcmp(lexer->cmd[i], "-n"))
+	if (lexer->cmd[i] && is_n_flag(lexer->cmd[i]))
 	{
 		newline = 0;
-		skip_n = 1;
 		i++;
 	}
 	line = *last_line();
 	line += 4;
 	while (is_spc(*line))
 		line++;
-	line = transform_correct(line, skip_n);
+	line = transform_correct(line, newline);
 	if (line && remove_quotes(line))
 		printf ("%s", line);
 	if (newline && printf("\n"))
