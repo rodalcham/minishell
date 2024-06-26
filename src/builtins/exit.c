@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 11:57:54 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/24 14:34:46 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 10:01:19 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	ft_exit(char *line, char **args)
 		*get_exit_status() = ft_atoi(args[1]);
 	free_line(line);
 	free_args(args);
+	env_free(*ft_env());
 	while (*get_exit_status() < 0)
 		*get_exit_status() = 256 + *get_exit_status();
 	return (*get_exit_status());

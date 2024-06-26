@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/17 10:56:49 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 09:54:45 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,39 @@ t_envp	*ft_create_envp(char **envp)
 	return (head);
 }
 
-void	init_env(char **env)
+void	env_free(char **ret)
 {
-	*ft_env() = env;
+	int	i;
+
+	i = 0;
+	if (!ret)
+		return ;
+	while (ret[i])
+		free (ret[i++]);
+	free(ret);
+}
+
+char	**init_env(char **env)
+{
+	int	i;
+	char	**ret;
+
+	i = 0;
+	if (!env)
+		return (NULL);
+	while (env[i])
+		i++;
+	ret = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (env[i])
+	{
+		ret[i] = ft_strdup(env[i]);
+		if (!ret[i])
+			return (env_free(ret), NULL);
+		i++;
+	}
+	ret[i] = NULL;
+	return (ret);
 }

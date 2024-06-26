@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/24 12:35:46 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 10:12:49 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include "../ft_malloc/ft_malloc.a"
 # include "../libftnew/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -132,7 +133,8 @@ char	*env_get_by_name(char *name);
 //envp
 t_envp	*ft_create_envp(char **envp);
 void	ft_free_envp(t_envp *head);
-void	init_env(char **env);
+char	**init_env(char **env);
+void	env_free(char **ret);
 
 //expand
 char	*expand_tokens(char *str);

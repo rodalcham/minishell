@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/24 13:09:43 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 10:01:08 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,14 @@ int	main(int argc, char **argv, char **envp)
 	*get_envp() = ft_create_envp(envp);
 	if (!*get_envp())
 		ft_error(-1);
-	init_env(envp);
+	*ft_env() = init_env(envp);
 	make_shlvl(envp);
 	rl_catch_signals = 0;
 	signal_handler();
 	intro();
 	main_loop();
 	printf("exit\n");
+	env_free(*ft_env());
 	ft_free_envp(*get_envp());
 	// system("leaks minishell");
 	exit (*get_exit_status());

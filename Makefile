@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+         #
+#    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/06/19 16:44:10 by rchavez@stu      ###   ########.fr        #
+#    Updated: 2024/06/26 10:12:18 by rchavez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,11 @@ CC := cc
 
 LIB := libftnew
 
+MLIB := ft_malloc
+
 LIBFT := libftnew/libft.a
+
+MFT := ft_malloc/ft_malloc.a
 
 SRCS	:= src/main.c src/globals.c src/utils.c src/ft_split_args.c\
 src/signals.c src/path.c src/ft_error.c src/utils2.c src/envp.c src/expand.c\
@@ -35,8 +39,8 @@ OBJ_FB := obj/builtins
 
 all: $(OBJ_FB) $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
+$(NAME): $(LIBFT) $(MFT) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MFT) -lreadline
 
 $(LIBFT) : $(LIB)
 	cd $(LIB) && make
@@ -44,6 +48,13 @@ $(LIBFT) : $(LIB)
 $(LIB) : 
 	@touch .gitmodules
 	@git submodule add -f https://github.com/lglauch/libftnew.git
+
+$(MFT) : $(MLIB)
+	cd $(MLIB) && make
+
+$(MLIB) :
+	@touch .gitmodules
+	@git submodule add -f https://github.com/rodalcham/ft_malloc.git
 	
 $(OBJ_F) : 
 	@if [ ! -d $(OBJ_F) ]; then \
@@ -64,6 +75,11 @@ clean:
 	else \
 		echo "Directory '$(LIB)' cannot be cleaned"; \
 	fi
+	@if [ -d "$(MLIB)" ]; then \
+		cd $(MLIB) && make clean; \
+	else \
+		echo "Directory '$(MLIB)' cannot be cleaned"; \
+	fi
 	rm -rf $(OBJ_F)
 
 fclean: clean
@@ -71,6 +87,11 @@ fclean: clean
 		rm -fr $(LIB); \
 	else \
 		echo "Directory '$(LIB)' cannot be removed."; \
+	fi
+	@if [ -d "$(MLIB)" ]; then \
+		rm -fr $(MLIB); \
+	else \
+		echo "Directory '$(MLIB)' cannot be removed."; \
 	fi
 	rm -rf $(NAME)
 

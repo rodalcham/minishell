@@ -60,6 +60,7 @@ dkms.conf
 *.bak
 *.orig
 .devcontainer
+.gitmodules
 
 # Build output directories
 build/
