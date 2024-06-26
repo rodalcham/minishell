@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 11:57:54 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/26 11:58:50 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:53:16 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_exit(char *line, char **args)
 	free_args(args);
 	env_free(*ft_env());
 	// system("leaks minishell");
-	// link_free();
+	link_free();
 	// printf("LEAK SIZE : %i", leak_size());
 	while (*get_exit_status() < 0)
 		*get_exit_status() = 256 + *get_exit_status();
