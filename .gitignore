@@ -21,6 +21,7 @@ obj
 *.lo
 libftnew
 libft
+ft_malloc
 
 # Shared objects (inc. Windows DLLs)
 *.dll

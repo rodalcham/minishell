@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/26 11:01:52 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:32:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ char	*ft_quote_strip(char *str);
 size_t	ft_countwords(char const *s, char c);
 char	*remove_quotes(char *str);
 char	*remove_uquotes(char *str);
+char	*join_quotes(char *str);
 
 //error handling
 void	ft_error(int errno);

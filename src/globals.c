@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/23 22:33:45 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/26 12:25:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

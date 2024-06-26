@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/26 11:47:22 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:41:25 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 void	intro(void)
 {
+	char	*name;
+
+	name = env_get_by_name("USER");
 	if (!isatty(fileno(stdin)))
 		return ;
 	printf("\033[H\033[J");
-	printf("   _   _   _   _   _   _   _   _   _   \n");
-	printf("  / \\ / \\ / \\ / \\ / \\ / \\ / \\ / \\ / \\ \n");
-	printf(" ( M | I | N | I | S | H | E | L | L )\n");
-	printf("  \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \n");
-	printf("    ********************************\n");
+	printf("        _   _   _   _   _   _   _   _   _   \n");
+	printf("       / \\ / \\ / \\ / \\ / \\ / \\ / \\ / \\ / \\ \n");
+	printf("      ( M | I | N | I | S | H | E | L | L )\n");
+	printf("       \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \n");
+	printf("         ********************************\n");
 	printf("\n    Welcome to Minishell by \033]8;;https://github.com/rodalcham"
 		"\archavez\033]8;;\a && \033]8;;https://github.com/lglauch"
 		"\alglauch\033]8;;\a\n\n");
-	printf("    ********************************\n");
+	printf("         ********************************\n");
+	printf("\n\t\tWelcome");
+	if (name && name[0])
+		printf(", %s", name);
+	printf("\n");
 }
 
 void	main_loop(void)
@@ -41,8 +48,8 @@ void	main_loop(void)
 		line = get_line();
 		if (!line)
 			break ;
+		printf("%s\n", remove_uquotes(join_quotes(line)));
 		args = ft_split_args(remove_uquotes(line));
-		printf("%s\n", remove_uquotes(line));
 		if (!args)
 			free_all(line, args, tokens, -1);
 		if (line && line[0] && !ft_strcmp(ft_quote_strip(args[0]), "exit"))
@@ -94,8 +101,9 @@ int	main(int argc, char **argv, char **envp)
 	if (!*get_envp())
 		ft_error(-1);
 	*ft_env() = init_env(envp);
-	if (!*ft_env())
+	if (!(*ft_env()))
 	{
+		printf("WHYYY\n");
 		ft_free_envp(*get_envp());
 		ft_error(-1);
 	}

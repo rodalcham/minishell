@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/26 11:33:30 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:32:29 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ char	*remove_quotes(char *str)
 	return (str);
 }
 
-void shift_left(char *str)
+void shift_left(char *str, int spc, size_t *p)
 {
 	size_t	i;
-	if (!str || !str[0])
+	if (!str || !str[0] || spc)
 		return ;
 	i = 0;
 	while (str[i + 1])
@@ -82,6 +82,8 @@ void shift_left(char *str)
 		i++;
 	}
 	str[i] ='\0';
+	if (p)
+		(*p)--;
 }
 
 char	*remove_uquotes(char *str)
@@ -95,12 +97,12 @@ char	*remove_uquotes(char *str)
 	spc = 0;
 	while (str && str[i] && ++i)
 	{
-		if (str[i] == '\'' || str[i] == '\"')
+		if (str[i - 1] == '\'' || str[i - 1] == '\"')
 		{
-			if (q && str[i - 1] == str[q])
+			if (q && str[i - 1] == str[q - 1])
 			{
-				shift_left(&str[i - 1]);
-				shift_left(&str[q - 1]);
+				shift_left(&str[i - 1], spc, &i);
+				shift_left(&str[q - 1], spc, &i);
 				q = 0;
 				spc = 0;
 			}
@@ -109,6 +111,25 @@ char	*remove_uquotes(char *str)
 		}
 		else if(q && is_spc(str[i - 1]))
 			spc = 1;
+	}
+	return (str);
+}
+
+char	*join_quotes(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	while (str[i])
+	{
+		if ((str[i] == '\'' || str[i] == '\"') && (str[i] == str[i + 1]))
+		{
+			shift_left(&str[i], 0, NULL);
+			shift_left(&str[i], 0, NULL);
+		}
+		i++;
 	}
 	return (str);
 }
