@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/24 12:32:09 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 11:33:30 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,48 @@ char	*remove_quotes(char *str)
 			i++;
 	}
 	str[j] = '\0';
+	return (str);
+}
+
+void shift_left(char *str)
+{
+	size_t	i;
+	if (!str || !str[0])
+		return ;
+	i = 0;
+	while (str[i + 1])
+	{
+		str[i] = str[i + 1];
+		i++;
+	}
+	str[i] ='\0';
+}
+
+char	*remove_uquotes(char *str)
+{
+	size_t	i;
+	size_t	q;
+	int	spc;
+
+	i = 0;
+	q = 0;
+	spc = 0;
+	while (str && str[i] && ++i)
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			if (q && str[i - 1] == str[q])
+			{
+				shift_left(&str[i - 1]);
+				shift_left(&str[q - 1]);
+				q = 0;
+				spc = 0;
+			}
+			else if (!q)
+				q = i;
+		}
+		else if(q && is_spc(str[i - 1]))
+			spc = 1;
+	}
 	return (str);
 }

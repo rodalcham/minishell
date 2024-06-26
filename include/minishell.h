@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/26 10:12:49 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 11:01:52 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "../ft_malloc/ft_malloc.a"
+# include "../ft_malloc/ft_malloc.h"
 # include "../libftnew/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -30,8 +30,10 @@
 # define READ O_RDONLY
 # define WRITE (O_WRONLY | O_TRUNC | O_CREAT)
 # define APPEND (O_WRONLY | O_APPEND | O_CREAT)
-// # define HEREDOC 
 # define PERMISSIONS 0644
+
+# define malloc malloc_t_bad
+# define free free_t
 
 typedef struct s_envp
 {
@@ -114,6 +116,7 @@ char	*ft_quote_strip(char *str);
 //helper
 size_t	ft_countwords(char const *s, char c);
 char	*remove_quotes(char *str);
+char	*remove_uquotes(char *str);
 
 //error handling
 void	ft_error(int errno);

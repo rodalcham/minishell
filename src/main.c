@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/26 10:01:08 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/26 11:47:22 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	main_loop(void)
 		line = get_line();
 		if (!line)
 			break ;
-		args = ft_split_args(line);
+		args = ft_split_args(remove_uquotes(line));
+		printf("%s\n", remove_uquotes(line));
 		if (!args)
 			free_all(line, args, tokens, -1);
 		if (line && line[0] && !ft_strcmp(ft_quote_strip(args[0]), "exit"))
@@ -93,6 +94,11 @@ int	main(int argc, char **argv, char **envp)
 	if (!*get_envp())
 		ft_error(-1);
 	*ft_env() = init_env(envp);
+	if (!*ft_env())
+	{
+		ft_free_envp(*get_envp());
+		ft_error(-1);
+	}
 	make_shlvl(envp);
 	rl_catch_signals = 0;
 	signal_handler();
@@ -102,5 +108,7 @@ int	main(int argc, char **argv, char **envp)
 	env_free(*ft_env());
 	ft_free_envp(*get_envp());
 	// system("leaks minishell");
+	// link_free();
+	// printf("LEAK SIZE : %i", leak_size());
 	exit (*get_exit_status());
 }
