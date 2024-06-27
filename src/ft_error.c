@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:09:53 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/26 12:12:05 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/27 12:01:50 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_error(int errno)
 {
+	dup2(2, 1);
 	if (errno == -1)
 		printf("\nCANNOT ALLOCATE MEMORY.\n");
 	else if (errno == -2)

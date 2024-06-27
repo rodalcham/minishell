@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/27 11:41:50 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:59:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	is_invalid(char *line)
 void	say_invalid(char *line, int i)
 {
 	*get_exit_status() = 2;
+	dup2(2, 1);
 	if (!isatty(fileno(stdin)))
 		printf("bash: line 1: ");
 	printf("syntax error near unexpected token `");
