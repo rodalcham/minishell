@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/21 11:59:10 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/27 08:09:46 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ char	*handle_absolute_path(char *command)
 {
 	char	*path;
 	int		i;
-	int		j;
+	// int		j;
 
 	path = ft_strdup(command);
 	if (!path)
 		return (NULL);
 	i = ft_strlen(command);
-	j = 0;
+	// j = 0;
 	while (i)
 	{
 		if (path[i] == '/')
@@ -76,12 +76,12 @@ char	*handle_absolute_path(char *command)
 	}
 	if (access(path, X_OK) == 0)
 	{
-		if (i >= 0)
-		{
-			while (path[++i])
-				command[j++] = path[i];
-			command[j] = '\0'; 
-		}
+		// if (i >= 0)
+		// {
+			// while (path[++i])
+			// 	command[j++] = path[i];
+			// command[j] = '\0'; 
+		// }
 		return (handle_dir(path));
 	}
 	return(free(path), ft_strdup("not_found"));
