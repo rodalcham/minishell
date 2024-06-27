@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/25 15:48:48 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:41:50 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int is_first_pipe(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	if (!line)
+		return (0);
+	while (is_spc(line[i]))
+		i++;
+	if (line[i] == '|')
+		return (1);
+	return (0);
+}
 
 int	is_invalid(char *line)
 {
@@ -21,6 +35,8 @@ int	is_invalid(char *line)
 		return (0);
 	i = -1;
 	x = 0;
+	if (is_first_pipe(line))
+		return (-2);
 	while (line[++i])
 	{
 		if (is_spc(line[i]))
@@ -41,19 +57,56 @@ int	is_invalid(char *line)
 
 void	say_invalid(char *line, int i)
 {
-	printf("Syntax error near unexpected token '");
+	*get_exit_status() = 2;
+	if (!isatty(fileno(stdin)))
+		printf("bash: line 1: ");
+	printf("syntax error near unexpected token `");
 	if (i == -1)
 		printf("newline");
+	if (i == -2)
+		printf("|");
 	else
 		printf("%c", line[i]);
 	printf("'\n");
+	if (!isatty(fileno(stdin)))
+	{
+		printf("bash: line 1: `%s'\n", line);
+		exit(*get_exit_status());
+	}
+}
+
+char	*rm_nl(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	if (!line)
+		return (NULL);
+	while (line[i])
+		i++;
+	if (i && line[i - 1] == '\n')
+		line[i - 1] = '\0';
+	return (line);
+}
+
+char	*take_in(char *in)
+{
+	if (isatty(fileno(stdin)))
+		return (readline(in));
+	else
+	{
+		char *line;
+		line = get_next_line(fileno(stdin));
+		line = rm_nl(line);
+		return (line);
+	}
 }
 
 char	*take_line(int *inv)
 {
 	char	*line;
 
-	line = readline("🐚 ");
+	line = take_in("🐚 ");
 	if (!line)
 		return (NULL);
 	line = handle_unclosed_quotes(line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/27 08:03:57 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/27 11:21:03 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int	main(int argc, char **argv, char **envp)
 	*ft_env() = init_env(envp);
 	if (!(*ft_env()))
 	{
-		printf("WHYYY\n");
 		ft_free_envp(*get_envp());
 		ft_error(-1);
 	}
@@ -114,7 +113,8 @@ int	main(int argc, char **argv, char **envp)
 	signal_handler();
 	intro();
 	main_loop();
-	printf("exit\n");
+	if (isatty(fileno(stdin)))
+		printf("exit\n");
 	env_free(*ft_env());
 	ft_free_envp(*get_envp());
 	// system("leaks minishell");

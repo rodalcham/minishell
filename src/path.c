@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/27 08:09:46 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/27 09:20:42 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ char *handle_dir(char *path)
 
 	if (stat(path, &statbuf) == -1)
 		return (free(path), NULL);
-	if (path[0] != '.')
-		return (path);
+	// if (path[0] != '.')
+	// 	return (path);
 	if (!S_ISREG(statbuf.st_mode))
 	{
 		if (S_ISDIR(statbuf.st_mode)) 
