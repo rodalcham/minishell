@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/27 11:21:03 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/27 14:10:32 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	main_loop(void)
 
 	while (*get_run() == 1)
 	{
-		link_t *leaks = *get_head();
-		if (!leaks)
-			printf("Nice\n");
+		// link_t *leaks = *get_head();
+		// if (!leaks)
+		// 	printf("Nice\n");
 		status = 0;
 		line = get_line();
 		if (!line)
@@ -108,7 +108,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_free_envp(*get_envp());
 		ft_error(-1);
 	}
-	make_shlvl(envp);
+	make_shlvl(*ft_env());
 	// rl_catch_signals = 0;
 	signal_handler();
 	intro();

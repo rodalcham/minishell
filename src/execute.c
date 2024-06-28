@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/24 08:48:09 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/28 11:37:33 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int	say_not_found(t_lexer *temp)
 	if (temp->cmd[0][0] == '/' || temp->cmd[0][0] == '.')
 	{
 		if (access(temp->cmd[0], F_OK) == 0)
-			printf("%s : Permission denied\n", temp->cmd[0]);
+			ft_perror(temp->cmd[0], " : Permission denied\n", NULL);
 		else
-			printf("%s : no such file or directory\n", temp->cmd[0]);
+			ft_perror(temp->cmd[0], " : no such file or directory\n", NULL);
 	}
 	else
-		printf("%s : command not found\n", temp->cmd[0]);
+		ft_perror(temp->cmd[0], " : command not found\n", NULL);
 	*get_exit_status() = 127;
 	return (0);
 }

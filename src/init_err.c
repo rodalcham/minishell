@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   init_err.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 21:09:53 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/28 11:38:14 by rchavez          ###   ########.fr       */
+/*   Created: 2024/06/28 10:44:14 by rchavez           #+#    #+#             */
+/*   Updated: 2024/06/28 11:35:22 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_error(int errno)
+void	ft_perror(char *s1, char *s2, char *s3)
 {
-	if (errno == -1)
-		perror("\nCANNOT ALLOCATE MEMORY.\n");
-	else if (errno == -2)
-		perror("\nFORK: MEMORY EXHAUSTED.\n");
-	else if (errno == -3)
-		perror("\nDUP2: CANNOT REDIRECT INPUT/OUTPUT.\n");
-	else if (errno == -4)
-		perror("\nEXECVE: FAILED TO REPLACE PROCESS.\n");
-	else if (errno == -5)
-		perror("\nPIPE: MEMORY EXHAUSTED.\n");
-	// ft_free_envp(*get_envp());
-	exit(*get_exit_status());
+	if (s1)
+		perror(s1);
+	if (s2)
+		perror(s2);
+	if (s3)
+		perror(s3);
 }

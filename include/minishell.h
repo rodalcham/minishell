@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/26 16:16:47 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/28 11:46:15 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_envp	**get_envp(void);
 int		*get_exit_status(void);
 char	***ft_env(void);
 char	**last_line(void);
+int		*get_fds();
 
 //get_line
 char	*get_line(void);
@@ -152,5 +153,8 @@ int		export_command(t_lexer *lexer);
 int		pwd_command(void);
 int		unset_command(t_lexer *lexer);
 int		ft_exit(char *line, char **args);
+
+//init_err
+void	ft_perror(char *s1, char *s2, char *s3);
 
 #endif

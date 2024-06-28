@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/26 12:25:39 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/28 10:44:48 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,11 @@ char	***ft_env(void)
 	static char	**env = NULL;
 
 	return (&env);
+}
+
+int	*get_fds(void)
+{
+	static int	fds[2] = {0 , 0};
+
+	return (&fds[0]);
 }

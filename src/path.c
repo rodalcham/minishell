@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/27 12:18:50 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/28 11:42:22 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ char *handle_dir(char *path)
 	if (!S_ISREG(statbuf.st_mode))
 	{
 		if (S_ISDIR(statbuf.st_mode)) 
-        	printf("%s is a directory\n", path);
+        	ft_perror(path, " is a directory\n", NULL);
 		else if (S_ISLNK(statbuf.st_mode)) 
-    	    printf("%s is a symbolic link\n", path);
+        	ft_perror(path, " is a symbolic link\n", NULL);
 		else 
-        	printf("%s is not a file\n", path);
+        	ft_perror(path, " is not a file\n", NULL);
 		*get_exit_status() = 126;
 		free(path);
 		path = ft_strdup("not_valid");

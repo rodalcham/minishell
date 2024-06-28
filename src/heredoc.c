@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/27 13:27:48 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/28 11:40:36 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	heredoc_child(int written, char *eof, int fd)
 		written = write(fd, line, ft_strlen(line));
 		if (written < 0 || write(fd, "\n", 1) < 0)
 		{
-			printf("Heredoc : Failed to write.\n");
+			perror("Heredoc : Failed to write.\n");
 			break ;
 		}
 		free(line);
