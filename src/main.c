@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 10:40:53 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:36:11 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (1);
 	*get_envp() = ft_create_envp(envp);
-	if (!*get_envp() && envp)
-		ft_error(-1);
 	*ft_env() = init_env(envp);
 	if (!(*ft_env()) && envp)
 	{

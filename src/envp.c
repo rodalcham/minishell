@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/26 12:26:57 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:36:30 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,10 @@ void	env_free(char **ret)
 
 char	**init_env(char **env)
 {
-	int	i;
+	int		i;
 	char	**ret;
 
 	i = 0;
-	if (!env)
-		return (NULL);
 	while (env[i])
 		i++;
 	ret = (char **)malloc(sizeof(char *) * (i + 1));
