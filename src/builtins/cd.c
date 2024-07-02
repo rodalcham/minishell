@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/28 14:34:01 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 10:44:27 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	cd_command(t_lexer *lexer)
 	char	*path;
 
 	if (lexer->next)
-		return; 
+		return (0);
 	path = env_get_by_name("HOME");
 	if (lexer->cmd[1] == NULL)
 	{
