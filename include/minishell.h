@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/02 14:51:01 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 16:40:33 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ int		export_command(t_lexer *lexer);
 int		pwd_command(void);
 int		unset_command(t_lexer *lexer);
 int		ft_exit(char *line, char **args);
+int 	env_pos(char **env, char *cmd);
+int		envp_update_value(char **env, char *cmd, int pos, char *eq);
 
 //init_err
 void	ft_perror(char *s1, char *s2, char *s3);

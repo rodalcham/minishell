@@ -6,11 +6,41 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 10:44:27 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 16:56:14 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	update_cwd(void)
+{
+	char	buff[4100];
+	char	*ev;
+	char	*eq;
+	int		pos;
+
+	ft_strcpy(buff, "PWD=");
+	getcwd(&buff[4], 4096);
+	ev = &buff[0];
+	eq = &buff[3];
+	pos = env_pos(*ft_env(), ev);
+	return (envp_update_value(*ft_env(), ev, pos, eq));
+}
+
+int	update_ocwd(void)
+{
+	char	buff[4103];
+	char	*ev;
+	char	*eq;
+	int		pos;
+
+	ft_strcpy(buff, "OLDPWD=");
+	getcwd(&buff[7], 4096);
+	ev = &buff[0];
+	eq = &buff[3];
+	pos = env_pos(*ft_env(), ev);
+	return (envp_update_value(*ft_env(), ev, pos, eq));
+}
 
 int	cd_command(t_lexer *lexer)
 {
@@ -18,6 +48,8 @@ int	cd_command(t_lexer *lexer)
 
 	if (lexer->next)
 		return (0);
+	if (update_ocwd() < 0)
+		return (-1);
 	path = env_get_by_name("HOME");
 	if (lexer->cmd[1] == NULL)
 	{
@@ -32,5 +64,7 @@ int	cd_command(t_lexer *lexer)
 		ft_perror("cd: ", lexer->cmd[1], ": No such file or directory\n");
 		return (1);
 	}
+	if (update_cwd() < 0)
+		return (-1);
 	return (0);
 }
