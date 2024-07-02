@@ -6,11 +6,13 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/28 13:12:08 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 10:40:53 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	g_signal = 0;
 
 void	intro(void)
 {

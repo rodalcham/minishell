@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/27 14:02:38 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/01 13:24:56 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 void	handle_ctrlc(int signal)
 {
 	(void)signal;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	if (g_signal == 0)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+		*get_exit_status() = 130;
+	}
 	//free later
 }
 
 void	signal_handler(void)
 {
-	signal(SIGINT, handle_ctrlc);
+	if (g_signal == 0)
+		signal(SIGINT, handle_ctrlc);
 	signal(SIGQUIT, SIG_IGN);
 }
