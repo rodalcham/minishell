@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/28 14:19:33 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:37:08 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	say_invalid(char *line, int i)
 	if (i == -2)
 		write(2, "|", 1);
 	else
-		write(2, &line[i], ft_strlen(&line[i]));
+		write(2, &line[i], 1);
 	write(2, "'\n", 2);
 	if (!isatty(fileno(stdin)))
 	{
