@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:33:05 by leo               #+#    #+#             */
-/*   Updated: 2024/06/28 11:45:42 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:21:25 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	pwd_command(void)
 	path = getcwd(NULL, 0);
 	if (!path)
 	{
-		perror("pwd: error retrieving current directory\n");
+		write(2, "pwd: error retrieving current directory\n", 40);
 		return (1);
 	}
 	printf("%s\n", path);	

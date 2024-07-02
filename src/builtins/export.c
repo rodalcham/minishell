@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/06/28 11:43:13 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:20:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int	export_command(t_lexer *lexer)
 		return (*get_exit_status() = 0);
 	if (!ev)
 	{
-		perror("export : INVALID USAGE\n");
+		write(2, "export : INVALID USAGE\n", 23);
 		return (*get_exit_status() = 0);
 	}
 	if (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)

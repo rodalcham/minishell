@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/27 14:10:32 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/28 13:12:08 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (1);
 	*get_envp() = ft_create_envp(envp);
-	if (!*get_envp())
+	if (!*get_envp() && envp)
 		ft_error(-1);
 	*ft_env() = init_env(envp);
-	if (!(*ft_env()))
+	if (!(*ft_env()) && envp)
 	{
 		ft_free_envp(*get_envp());
 		ft_error(-1);

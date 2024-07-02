@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_handler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/23 21:47:35 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/06/28 13:08:02 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	add_input(t_lexer *lex, char **args, int *i)
 	args[*i] = ft_quote_strip(args[*i]);
 	fd = open(args[*i], READ, 0);
 	if (fd < 0)
-		printf("%s : No such file or directory.\n", args[*i]);
+		ft_perror(args[*i], " : No such file or directory.\n", NULL);
 	if (!lex->input)
 		lex->input = new_file();
 	else
@@ -52,7 +52,7 @@ int	add_output(t_lexer *lex, char **args, int *i)
 	args[*i] = ft_quote_strip(args[*i]);
 	fd = open(args[*i], mod, PERMISSIONS);
 	if (fd < 0)
-		printf("%s : No such file or directory.\n", args[*i]);
+		ft_perror(args[*i], " : No such file or directory.\n", NULL);
 	if (!lex->output)
 		lex->output = new_file();
 	else

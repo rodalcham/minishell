@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/28 11:46:33 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:19:33 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ void	say_invalid(char *line, int i)
 {
 	*get_exit_status() = 2;
 	if (!isatty(fileno(stdin)))
-		perror("bash: line 1: ");
-	perror("syntax error near unexpected token `");
+		write(2, "bash: line 1: ", 14);
+	write(2, "syntax error near unexpected token `", 36);
 	if (i == -1)
-		perror("newline");
+		write(2, "newline", 7);
 	if (i == -2)
-		perror("|");
+		write(2, "|", 1);
 	else
-		perror(&line[i]);
-	perror("'\n");
+		write(2, &line[i], ft_strlen(&line[i]));
+	write(2, "'\n", 2);
 	if (!isatty(fileno(stdin)))
 	{
 		ft_perror("bash: line 1: `", line, "'\n");
