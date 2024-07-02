@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 14:49:40 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:51:19 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*remove_uquotes(char *str)
 			else if (!q)
 				q = i;
 		}
-		else if(q && is_spc(str[i - 1]))
+		else if(q && (is_spc(str[i - 1]) || str[i - 1] == '$'))
 			spc = 1;
 	}
 	return (str);

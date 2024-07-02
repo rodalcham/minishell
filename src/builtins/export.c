@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/06/28 14:20:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 16:05:10 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	env_cmp(char *s1, char *s2)
 	return (ret);
 }
 
-int env_pos(char **env, char *cmd)
+int	env_pos(char **env, char *cmd)
 {
 	int	i;
 
@@ -95,7 +95,7 @@ int	envp_add(char **env, char *cmd, int pos, char *eq)
 
 int	envp_update_value(char **env, char *cmd, int pos, char *eq)
 {
-	char *new;
+	char	*new;
 
 	new = NULL;
 	if (eq && eq != cmd && *(eq - 1) == '+' && *(eq + 1))
