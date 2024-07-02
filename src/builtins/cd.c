@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 16:56:14 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:01:06 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	update_cwd(void)
 	ev = &buff[0];
 	eq = &buff[3];
 	pos = env_pos(*ft_env(), ev);
-	return (envp_update_value(*ft_env(), ev, pos, eq));
+	if (pos >= 0)
+		return (envp_update_value(*ft_env(), ev, pos, eq));
+	else
+		return (envp_add(*ft_env(), ev, pos, eq));
 }
 
 int	update_ocwd(void)
@@ -39,7 +42,10 @@ int	update_ocwd(void)
 	ev = &buff[0];
 	eq = &buff[3];
 	pos = env_pos(*ft_env(), ev);
-	return (envp_update_value(*ft_env(), ev, pos, eq));
+	if (pos >= 0)
+		return (envp_update_value(*ft_env(), ev, pos, eq));
+	else
+		return (envp_add(*ft_env(), ev, pos, eq));
 }
 
 int	cd_command(t_lexer *lexer)
