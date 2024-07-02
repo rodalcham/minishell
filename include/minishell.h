@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/01 12:37:20 by leo              ###   ########.fr       */
+/*   Updated: 2024/07/02 14:51:01 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ size_t	ft_countwords(char const *s, char c);
 char	*remove_quotes(char *str);
 char	*remove_uquotes(char *str);
 char	*join_quotes(char *str);
+int		is_forkable(t_lexer *temp);
 
 //error handling
 void	ft_error(int errno);

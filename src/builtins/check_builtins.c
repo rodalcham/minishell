@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:53:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/28 11:42:29 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:07:17 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	call_functions(t_lexer *lexer)
 		return (exit_code);
 	}
 	if (i == 5)
-		exit_code = unset_command(lexer);
+		return (exit_code = unset_command(lexer));
 	if (i == 6)
 		exit_code = env_command();
 	exit(exit_code);

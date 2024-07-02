@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/28 10:43:57 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:49:40 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,11 @@ char	*join_quotes(char *str)
 		i++;
 	}
 	return (str);
+}
+
+int	is_forkable(t_lexer *temp)
+{
+		if (ft_strcmp("cd", temp->cmd[0]) && ft_strcmp("export", temp->cmd[0]) && ft_strcmp("unset", temp->cmd[0]))
+			return (1);
+		return (0);
 }

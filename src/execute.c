@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/28 11:37:33 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:50:43 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	execute(t_lexer *tokens)
 
 int	replace_io(t_lexer *temp)
 {
-	if (!ft_strcmp("cd", temp->cmd[0]) || !ft_strcmp("export", temp->cmd[0]))
+	if (!is_forkable(temp))
 		return (0);
 	if (temp->input)
 	{
@@ -86,7 +86,7 @@ int	exec_do(t_lexer *temp)
 		|| (temp->output && temp->output->fd < 0)
 		|| (!ft_strncmp(temp->path, "not_valid", 9)))
 		return (0);
-	if (ft_strcmp("cd", temp->cmd[0]) && ft_strcmp("export", temp->cmd[0]))
+	if (is_forkable(temp))
 		temp->pid = fork();
 	if (temp->pid == 0)
 	{

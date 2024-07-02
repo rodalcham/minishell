@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_lexer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/23 21:50:09 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/02 14:52:06 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ t_lexer	*init_lexer(int num)
 
 int	handle_ops_open(t_lexer *lex, char **args, int *i)
 {
-	if (lex->cmd && (!ft_strcmp(lex->cmd[0], "export")
-		|| !ft_strcmp(lex->cmd[0], "cd")))
+	if (lex->cmd && (!is_forkable(lex)))
 		return (0);
 	if (args[*i][0] == '<')
 	{
