@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/03 08:47:31 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:50:35 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	custom_handler(int signal)
 	(void)signal;
 	printf("\n");
 	*get_exit_status() = 130;
-	exit(0);
+	exit(130);
 }
 
 int	heredoc_child(int written, char *eof, int fd)

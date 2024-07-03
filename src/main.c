@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/03 09:52:41 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:53:45 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ void	main_loop(void)
 
 	while (*get_run() == 1)
 	{
-		// link_t *leaks = *get_head();
-		// if (!leaks)
-		// 	printf("Nice\n");
 		status = 0;
 		line = get_line();
 		if (!line)
@@ -57,8 +54,10 @@ void	main_loop(void)
 		if (line && line[0] && !ft_strcmp(ft_quote_strip(args[0]), "exit"))
 			exit(ft_exit(line, args));
 		tokens = lex(args, &status);
+		signal(SIGINT, signal_temp);
 		if (!status)
 			status = execute(tokens);
+		signal(SIGINT, handle_ctrlc);
 		if (status < 0)
 			free_all(line, args, tokens, status);
 		free_all(line, args, tokens, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/02 15:40:44 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:21:46 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,14 @@ char	*take_line(int *inv)
 	*inv = is_invalid(line);
 	if (!*inv)
 		line = expand_tokens(line);
-	*last_line() = line;
+	if (*last_line())
+		free(*last_line());
+	*last_line() = ft_strdup(line);
+	if (!*last_line())
+	{
+		free(line);
+		ft_error(-1);
+	}
 	return (line);
 }
 

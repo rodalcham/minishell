@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/03 12:49:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:54:20 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ char	**ft_splitfree(char **ret, size_t i);
 //signals
 void	signal_handler(void);
 void	handle_ctrlc(int signal);
+void	custom_handler(int signal);
+void	signal_temp(int signal);
 
 //path
 char	*path_finder(char *command, char *envp);
