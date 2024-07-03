@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/03 13:06:40 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 15:04:16 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*remove_uquotes(char *str)
 			else if (!q)
 				q = i;
 		}
-		else if(q && (is_spc(str[i - 1]) || str[i - 1] == '$'))
+		else if(q && (is_spc(str[i - 1]) || str[i - 1] == '$' || sep(str[i - 1])))
 			spc = 1;
 	}
 	return (str);

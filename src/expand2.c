@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:47:16 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/03 14:14:16 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 14:51:42 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ size_t	expand_len(char *str, char *buff)
 			is_quoted(str, i) != 1)
 		{
 			ret += ft_strlen(env_get_by_name(extract_env(&str[i], buff)));
-			while (str[i + 1] && !is_spc(str[i + 1]) && str[i + 1] != '\''
-				&& str[i + 1] != '\"')
+			while (str[i + 1] && !is_spc(str[i + 1]) &&
+				(ft_isalnum(str[i + 1]) || str[i + 1] == '_'))
 				i++;
 		}
 		else
@@ -109,8 +109,8 @@ void	do_expand(char *str, char *buff, char *ret)
 			is_quoted(str, i) != 1)
 		{
 			str_app(&ret[j], env_get_by_name(extract_env(&str[i], buff)), &j);
-			while (str[i + 1] && !is_spc(str[i + 1]) && str[i + 1] != '\''
-				&& str[i + 1] != '\"')
+			while (str[i + 1] && !is_spc(str[i + 1]) &&
+				(ft_isalnum(str[i + 1]) || str[i + 1] == '_'))
 				i++;
 		}
 		else
