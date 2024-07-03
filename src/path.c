@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/28 11:42:22 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 09:53:17 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*path_finder(char *command, char *envp)
 	char	**paths;
 	char	*ret;
 
-	if (!command)
+	if (!command || !envp)
 		return (ft_strdup("not_found"));
 	if	(command[0] == '.' || command[0] == '/')
 		return (handle_absolute_path(command));
@@ -130,5 +130,5 @@ char	*env_get_by_name(char *name)
 			return (env[i] + name_len + 1);
 		i++;
 	}
-	return (ft_strdup(""));
+	return (NULL);
 }

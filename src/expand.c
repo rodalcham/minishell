@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:08:57 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 16:08:18 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/03 08:52:38 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ char	*ft_inject_value(char *str, char *placeholder, char *envp_value)
 	envp_value_len = ft_strlen(envp_value);
 	pos = ft_strnstr(str, placeholder, ft_strlen(str));
 	if (pos == NULL)
-		return (ft_strdup(str));
+		return (ft_strdup(str)); //MULTIPLE MALLOCS
 	rtr = malloc(sizeof(char) * (str_len - placeholder_len
-				+ envp_value_len + 1));
+				+ envp_value_len + 1)); //MULTIPLE MALLOCS
 	if (rtr == NULL)
 		return (NULL);
 	ft_strncpy(rtr, str, pos - str);
 	rtr[pos - str] = '\0';
-	ft_strlcat(rtr, envp_value, (pos) - (str) + envp_value_len + 1);
+	ft_strlcat(rtr, envp_value, (pos) - (str) + envp_value_len + 1); //MULTIPLE MALLOCS
 	ft_strlcat(rtr, pos + placeholder_len,
 		str_len - placeholder_len + envp_value_len + 1);
-	rtr[str_len - placeholder_len + envp_value_len] = 0;
+	rtr[str_len - placeholder_len + envp_value_len] = 0;//MULTIPLE MALLOCS
 	return (rtr);
 }
 
@@ -44,7 +44,7 @@ char	*transform_variable(char *str, char *envp_name, char *envp_value)
 	char	*placeholder;
 	char	*new;
 
-	placeholder = ft_strjoin("$", envp_name);
+	placeholder = ft_strjoin("$", envp_name); //MULTIPLE MALLOCS
 	if (envp_value == NULL)
 		new = ft_inject_value(str, placeholder, "");
 	else
@@ -82,7 +82,7 @@ char	*extract_env_name(char *str, int *i)
 
 	if (str[*i] == '?')
 	{
-		envp_name = ft_strdup("?");
+		envp_name = ft_strdup("?"); //MULTIPLE MALLOCS
 		(*i)++;
 	}
 	else
@@ -90,7 +90,7 @@ char	*extract_env_name(char *str, int *i)
 		if (!ft_isalnum(str[*i]) && str[*i] != '_' && str[*i] != '"')
 			return (ft_strdup("$"));
 		j = 0;
-		envp_name = malloc(sizeof(char) * ft_strlen(&str[*i]) + 1);
+		envp_name = malloc(sizeof(char) * ft_strlen(&str[*i]) + 1); //unprotected
 		while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
 			envp_name[j++] = str[(*i)++];
 		envp_name[j] = '\0';
@@ -98,7 +98,7 @@ char	*extract_env_name(char *str, int *i)
 	return (envp_name);
 }
 
-char	*expand_tokens(char *str)
+char	*expand_tokens(char *str) //DOESNT FREE STR????
 {
 	int		i;
 	char	*envp_name;
@@ -110,7 +110,7 @@ char	*expand_tokens(char *str)
 		return (0);
 	if (!str[0])
 		return (str);
-	new = ft_strdup(str);
+	new = ft_strdup(str); //Double malloc
 	while (str[i])
 	{
 		if ((str[i] != '$' || !is_within_single_quotes(str, i + 1)) && ++i)
@@ -118,7 +118,7 @@ char	*expand_tokens(char *str)
 		i++;
 		envp_name = extract_env_name(str, &i);
 		if (ft_strcmp(envp_name, "?") == 0)
-			envp_value = ft_itoa(*get_exit_status());
+			envp_value = ft_itoa(*get_exit_status()); //MULTIPLE MALLOCS
 		else
 			envp_value = env_get_by_name(envp_name);
 		new = transform_variable(new, envp_name, envp_value);

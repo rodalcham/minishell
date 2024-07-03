@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 17:01:06 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 09:53:58 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	update_ocwd(void)
 	ft_strcpy(buff, "OLDPWD=");
 	getcwd(&buff[7], 4096);
 	ev = &buff[0];
-	eq = &buff[3];
+	eq = &buff[6];
 	pos = env_pos(*ft_env(), ev);
 	if (pos >= 0)
 		return (envp_update_value(*ft_env(), ev, pos, eq));
@@ -56,10 +56,10 @@ int	cd_command(t_lexer *lexer)
 		return (0);
 	if (update_ocwd() < 0)
 		return (-1);
-	path = env_get_by_name("HOME");
 	if (lexer->cmd[1] == NULL)
 	{
-		if (ft_strncmp(path, "", 1) == 0)
+		path = env_get_by_name("HOME");
+		if (!path || !path[0])
 			write(2, "cd: HOME not set\n", 17);
 		else if (chdir(path) == -1)
 			ft_perror("cd: ", path, ": No such file or directory\n");

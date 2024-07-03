@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 15:51:19 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/03 13:06:40 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,30 @@ int	is_forkable(t_lexer *temp)
 		if (ft_strcmp("cd", temp->cmd[0]) && ft_strcmp("export", temp->cmd[0]) && ft_strcmp("unset", temp->cmd[0]))
 			return (1);
 		return (0);
+}
+
+int	is_quoted(char *str, size_t index)
+{
+	size_t	i;
+	int		sq;
+	int		dq;
+
+	sq = 0;
+	dq = 0;
+	i = 0;
+	if (!str || index >= ft_strlen(str))
+		return (0);
+	while(str[i] && i <= index)
+	{
+		if (str[i] == '\'' && !dq)
+			sq = !sq;
+		else if (str[i] == '\"' && !sq)
+			dq = !dq;
+		i++;
+	}
+	if (sq)
+		return (1);
+	if (dq)
+		return (2);
+	return (0);
 }

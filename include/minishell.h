@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/02 16:59:54 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 12:49:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ char	*remove_quotes(char *str);
 char	*remove_uquotes(char *str);
 char	*join_quotes(char *str);
 int		is_forkable(t_lexer *temp);
+int		is_quoted(char *str, size_t index);
 
 //error handling
 void	ft_error(int errno);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 14:36:11 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/03 09:52:41 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ void	intro(void)
 		"\archavez\033]8;;\a && \033]8;;https://github.com/lglauch"
 		"\alglauch\033]8;;\a\n\n");
 	printf("         ********************************\n");
-	printf("\n\t\tWelcome");
 	if (name && name[0])
-		printf(", %s", name);
-	printf("\n");
+		printf("\n\t\tWelcome, %s\n", name);
 }
 
 void	main_loop(void)
