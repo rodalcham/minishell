@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:47:16 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/03 13:48:13 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/03 14:14:16 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ char	*expand_tokens(char	*str)
 	char	*buff;
 	char	*ret;
 
+	if (!str)
+		return (NULL);
 	buff = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!buff)
 		return (free(str), NULL);
