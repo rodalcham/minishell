@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/03 16:17:06 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/04 11:51:34 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	envp_update_value(char **env, char *cmd, int pos, char *eq)
 	return (*get_exit_status() = 0);
 }
 
-char	*get_ev()
+char	*get_ev(int *v)
 {
 	int		i;
 	char	*line;
@@ -121,6 +121,14 @@ char	*get_ev()
 	line = remove_uquotes(join_quotes(*last_line()));
 	while (line[i] && is_spc(line[i]))
 		i++;
+	if (ft_strncmp("export", &line[i], 6))
+	{
+		*v = 0;
+		while (line[i] && ft_strncmp("export", &line[i], 6))
+			i++;
+	}
+	else
+		*v = 1;
 	i += 6;
 	while (line[i] && is_spc(line[i]))
 		i++;
@@ -133,23 +141,24 @@ int	export_command(t_lexer *lexer)
 	char	*ev;
 	char	*eq;
 	int		pos;
+	int		v;
 
-	ev = get_ev();
+	ev = get_ev(&v);
 	eq = ft_strchr(ev, '=');
 	pos = env_pos(*ft_env(), ev);
-	if (lexer->next || !eq)
-		return (*get_exit_status() = 0);
-	if (!ev)
+	if (!ev && eq)
 	{
 		write(2, "export : INVALID USAGE\n", 23);
 		return (*get_exit_status() = 0);
 	}
-	if (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
-		|| is_spc(*(eq - 1)))
+	if (eq && (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
+		|| is_spc(*(eq - 1))))
 	{
-		ft_perror("export : '", ev, "' : not a valid identifier\n");
+		ft_perror_spc("export : '", ev, "' : not a valid identifier\n");
 		return (*get_exit_status() = 1);
 	}
+	if (lexer->next || !eq || !v)
+		return (*get_exit_status() = 0);
 	if (pos >= 0)
 		return (envp_update_value(*ft_env(), ev, pos, eq));
 	else

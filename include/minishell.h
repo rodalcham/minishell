@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 10:45:52 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 11:45:02 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		add_pipe(t_lexer *lex);
 
 //heredoc
 int		do_heredoc(int fd, char *eof);
+void	exit_130(int signal);
 
 //execute
 int		execute(t_lexer *tokens);
@@ -165,5 +166,6 @@ int		envp_add(char **env, char *cmd, int pos, char *eq);
 
 //init_err
 void	ft_perror(char *s1, char *s2, char *s3);
+void	ft_perror_spc(char *s1, char *s2, char *s3);
 
 #endif

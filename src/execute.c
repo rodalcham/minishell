@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/03 16:58:23 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/04 11:31:49 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int	execute(t_lexer *tokens)
 	temp = tokens;
 	while (temp)
 	{
-		if (temp->cmd)
+		if (temp->cmd && *get_exit_status() != 130)
 			status = exec_do(temp);
+		if (*get_exit_status() == 130)
+			*get_exit_status() = 1;
 		if (temp->input)
 			close(temp->input->fd);
 		if (temp->output)

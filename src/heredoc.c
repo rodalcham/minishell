@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 10:46:09 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:54:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	custom_handler(int signal)
 	printf("\n");
 	*get_exit_status() = 130;
 	exit(130);
+}
+
+void	exit_130(int signal)
+{
+	(void)signal;
+	*get_exit_status() = 130;
 }
 
 int	heredoc_child(int written, char *eof, int fd)
@@ -53,8 +59,10 @@ int	do_heredoc(int fd, char *eof)
 	int		written;
 	int		pid;
 
+	if (*get_exit_status() == 130)
+		return (0);
 	written = 0;
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, exit_130);
 	pid = fork();
 	if (pid == 0)
 		exit (heredoc_child(written, eof, fd));
