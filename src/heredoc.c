@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/03 08:47:31 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:36:16 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	heredoc_child(int written, char *eof, int fd)
 	line = readline("> ");
 	while (written >= 0 && line && ft_strcmp(line, eof))
 	{
-		line = expand_tokens(line);
+		line = expand_tokens(line, 1);
+		if (!line)
+			return (-1);
 		written = write(fd, line, ft_strlen(line));
 		if (written < 0 || write(fd, "\n", 1) < 0)
 		{
@@ -40,7 +42,8 @@ int	heredoc_child(int written, char *eof, int fd)
 		free(line);
 		line = readline("> ");
 	}
-	free(line);
+	if (line)
+		free(line);
 	close(fd);
 	return (written);
 }

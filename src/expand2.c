@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:47:16 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/03 14:51:42 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:33:36 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*extract_env(char *str, char *buff)
 	return (buff);
 }
 
-size_t	expand_len(char *str, char *buff)
+size_t	expand_len(char *str, char *buff, int mode)
 {
 	size_t	i;
 	size_t	ret;
@@ -36,10 +36,10 @@ size_t	expand_len(char *str, char *buff)
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1] && !is_spc(str[i + 1]) &&
-			is_quoted(str, i) != 1 && str[i + 1] == '?' && ++i)
+			(is_quoted(str, i) != 1 || mode)&& str[i + 1] == '?' && ++i)
 			ret += 7;
 		else if (str[i] == '$' && str[i + 1] && !is_spc(str[i + 1]) &&
-			is_quoted(str, i) != 1)
+			(is_quoted(str, i) != 1 || mode))
 		{
 			ret += ft_strlen(env_get_by_name(extract_env(&str[i], buff)));
 			while (str[i + 1] && !is_spc(str[i + 1]) &&
@@ -93,7 +93,7 @@ void	str_int(char *dst, size_t *j)
 	}
 }
 
-void	do_expand(char *str, char *buff, char *ret)
+void	do_expand(char *str, char *buff, char *ret, int mode)
 {
 	size_t	i;
 	size_t	j;
@@ -103,10 +103,10 @@ void	do_expand(char *str, char *buff, char *ret)
 	while (str[++i])
 	{
 		if (str[i] == '$' && str[i + 1] && !is_spc(str[i + 1]) &&
-			is_quoted(str, i) != 1 && str[i + 1] == '?' && ++i)
+			(is_quoted(str, i) != 1 || mode) && str[i + 1] == '?' && ++i)
 			str_int(&ret[j], &j);
 		else if (str[i] == '$' && str[i + 1] && !is_spc(str[i + 1]) &&
-			is_quoted(str, i) != 1)
+			(is_quoted(str, i) != 1 || mode))
 		{
 			str_app(&ret[j], env_get_by_name(extract_env(&str[i], buff)), &j);
 			while (str[i + 1] && !is_spc(str[i + 1]) &&
@@ -119,7 +119,7 @@ void	do_expand(char *str, char *buff, char *ret)
 	ret[j] = '\0';
 }
 
-char	*expand_tokens(char	*str)
+char	*expand_tokens(char	*str, int mode)
 {
 	char	*buff;
 	char	*ret;
@@ -129,10 +129,10 @@ char	*expand_tokens(char	*str)
 	buff = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!buff)
 		return (free(str), NULL);
-	ret = (char *)malloc(sizeof(char) * (expand_len(str, buff) + 1));
+	ret = (char *)malloc(sizeof(char) * (expand_len(str, buff, mode) + 1));
 	if (!ret)
 		return (free(str), free(buff), NULL);
-	do_expand(str, buff, ret);
+	do_expand(str, buff, ret, mode);
 	free(str);
 	free(buff);
 	return (ret);

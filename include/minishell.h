@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/03 12:49:59 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:34:03 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ char	**init_env(char **env);
 void	env_free(char **ret);
 
 //expand
-char	*expand_tokens(char *str);
+char	*expand_tokens(char *str, int mode);
 
 //builtins
 int		echo_command(t_lexer *lexer);
