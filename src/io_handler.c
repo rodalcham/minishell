@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/04 13:50:39 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:05:55 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	add_input(t_lexer *lex, char **args, int *i)
 		return (0);
 	fd = 0;
 	(*i)++;
-	args[*i] = ft_quote_strip(args[*i]);
+	// args[*i] = ft_quote_strip(args[*i]);
 	fd = open(args[*i], READ, 0);
 	if (fd < 0)
 		ft_perror(args[*i], " : No such file or directory.\n", NULL);
@@ -49,7 +49,7 @@ int	add_output(t_lexer *lex, char **args, int *i)
 	else
 		mod = WRITE;
 	(*i)++;
-	args[*i] = ft_quote_strip(args[*i]);
+	// args[*i] = ft_quote_strip(args[*i]);
 	fd = open(args[*i], mod, PERMISSIONS);
 	if (fd < 0)
 		ft_perror(args[*i], " : No such file or directory.\n", NULL);
@@ -73,7 +73,7 @@ int	add_heredoc(t_lexer *lex, char **args, int *i)
 	if (pipe(p_fd) < 0)
 		return (-5);
 	(*i)++;
-	args[*i] = ft_quote_strip(args[*i]);
+	// args[*i] = ft_quote_strip(args[*i]);
 	if (do_heredoc(p_fd[1], args[*i]) < 0)
 	{
 		close(p_fd[0]);

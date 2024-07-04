@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/04 14:44:50 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:39:22 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	main_loop(void)
 		line = get_line();
 		if (!line)
 			break ;
-		args = ft_split_args(remove_uquotes(line));
+		args = ft_split_args(line);
 		if (!args)
 			free_all(line, args, tokens, -1);
 		if (line && line[0] && !ft_strcmp(ft_quote_strip(args[0]), "exit"))

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/03 13:03:58 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 16:28:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 
 char	**ft_splitfree(char **ret, size_t i)
 {
-	while (i > 0)
-	{
-		free(ret[i - 1]);
-		i--;
-	}
-	free(ret);
-	return (NULL);
 	while (i > 0)
 	{
 		free(ret[i - 1]);
