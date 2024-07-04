@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/03 16:53:45 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/04 14:03:05 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	main_loop(void)
 		line = get_line();
 		if (!line)
 			break ;
-		args = ft_split_args(remove_uquotes(join_quotes(line)));
+		args = ft_split_args(remove_uquotes(line));
 		if (!args)
 			free_all(line, args, tokens, -1);
 		if (line && line[0] && !ft_strcmp(ft_quote_strip(args[0]), "exit"))

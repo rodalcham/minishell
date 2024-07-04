@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:16:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/06/28 13:08:02 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 13:50:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	add_input(t_lexer *lex, char **args, int *i)
 	int	fd;
 
 	if ((lex->input && lex->input->fd < 0)
-		|| (lex->output && lex->output->fd < 0))
+		|| (lex->output && lex->output->fd < 0) || !args[*i + 1])
 		return (0);
 	fd = 0;
 	(*i)++;
@@ -41,7 +41,7 @@ int	add_output(t_lexer *lex, char **args, int *i)
 	int	mod;
 
 	if ((lex->input && lex->input->fd < 0)
-		|| (lex->output && lex->output->fd < 0))
+		|| (lex->output && lex->output->fd < 0) || !args[*i + 1])
 		return (0);
 	fd = 0;
 	if (args[*i][1] == '>')
@@ -68,7 +68,7 @@ int	add_heredoc(t_lexer *lex, char **args, int *i)
 	int	p_fd[2];
 
 	if ((lex->input && lex->input->fd < 0)
-		|| (lex->output && lex->output->fd < 0))
+		|| (lex->output && lex->output->fd < 0) || !args[*i + 1])
 		return (0);
 	if (pipe(p_fd) < 0)
 		return (-5);

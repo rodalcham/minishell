@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 10:47:04 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 14:07:26 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,10 @@ char	*take_line(int *inv)
 	line = handle_unclosed_quotes(line);
 	if (line && ft_strlen(line) > 0)
 		add_history(line);
-	*inv = is_invalid(line);
-	if (!*inv)
-		line = expand_tokens(line, 0);
+	line = expand_tokens(line, 0);
+	if (!line)
+		return (NULL);
+	*inv = is_invalid(join_quotes(line));
 	if (*last_line())
 		free(*last_line());
 	*last_line() = ft_strdup(line);
@@ -148,3 +149,7 @@ char	*get_line(void)
 	}
 	return (line);
 }
+
+
+// echo '' ""
+// echo "''$USER''"
