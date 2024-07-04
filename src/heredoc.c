@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 10:36:16 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:46:09 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	custom_handler(int signal)
 	(void)signal;
 	printf("\n");
 	*get_exit_status() = 130;
-	exit(0);
+	exit(130);
 }
 
 int	heredoc_child(int written, char *eof, int fd)

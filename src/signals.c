@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/01 13:24:56 by leo              ###   ########.fr       */
+/*   Updated: 2024/07/03 16:56:07 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,10 @@ void	signal_handler(void)
 	if (g_signal == 0)
 		signal(SIGINT, handle_ctrlc);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+void	signal_temp(int signal)
+{
+	(void)signal;
+	*get_exit_status() = 130;
 }

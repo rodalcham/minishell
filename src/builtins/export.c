@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/02 16:05:10 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:17:06 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char	*get_ev()
 	char	*ev;
 
 	i = 0;
-	line = *last_line();
+	line = remove_uquotes(join_quotes(*last_line()));
 	while (line[i] && is_spc(line[i]))
 		i++;
 	i += 6;
