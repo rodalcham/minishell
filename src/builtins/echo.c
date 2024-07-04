@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/04 16:20:19 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/04 16:22:55 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ int	echo_command(t_lexer *lexer)
 	line += 4;
 	while (is_spc(*line))
 		line++;
-	printf("lexer->cmd[i] = %s\n", lexer->cmd[i]);
 	line = ft_strnstr(line, lexer->cmd[1], ft_strlen(line));
 	line = transform_correct(line, newline);
 	if (line && remove_quotes(line))
