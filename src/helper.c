@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/03 15:04:16 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 14:06:47 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	*join_quotes(char *str)
 		return (NULL);
 	while (str[i])
 	{
-		if ((str[i] == '\'' || str[i] == '\"') && (str[i] == str[i + 1]))
+		if ((str[i] == '\'' || str[i] == '\"') && (str[i] == str[i + 1]) && !is_quoted(str, i + 1))
 		{
 			shift_left(&str[i], 0, NULL);
 			shift_left(&str[i], 0, NULL);

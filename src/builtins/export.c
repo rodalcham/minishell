@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/04 11:51:34 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 12:32:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ char	*get_ev(int *v)
 	}
 	else
 		*v = 1;
+	line[i] = 'D';
 	i += 6;
 	while (line[i] && is_spc(line[i]))
 		i++;
