@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/04 11:31:49 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 11:54:46 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	execute(t_lexer *tokens)
 			close(temp->input->fd);
 		if (temp->output)
 			close(temp->output->fd);
-		if (status)
+		if (status < 0)
 			return (status);
 		temp = temp->next;
 	}
