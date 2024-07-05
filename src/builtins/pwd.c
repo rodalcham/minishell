@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:33:05 by leo               #+#    #+#             */
-/*   Updated: 2024/06/28 14:21:25 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:25:19 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	pwd_command(void)
 		return (1);
 	}
 	printf("%s\n", path);	
-	free(path);
+	free_t(path);
 	return (0);
 }

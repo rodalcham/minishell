@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_free.c                                      :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:23:04 by rchavez           #+#    #+#             */
-/*   Updated: 2024/06/13 13:50:58 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:23:50 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	free_lexer(t_lexer *head)
 	{
 		temp = head;
 		if (temp->cmd)
-			free(temp->cmd);
+			free_t(temp->cmd);
 		if (temp->input)
-			free(temp->input);
+			free_t(temp->input);
 		if (temp->output)
-			free(temp->output);
+			free_t(temp->output);
 		if (temp->path)
-			free(temp->path);
+			free_t(temp->path);
 		head = head->next;
-		free(temp);
+		free_t(temp);
 	}
 }
 
@@ -43,17 +43,17 @@ void	free_args(char **args)
 		return ;
 	while (args[i])
 	{
-		free(args[i]);
+		free_t(args[i]);
 		i++;
 	}
-	free(args);
+	free_t(args);
 }
 
 void	free_line(char *line)
 {
 	if (!line)
 		return ;
-	free(line);
+	free_t(line);
 }
 
 void	free_all(char *line, char **args, t_lexer *head, int errno)

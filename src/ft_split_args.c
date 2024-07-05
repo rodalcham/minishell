@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 16:28:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:23:54 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,118 +16,110 @@ char	**ft_splitfree(char **ret, size_t i)
 {
 	while (i > 0)
 	{
-		free(ret[i - 1]);
+		free_t(ret[i - 1]);
 		i--;
 	}
-	free(ret);
+	free_t(ret);
 	return (NULL);
 }
 
-int	arg_count(char *s)
+int	arg_count(char *str)
 {
-	int	i;
-	int	x;
-	int	count;
-
-	i = 0;
-	count = 0;
-	if (!s || !s[0])
-		return (0);
-	while (s[i])
-	{
-		x = sep(s[i]);
-		if (i > 0 && (is_spc(s[i]) || x) && !is_spc(s[i - 1]) && !sep(s[i - 1]))
-			count++;
-		if (x && ++i)
-		{
-			count++;
-			while (s[i] && x != sep(s[i]) && x < 3)
-				i++;
-		}
-		if (s[i] && (x < 3 || x == sep(s[i])))
-			i++;
-	}
-	if (!s[i] && !is_spc(s[i - 1]) && !sep(s[i - 1]) && !x)
-		count++;
-	return (count);
-}
-
-int	ft_arglen(char *arg)
-{
-	int	i;
-	int	x;
-
-	if (!arg || !arg[0])
-		return (0);
-	i = 0;
-	x = sep(arg[i]);
-	if (x)
-	{
-		i++;
-		if (x > 2 && x != sep(arg[i]))
-			return (i);
-		while (arg[i] && x != sep(arg[i + 1]))
-			i++;
-		if (arg[i])
-			i++;
-		return (i);
-	}
-	while (arg[i] && !is_spc(arg[i]) && !sep(arg[i]))
-		i++;
-	return (i);
-}
-
-int	ft_argcpy(char *dst, char *src)
-{
-	int	i;
-	int	x;
+	size_t	i;
+	int		ret;
 
 	i = -1;
-	if (!src || !dst || !src[0])
-		return (0);
-	x = sep(src[0]);
-	if (x && i++)
+	ret = 0;
+	while (str[++i])
 	{
-		dst[i] = src[i];
-		if (x > 2 && x != sep(src[i + 1]))
+		if (!is_quoted(str, i))
 		{
-			dst[++i] = '\0';
-			return (1);
+			if ((is_spc(str[i]) || is_op(str[i])) && i
+				&& !is_spc(str[i - 1]) && !is_op(str[i - 1]))
+				ret++;
+			if (is_op(str[i]))
+			{
+				ret++;
+				if (str[i] != '|' && str[i + 1] == str[i])
+					i++;
+			}
 		}
-		while (src[++i] && x != sep(src[i]))
-			dst[i] = src[i];
-		if (x == sep(src[i++]))
-			dst[i - 1] = src[i - 1];
+	}
+	if (i && !is_spc(str[i - 1]))
+		ret++;
+	return (ret);
+}
+
+size_t	arg_len(char *str)
+{
+	size_t	ret;
+	int		x;
+
+	ret = 0;
+	x = is_op(str[0]);
+	if (!str || !str[0])
+		return (0);
+	if (x)
+	{
+		if (str[0] == str[1] && str[0] != '|')
+			return (2);
+		return (1);
+	}
+	while (str[ret] && ((!is_spc(str[ret]) && !is_op(str[ret]))
+			|| is_quoted(str, ret)))
+		ret++;
+	return (ret);
+}
+
+void	arg_cpy(char *dst, char *src, size_t *index)
+{
+	int		x;
+	size_t	i;
+	size_t	j;
+
+	i = *index;
+	j = 0;
+	x = is_op(src[i]);
+	if (x)
+	{
+		dst[j++] = src[i];
+		if (src[i] != '|' && src[i] == src[i + 1])
+			dst[j++] = src[i + 1];
 	}
 	else
-		while (src[++i] && !is_spc(src[i]) && !sep(src[i]))
-			dst[i] = src[i];
-	dst[i] = '\0';
-	return (i);
+	{
+		while (src[i] && ((!is_spc(src[i]) && !is_op(src[i]))
+				|| is_quoted(src, i)))
+			dst[j++] = src[i++];
+	}
+	dst[j] = '\0';
+	*index = *index + j;
 }
 
 char	**ft_split_args(char *str)
 {
 	int		i;
-	size_t	j;
 	int		count;
+	size_t	index;
 	char	**ret;
 
-	i = 0;
-	j = 0;
+	i = -1;
 	count = arg_count(str);
-	ret = (char **)malloc(sizeof(char *) * (count + 1));
+	index = 0;
+	ret = (char **)malloc_t(sizeof(char *) * (count + 1));
 	if (!ret)
 		return (NULL);
-	ret[count] = NULL;
-	while (str && str[j] && i < count)
+	while (++i < count)
 	{
-		while (str[j] && is_spc(str[j]))
-			j++;
-		ret[i] = (char *)malloc(sizeof(char) * (ft_arglen(&str[j]) + 1));
+		while (str[index] && is_spc(str[index]))
+			index++;
+		ret[i] = (char *)malloc_t(sizeof(char) * (arg_len(&str[index]) + 1));
 		if (!ret[i])
 			return (ft_splitfree(ret, i));
-		j += ft_argcpy(ret[i++], &str[j]);
+		arg_cpy(ret[i], str, &index);
+		while (str[index] && is_spc(str[index]))
+			index++;
 	}
+	ret[count] = NULL;
 	return (ret);
 }

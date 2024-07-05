@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 13:10:48 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:01:03 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	***ft_env(void)
 	return (&env);
 }
 
-t_lexer	**get_lexer()
+t_lexer	**get_lexer(void)
 {
 	static t_lexer	*head = NULL;
 

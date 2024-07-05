@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 11:39:49 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:23:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	env_free(char **ret)
 	if (!ret)
 		return ;
 	while (ret[i])
-		free (ret[i++]);
-	free(ret);
+		free_t (ret[i++]);
+	free_t(ret);
 }
 
 char	**ft_make_envp(char **ret)
@@ -31,22 +31,22 @@ char	**ft_make_envp(char **ret)
 	ret[0] = ft_strdup(ft_strjoin("PWD=", getcwd(buffer, sizeof(buffer))));
 	if (!ret[0])
 	{
-		free(ret);
+		free_t(ret);
 		return (0);
 	}
 	ret[1] = ft_strdup("SHLVL=0");
 	if (!ret[1])
 	{
-		free(ret[0]);
-		free(ret);
+		free_t(ret[0]);
+		free_t(ret);
 		return (0);
 	}
 	ret[2] = ft_strdup("_=");
 	if (!ret[2])
 	{
-		free(ret[0]);
-		free(ret[1]);
-		free(ret);
+		free_t(ret[0]);
+		free_t(ret[1]);
+		free_t(ret);
 		return (0);
 	}
 	ret[3] = NULL;
@@ -62,9 +62,9 @@ char	**init_env(char **env)
 	while (env[i])
 		i++;
 	if (env && env[0])
-		ret = (char **)malloc(sizeof(char *) * (i + 1));
+		ret = (char **)malloc_t(sizeof(char *) * (i + 1));
 	else
-		ret = (char **)malloc(sizeof(char *) * (3 + 1));
+		ret = (char **)malloc_t(sizeof(char *) * (3 + 1));
 	if (!ret)
 		return (NULL);
 	if (!env || !env[0])

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:47:07 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/28 11:40:47 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:24:19 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	out_to_file(char *quitter, char *op)
 		}
 		if (ft_strncmp(input, quitter, ft_strlen(quitter)) == 0)
 		{
-			free (input);
+			free_t (input);
 			break ;
 		}
 		fd = ft_get_fd(op, input);
 		write(fd, input, ft_strlen(input));
 		write(fd, "\n", 1);
 		close(fd);
-		free(input);
+		free_t(input);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 14:52:01 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:24:10 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int	heredoc_child(int written, char *eof, int fd, int mode)
 			write(2, "Heredoc : Failed to write.\n", 27);
 			break ;
 		}
-		free(line);
+		free_t(line);
 		line = take_in("> ");
 	}
 	if (line)
-		free(line);
+		free_t(line);
 	close(fd);
 	return (written);
 }

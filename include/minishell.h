@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 15:04:53 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:25:34 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 
-# define READ O_RDONLY
-# define WRITE (O_WRONLY | O_TRUNC | O_CREAT)
-# define APPEND (O_WRONLY | O_APPEND | O_CREAT)
 # define PERMISSIONS 0644
-
-# define malloc malloc_t_bad
-# define free free_t
 
 extern int	g_signal;
 
@@ -64,9 +58,7 @@ typedef struct s_lexer
 int		*get_run(void);
 int		*get_exit_status(void);
 char	***ft_env(void);
-char	**last_line(void);
-int		*get_fds();
-t_lexer	**get_lexer();
+t_lexer	**get_lexer(void);
 
 //get_line
 char	*get_line(void);
@@ -101,6 +93,7 @@ void	exit_130(int signal);
 
 //execute
 int		execute(t_lexer *tokens);
+void	ft_wait(t_lexer *tokens);
 int		exec_do(t_lexer *temp);
 
 //utils
@@ -118,7 +111,7 @@ int		ft_strcmp(char *s1, char *s2);
 char	*ft_quote_strip(char *str);
 
 //helper
-size_t	ft_countwords(char const *s, char c);
+int		ft_countwords(char const *s, char c);
 char	*remove_quotes(char *str);
 char	*remove_uquotes(char *str);
 char	*join_quotes(char *str);
@@ -162,7 +155,7 @@ int		export_command(t_lexer *lexer);
 int		pwd_command(void);
 int		unset_command(t_lexer *lexer);
 int		ft_exit(t_lexer	*lexer);
-int 	env_pos(char **env, char *cmd);
+int		env_pos(char **env, char *cmd);
 int		envp_update_value(char **env, char *cmd, int pos, char *eq);
 int		envp_add(char **env, char *cmd, int pos, char *eq);
 

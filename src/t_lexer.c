@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 13:58:30 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:25:00 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_lexer	*init_lexer(int num)
 	head = NULL;
 	while (++i < num)
 	{
-		temp = (t_lexer *)malloc(sizeof(t_lexer));
+		temp = (t_lexer *)malloc_t(sizeof(t_lexer));
 		if (!temp)
 		{
 			prev->next = NULL;
@@ -118,9 +118,9 @@ char	**add_cmd(t_lexer *lex, char *str)
 	size = 0;
 	while (lex->cmd && lex->cmd[size])
 		size++;
-	ret = (char **)malloc(sizeof(char *) * (size + 2));
+	ret = (char **)malloc_t(sizeof(char *) * (size + 2));
 	if (!ret)
-		return (free(lex->cmd), NULL);
+		return (free_t(lex->cmd), NULL);
 	while (lex->cmd && lex->cmd[++i])
 		ret[i] = lex->cmd[i];
 	if (!lex->cmd)
@@ -131,8 +131,8 @@ char	**add_cmd(t_lexer *lex, char *str)
 	{
 		lex->path = path_finder(ret[0], env_get_by_name("PATH"));
 		if (!lex->path)
-			return (free(ret), free(lex->cmd), NULL);
+			return (free_t(ret), free_t(lex->cmd), NULL);
 	}
-	free(lex->cmd);
+	free_t(lex->cmd);
 	return (ret);
 }

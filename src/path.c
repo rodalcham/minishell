@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/03 09:53:17 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:24:39 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_pathjoin(char *path, char *cmd)
 
 	i = 0;
 	j = 0;
-	ret = (char *)malloc(sizeof(char) * (ft_strlen(path) + ft_strlen(cmd) + 2));
+	ret = (char *)malloc_t(sizeof(char) * (ft_strlen(path) + ft_strlen(cmd) + 2));
 	if (!ret)
 		return (NULL);
 	if (path)
@@ -39,7 +39,7 @@ char *handle_dir(char *path)
 	struct stat statbuf;
 
 	if (stat(path, &statbuf) == -1)
-		return (free(path), NULL);
+		return (free_t(path), NULL);
 	// if (path[0] != '.')
 	// 	return (path);
 	if (!S_ISREG(statbuf.st_mode))
@@ -51,7 +51,7 @@ char *handle_dir(char *path)
 		else 
         	ft_perror(path, " is not a file\n", NULL);
 		*get_exit_status() = 126;
-		free(path);
+		free_t(path);
 		path = ft_strdup("not_valid");
     }
 	return (path);
@@ -84,7 +84,7 @@ char	*handle_absolute_path(char *command)
 		// }
 		return (handle_dir(path));
 	}
-	return(free(path), ft_strdup("not_found"));
+	return(free_t(path), ft_strdup("not_found"));
 }
 
 char	*path_finder(char *command, char *envp)
@@ -108,10 +108,10 @@ char	*path_finder(char *command, char *envp)
 			return (ft_splitfree(paths, i), NULL);
 		if (access(ret, X_OK) == 0)
 			return (ft_splitfree(paths, i + 1), ret);
-		free(paths[i]);
-		free(ret);
+		free_t(paths[i]);
+		free_t(ret);
 	}
-	return (free(paths), ft_strdup("not_found"));
+	return (free_t(paths), ft_strdup("not_found"));
 }
 
 char	*env_get_by_name(char *name)

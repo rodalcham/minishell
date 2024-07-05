@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/05 09:41:20 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:25:16 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	envp_add(char **env, char *cmd, int pos, char *eq)
 	char	**new;
 	int		i;
 
-	new = (char **)malloc(sizeof(char *) * (env_len(env) + 1));
+	new = (char **)malloc_t(sizeof(char *) * (env_len(env) + 1));
 	if (!new)
 		return (-1);
 	if (eq && eq != cmd && *(eq - 1) == '+')
@@ -85,11 +85,11 @@ int	envp_add(char **env, char *cmd, int pos, char *eq)
 		new[i] = env[i];
 	new[i] = ft_strdup(cmd);
 	if (!new[i])
-		return (free(new), -1);
+		return (free_t(new), -1);
 	new[++i] = NULL;
 	*ft_env() = new;
 	if (pos >= 0)
-		free(env);
+		free_t(env);
 	return (*get_exit_status() = 0);
 }
 
@@ -106,7 +106,7 @@ int	envp_update_value(char **env, char *cmd, int pos, char *eq)
 		return (0);
 	if (!new)
 		return (-1);
-	free(env[pos]);
+	free_t(env[pos]);
 	env[pos] = new;
 	return (*get_exit_status() = 0);
 }

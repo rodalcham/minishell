@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/05 11:07:02 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 15:25:26 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ int	execute(t_lexer *tokens)
 			return (status);
 		temp = temp->next;
 	}
+	ft_wait(tokens);
+	return (0);
+}
+
+void	ft_wait(t_lexer *tokens)
+{
+	t_lexer	*temp;
+
 	temp = tokens;
 	while (temp)
 	{
@@ -39,7 +47,6 @@ int	execute(t_lexer *tokens)
 			waitpid(temp->pid, get_exit_status(), 0);
 		temp = temp->next;
 	}
-	return (0);
 }
 
 int	replace_io(t_lexer *temp)

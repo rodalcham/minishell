@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/24 13:15:54 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:25:06 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 	char	*new_str;
 	int		i;
 
-	new_str = malloc(sizeof(char) * ft_strlen(str) + 2);
+	new_str = malloc_t(sizeof(char) * ft_strlen(str) + 2);
 	ft_strcpy(new_str, str);
 	ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
 	while (double_quotes == 1 || single == 1)
@@ -61,7 +61,7 @@ char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 					+ ft_strlen(new_input) + 3));
 		if (!new_str)
 		{
-			free(new_input);
+			free_t(new_input);
 			return (NULL);
 		}
 		ft_strlcat(new_str, new_input, ft_strlen(new_str)
@@ -80,7 +80,7 @@ char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 			}
 			i++;
 		}
-		free(new_input);
+		free_t(new_input);
 	}
 	return (new_str);
 }
