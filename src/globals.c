@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 10:22:40 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 13:10:48 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@ int	*get_run(void)
 	static int	run = 1;
 
 	return (&run);
-}
-
-char	**last_line(void) //  REMOVE!
-{
-	static char	*str = NULL;
-
-	return (&str);
 }
 
 int	*get_exit_status(void)

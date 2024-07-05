@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 10:20:49 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 13:16:15 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int		echo_command(t_lexer *lexer);
 int		ft_check_commands(t_lexer *lexer);
 int		call_functions(t_lexer *lexer);
 int		cd_command(t_lexer *lexer);
-int		env_command(void);
+int		env_command(t_lexer *lexer);
 int		export_command(t_lexer *lexer);
 int		pwd_command(void);
 int		unset_command(t_lexer *lexer);

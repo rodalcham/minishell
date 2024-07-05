@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 12:54:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 13:11:15 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,6 @@ char	*take_line(int *inv)
 	if (!line)
 		return (NULL);
 	*inv = is_invalid(line);
-	if (*last_line())
-		free(*last_line());
-	*last_line() = ft_strdup(line);
-	if (!*last_line())
-	{
-		free(line);
-		ft_error(-1);
-	}
 	return (line);
 }
 

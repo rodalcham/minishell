@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:25:08 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 15:31:05 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/05 13:16:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int	env_has_value(char *str)
 	return (1);
 }
 
-int	env_command(void)
+int	env_command(t_lexer *lexer)
 {
 	char	**list;
 	int			i;
 
+	if(lexer->cmd[1])
+		return (0);
 	list = *ft_env();
 	if (list == NULL)
 		return (1);

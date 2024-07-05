@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:53:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 09:53:11 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 13:14:47 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ int	call_functions(t_lexer *lexer)
 	if (i == 6)
 		return (exit_code = ft_exit(lexer));
 	if (i == 7)
-		exit_code = env_command();
+		exit_code = env_command(lexer);
 	exit(exit_code);
 }
