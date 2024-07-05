@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/04 14:06:47 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 17:37:43 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*remove_quotes(char *str)
 void shift_left(char *str, int spc, size_t *p)
 {
 	size_t	i;
+
 	if (!str || !str[0] || spc)
 		return ;
 	i = 0;
@@ -115,9 +116,34 @@ char	*remove_uquotes(char *str)
 	return (str);
 }
 
+char	*adj_quotes(char *str)
+{
+	size_t	i;
+	char	q;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	while (str[i])
+	{
+		if	((str[i] == '\'' || str[i] == '\"') && (!i || !is_spc(str[i - 1])) && (str[i + 1] && !is_spc(str[i + 1]) && !is_quoted(str, i + 1)))
+		{
+			q = str[i];
+			shift_left(&str[i], 0, NULL);
+			while (str[i] && str[i] != q)
+				i++;
+			if (str[i])
+				shift_left(&str[i], 0, NULL);
+		}
+		else
+			i++;
+	}
+	return (str);
+}
+
 char	*join_quotes(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -132,6 +158,7 @@ char	*join_quotes(char *str)
 		i++;
 	}
 	return (str);
+	// return (adj_quotes(str));
 }
 
 int	is_forkable(t_lexer *temp)

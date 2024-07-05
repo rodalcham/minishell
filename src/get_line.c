@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:07:56 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 14:07:26 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/04 17:56:59 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char	*take_line(int *inv)
 	line = expand_tokens(line, 0);
 	if (!line)
 		return (NULL);
-	*inv = is_invalid(join_quotes(line));
+	*inv = is_invalid(line);
 	if (*last_line())
 		free(*last_line());
 	*last_line() = ft_strdup(line);
