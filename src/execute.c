@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/04 11:54:46 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 11:07:02 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	execute(t_lexer *tokens)
 	{
 		if (temp->cmd && *get_exit_status() != 130)
 			status = exec_do(temp);
-		if (*get_exit_status() == 130)
+		if (*get_exit_status() == 130 && *get_run())
 			*get_exit_status() = 1;
 		if (temp->input)
 			close(temp->input->fd);

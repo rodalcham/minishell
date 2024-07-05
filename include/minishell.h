@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 11:45:02 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 10:20:49 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ typedef struct s_lexer
 
 //globals
 int		*get_run(void);
-t_envp	**get_envp(void);
 int		*get_exit_status(void);
 char	***ft_env(void);
 char	**last_line(void);
 int		*get_fds();
+t_lexer	**get_lexer();
 
 //get_line
 char	*get_line(void);
@@ -159,7 +159,7 @@ int		env_command(void);
 int		export_command(t_lexer *lexer);
 int		pwd_command(void);
 int		unset_command(t_lexer *lexer);
-int		ft_exit(char *line, char **args);
+int		ft_exit(t_lexer	*lexer);
 int 	env_pos(char **env, char *cmd);
 int		envp_update_value(char **env, char *cmd, int pos, char *eq);
 int		envp_add(char **env, char *cmd, int pos, char *eq);
