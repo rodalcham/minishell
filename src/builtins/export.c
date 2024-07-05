@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/04 12:32:39 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 09:41:20 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,30 +111,17 @@ int	envp_update_value(char **env, char *cmd, int pos, char *eq)
 	return (*get_exit_status() = 0);
 }
 
-char	*get_ev(int *v)
+int	declare_usage(void)
 {
+	char	**env;
 	int		i;
-	char	*line;
-	char	*ev;
 
-	i = 0;
-	line = remove_uquotes(join_quotes(*last_line()));
-	while (line[i] && is_spc(line[i]))
-		i++;
-	if (ft_strncmp("export", &line[i], 6))
-	{
-		*v = 0;
-		while (line[i] && ft_strncmp("export", &line[i], 6))
-			i++;
-	}
-	else
-		*v = 1;
-	line[i] = 'D';
-	i += 6;
-	while (line[i] && is_spc(line[i]))
-		i++;
-	ev = remove_quotes(&line[i]);
-	return (ev);
+	env = *ft_env();
+	i = -1;
+	while(env && env[++i])
+		printf("declare -x %s\n", env[i]);
+	*get_exit_status() = 0;
+	return (0);
 }
 
 int	export_command(t_lexer *lexer)
@@ -142,23 +129,19 @@ int	export_command(t_lexer *lexer)
 	char	*ev;
 	char	*eq;
 	int		pos;
-	int		v;
 
-	ev = get_ev(&v);
+	ev = lexer->cmd[1];
+	if (!ev)
+		return (declare_usage());
 	eq = ft_strchr(ev, '=');
 	pos = env_pos(*ft_env(), ev);
-	if (!ev && eq)
-	{
-		write(2, "export : INVALID USAGE\n", 23);
-		return (*get_exit_status() = 0);
-	}
 	if (eq && (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
 		|| is_spc(*(eq - 1))))
 	{
 		ft_perror_spc("export : '", ev, "' : not a valid identifier\n");
 		return (*get_exit_status() = 1);
 	}
-	if (lexer->next || !eq || !v)
+	if (lexer->next || !eq || *get_lexer() != lexer)
 		return (*get_exit_status() = 0);
 	if (pos >= 0)
 		return (envp_update_value(*ft_env(), ev, pos, eq));

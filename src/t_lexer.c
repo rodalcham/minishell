@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 18:07:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 09:19:06 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_lexer	*init_lexer(int num)
 		temp->pid = 0;
 		prev = temp;
 	}
+	*get_lexer() = head;
 	return (head);
 }
 

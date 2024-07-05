@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:48:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/06/28 10:44:48 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 10:22:40 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,11 @@ int	*get_run(void)
 	return (&run);
 }
 
-char	**last_line(void)
+char	**last_line(void) //  REMOVE!
 {
 	static char	*str = NULL;
 
 	return (&str);
-}
-
-t_envp	**get_envp(void)
-{
-	static t_envp	*envp = NULL;
-
-	return (&envp);
 }
 
 int	*get_exit_status(void)
@@ -47,9 +40,9 @@ char	***ft_env(void)
 	return (&env);
 }
 
-int	*get_fds(void)
+t_lexer	**get_lexer()
 {
-	static int	fds[2] = {0 , 0};
+	static t_lexer	*head = NULL;
 
-	return (&fds[0]);
+	return (&head);
 }
