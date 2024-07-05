@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 16:25:34 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:29:17 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,6 @@
 # define PERMISSIONS 0644
 
 extern int	g_signal;
-
-typedef struct s_envp
-{
-	char			*value;
-	char			*name;
-	struct s_envp	*next;
-}					t_envp;
 
 typedef struct s_file
 {
@@ -137,8 +130,6 @@ char	*path_finder(char *command, char *envp);
 char	*env_get_by_name(char *name);
 
 //envp
-t_envp	*ft_create_envp(char **envp);
-void	ft_free_envp(t_envp *head);
 char	**init_env(char **env);
 void	env_free(char **ret);
 

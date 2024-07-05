@@ -6,13 +6,13 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 11:57:54 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 11:21:46 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:54:23 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	do_exit(t_lexer *lexer, char **args)
+int	do_exit(t_lexer *lexer, char **args)
 {
 	if (args[1] && !args[2])
 		*get_exit_status() = ft_atoi(args[1]);
@@ -20,11 +20,12 @@ void	do_exit(t_lexer *lexer, char **args)
 		*get_exit_status() = 256 + *get_exit_status();
 	if (lexer == *get_lexer() && !lexer->next)
 		*get_run() = 0;
+	return (*get_exit_status());
 }
 
 int	ft_exit(t_lexer *lexer)
 {
-	int	i;
+	int		i;
 	char	**args;
 
 	args = lexer->cmd;
@@ -34,18 +35,19 @@ int	ft_exit(t_lexer *lexer)
 		if (args[1][0] == '-' && args[1][1])
 			i++;
 		while (args[1][++i])
+		{
 			if (!ft_isdigit(args[1][i]))
 			{
 				ft_perror("exit: ", args[1], ": numeric argument required\n");
 				*get_exit_status() = 255;
-				break;
+				break ;
 			}
+		}
 	}
 	if (args[1] && args[2] && *get_exit_status() != 255)
 	{
 		write(2, "exit: too many arguments\n", 25);
 		return (*get_exit_status() = 1);
 	}
-	do_exit(lexer, args);
-	return (*get_exit_status());
+	return (do_exit(lexer, args));
 }

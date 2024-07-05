@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 16:24:39 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:35:55 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_pathjoin(char *path, char *cmd)
 
 	i = 0;
 	j = 0;
-	ret = (char *)malloc_t(sizeof(char) * (ft_strlen(path) + ft_strlen(cmd) + 2));
+	ret = (char *)malloc_t(sizeof(char)
+			* (ft_strlen(path) + ft_strlen(cmd) + 2));
 	if (!ret)
 		return (NULL);
 	if (path)
@@ -34,26 +35,24 @@ char	*ft_pathjoin(char *path, char *cmd)
 	return (ret);
 }
 
-char *handle_dir(char *path)
+char	*handle_dir(char *path)
 {
-	struct stat statbuf;
+	struct stat	statbuf;
 
 	if (stat(path, &statbuf) == -1)
 		return (free_t(path), NULL);
-	// if (path[0] != '.')
-	// 	return (path);
 	if (!S_ISREG(statbuf.st_mode))
 	{
-		if (S_ISDIR(statbuf.st_mode)) 
-        	ft_perror(path, " is a directory\n", NULL);
-		else if (S_ISLNK(statbuf.st_mode)) 
-        	ft_perror(path, " is a symbolic link\n", NULL);
-		else 
-        	ft_perror(path, " is not a file\n", NULL);
+		if (S_ISDIR(statbuf.st_mode))
+			ft_perror(path, " is a directory\n", NULL);
+		else if (S_ISLNK(statbuf.st_mode))
+			ft_perror(path, " is a symbolic link\n", NULL);
+		else
+			ft_perror(path, " is not a file\n", NULL);
 		*get_exit_status() = 126;
 		free_t(path);
 		path = ft_strdup("not_valid");
-    }
+	}
 	return (path);
 }
 
@@ -61,30 +60,20 @@ char	*handle_absolute_path(char *command)
 {
 	char	*path;
 	int		i;
-	// int		j;
 
 	path = ft_strdup(command);
 	if (!path)
 		return (NULL);
 	i = ft_strlen(command);
-	// j = 0;
 	while (i)
 	{
 		if (path[i] == '/')
-			break;
+			break ;
 		i--;
 	}
 	if (access(path, X_OK) == 0)
-	{
-		// if (i >= 0)
-		// {
-			// while (path[++i])
-			// 	command[j++] = path[i];
-			// command[j] = '\0'; 
-		// }
 		return (handle_dir(path));
-	}
-	return(free_t(path), ft_strdup("not_found"));
+	return (free_t(path), ft_strdup("not_found"));
 }
 
 char	*path_finder(char *command, char *envp)
@@ -95,7 +84,7 @@ char	*path_finder(char *command, char *envp)
 
 	if (!command || !envp)
 		return (ft_strdup("not_found"));
-	if	(command[0] == '.' || command[0] == '/')
+	if (command[0] == '.' || command[0] == '/')
 		return (handle_absolute_path(command));
 	paths = ft_split(envp, ':');
 	if (!paths)

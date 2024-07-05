@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper.c                                           :+:      :+:    :+:   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 16:08:46 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 16:47:18 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_countwords(char const *s, char c)
 {
-	int	x;
+	int		x;
 	size_t	i;
 
 	x = 0;
@@ -34,11 +34,11 @@ int	ft_countwords(char const *s, char c)
 
 int	is_forkable(t_lexer *temp)
 {
-		if (ft_strcmp("cd", temp->cmd[0]) && ft_strcmp("export", temp->cmd[0])
-			&& ft_strcmp("unset", temp->cmd[0])
-			&& ft_strcmp("exit", temp->cmd[0]))
-			return (1);
-		return (0);
+	if (ft_strcmp("cd", temp->cmd[0]) && ft_strcmp("export", temp->cmd[0])
+		&& ft_strcmp("unset", temp->cmd[0])
+		&& ft_strcmp("exit", temp->cmd[0]))
+		return (1);
+	return (0);
 }
 
 char	*remove_quotes(char *str)
@@ -78,7 +78,7 @@ int	is_quoted(char *str, size_t index)
 	i = 0;
 	if (!str || index >= ft_strlen(str))
 		return (0);
-	while(str[i] && i <= index)
+	while (str[i] && i <= index)
 	{
 		if (str[i] == '\'' && !dq)
 			sq = !sq;

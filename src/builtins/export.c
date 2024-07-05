@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/05 16:25:16 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 17:00:02 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	env_len(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!env)
@@ -33,7 +33,7 @@ int	env_cmp(char *s1, char *s2)
 	ret = 0;
 	if (!s1 || !s2)
 		return (0);
-	while(s1[i] && s2[i] && s1[i] != '=' && s2[i] != '='
+	while (s1[i] && s2[i] && s1[i] != '=' && s2[i] != '='
 		&& s1[i] != '+' && s2[i] != '+')
 	{
 		if (s1[i] != s2[i])
@@ -65,52 +65,6 @@ int	env_pos(char **env, char *cmd)
 	return (-1);
 }
 
-int	envp_add(char **env, char *cmd, int pos, char *eq)
-{
-	char	**new;
-	int		i;
-
-	new = (char **)malloc_t(sizeof(char *) * (env_len(env) + 1));
-	if (!new)
-		return (-1);
-	if (eq && eq != cmd && *(eq - 1) == '+')
-	{
-		eq--;
-		while (*(++eq))
-			*(eq - 1) = *(eq);
-		*(eq - 1) = '\0';
-	}
-	i = -1;
-	while (env[++i])
-		new[i] = env[i];
-	new[i] = ft_strdup(cmd);
-	if (!new[i])
-		return (free_t(new), -1);
-	new[++i] = NULL;
-	*ft_env() = new;
-	if (pos >= 0)
-		free_t(env);
-	return (*get_exit_status() = 0);
-}
-
-int	envp_update_value(char **env, char *cmd, int pos, char *eq)
-{
-	char	*new;
-
-	new = NULL;
-	if (eq && eq != cmd && *(eq - 1) == '+' && *(eq + 1))
-		new = ft_strjoin(env[pos], (eq + 1));
-	else if (eq)
-		new = ft_strdup(cmd);
-	else
-		return (0);
-	if (!new)
-		return (-1);
-	free_t(env[pos]);
-	env[pos] = new;
-	return (*get_exit_status() = 0);
-}
-
 int	declare_usage(void)
 {
 	char	**env;
@@ -118,7 +72,7 @@ int	declare_usage(void)
 
 	env = *ft_env();
 	i = -1;
-	while(env && env[++i])
+	while (env && env[++i])
 		printf("declare -x %s\n", env[i]);
 	*get_exit_status() = 0;
 	return (0);
@@ -136,7 +90,7 @@ int	export_command(t_lexer *lexer)
 	eq = ft_strchr(ev, '=');
 	pos = env_pos(*ft_env(), ev);
 	if (eq && (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
-		|| is_spc(*(eq - 1))))
+			|| is_spc(*(eq - 1))))
 	{
 		ft_perror_spc("export : '", ev, "' : not a valid identifier\n");
 		return (*get_exit_status() = 1);
