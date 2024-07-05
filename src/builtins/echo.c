@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/04 16:22:55 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/05 11:37:30 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ char	*transform_correct(char *line, int n)
 	doubl = 0;
 	j = 0;
 	new_str = malloc(sizeof(char) * ft_strlen(line) + 1);
+	if (!new_str)
+		return (NULL);
 	while (line[i])
 	{
 		while (is_spc(line[i]) && is_spc(line[i + 1]) && !single && !doubl)
@@ -120,28 +122,7 @@ char	*transform_correct(char *line, int n)
 			remove_n_flag(line, &i);
 			n = 1;
 		}
-		if (line[i] == '\"' && single == 0)
-		{
-			doubl = !doubl;
-			new_str[j++] = line[i++];
-		}
-		if (line[i] == '\'' && doubl == 0)
-		{
-			single = !single;
-			new_str[j++] = line[i++];
-		}
-		if ((line[i] == '>' || line[i] == '<' || line[i] == '|') && !single && !doubl)
-		{
-			if (line[i] == '|')
-			{
-				line[i] = 0;
-				break ;
-			}
-			while (line[i] != 0 && !is_spc(line[i]))
-				i++;
-		}
-		else
-			new_str[j++] = line[i];
+		new_str[j++] = line[i];
 		i++;
 	}
 	new_str[j] = 0;
@@ -162,6 +143,25 @@ int	is_n_flag(char *str)
 	return (1);
 }
 
+char	*ft_combine_lexer(t_lexer *lexer)
+{
+	int		i;
+	char	*line;
+	char	*tmp;
+
+	i = 1;
+	line = ft_strdup("");
+	while (lexer->cmd[i])
+	{
+		tmp = ft_strjoin(line, lexer->cmd[i]);
+		free(line);
+		line = ft_strjoin(tmp, " ");
+		free(tmp);
+		i++;
+	}
+	return (line);
+}
+
 int	echo_command(t_lexer *lexer)
 {
 	int		i;
@@ -175,13 +175,9 @@ int	echo_command(t_lexer *lexer)
 		newline = 0;
 		i++;
 	}
-	line = *last_line();
-	line += 4;
-	while (is_spc(*line))
-		line++;
-	line = ft_strnstr(line, lexer->cmd[1], ft_strlen(line));
+	line = ft_combine_lexer(lexer);
 	line = transform_correct(line, newline);
-	if (line && remove_quotes(line))
+	if (line)
 		printf ("%s", line);
 	if (newline && printf("\n"))
 		return (0);
