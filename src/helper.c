@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:05:50 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 10:31:22 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 15:04:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,5 +191,21 @@ int	is_quoted(char *str, size_t index)
 		return (1);
 	if (dq)
 		return (2);
+	return (0);
+}
+
+int	has_quotes(char	*str)
+{
+	size_t	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (is_quoted(str, i))
+			return (1);
+		i++;
+	}
 	return (0);
 }

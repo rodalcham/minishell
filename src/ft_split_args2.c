@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:10:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 13:22:00 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 13:59:12 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	arg_cpy(char *dst, char *src, size_t *index)
 			dst[j++] = src[i++];
 	}
 	dst[j] = '\0';
-	dst = remove_quotes(dst);
 	*index = *index + j;
 }
 

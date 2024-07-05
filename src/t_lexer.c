@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 09:19:06 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 13:58:30 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_lexer	*lex(char **args, int *status)
 		}
 		else
 		{
-			temp->cmd = add_cmd(temp, args[i]);
+			temp->cmd = add_cmd(temp, remove_quotes(args[i]));
 			if (!temp->cmd)
 				return (*status = -1, head);
 		}

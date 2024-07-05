@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 13:16:15 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 15:04:53 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_lexer	**get_lexer();
 
 //get_line
 char	*get_line(void);
+char	*take_in(char *in);
 
 //t_lexer
 t_lexer	*init_lexer(int num);
@@ -95,7 +96,7 @@ int		add_heredoc(t_lexer *lex, char **args, int *i);
 int		add_pipe(t_lexer *lex);
 
 //heredoc
-int		do_heredoc(int fd, char *eof);
+int		do_heredoc(int fd, char *eof, int mode);
 void	exit_130(int signal);
 
 //execute
@@ -123,6 +124,7 @@ char	*remove_uquotes(char *str);
 char	*join_quotes(char *str);
 int		is_forkable(t_lexer *temp);
 int		is_quoted(char *str, size_t index);
+int		has_quotes(char	*str);
 
 //error handling
 void	ft_error(int errno);

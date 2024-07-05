@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/04 10:54:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 14:52:01 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@ void	exit_130(int signal)
 	*get_exit_status() = 130;
 }
 
-int	heredoc_child(int written, char *eof, int fd)
+int	heredoc_child(int written, char *eof, int fd, int mode)
 {
 	char	*line;
 
 	g_signal = 1;
 	signal(SIGINT, custom_handler);
 	written = 1;
-	line = readline("> ");
+	line = take_in("> ");
 	while (written >= 0 && line && ft_strcmp(line, eof))
 	{
-		line = expand_tokens(line, 1);
+		if (!mode)
+			line = expand_tokens(line, 1);
 		if (!line)
 			return (-1);
 		written = write(fd, line, ft_strlen(line));
@@ -46,7 +47,7 @@ int	heredoc_child(int written, char *eof, int fd)
 			break ;
 		}
 		free(line);
-		line = readline("> ");
+		line = take_in("> ");
 	}
 	if (line)
 		free(line);
@@ -54,7 +55,7 @@ int	heredoc_child(int written, char *eof, int fd)
 	return (written);
 }
 
-int	do_heredoc(int fd, char *eof)
+int	do_heredoc(int fd, char *eof, int mode)
 {
 	int		written;
 	int		pid;
@@ -65,7 +66,7 @@ int	do_heredoc(int fd, char *eof)
 	signal(SIGINT, exit_130);
 	pid = fork();
 	if (pid == 0)
-		exit (heredoc_child(written, eof, fd));
+		exit (heredoc_child(written, eof, fd, mode));
 	else if (pid < 0)
 		return (-1);
 	else
