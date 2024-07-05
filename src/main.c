@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 11:06:12 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 11:44:09 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ void	main_loop(void)
 	}
 }
 
+static int	shlvl(int value)
+{
+	if (value < 0)
+		return (0);
+	else if (value >= 1000)
+		return (1);
+	else
+		return (value);
+}
+
 void	make_shlvl(char	**envp)
 {
 	int		i;
@@ -75,7 +85,7 @@ void	make_shlvl(char	**envp)
 	{
 		if (ft_strncmp(envp[i], "SHLVL=", ft_strlen("SHLVL=")) == 0)
 		{
-			value = ft_atoi(envp[i] + ft_strlen("SHLVL=")) + 1;
+			value = shlvl(ft_atoi(envp[i] + ft_strlen("SHLVL=")) + 1);
 			value_str = ft_itoa(value);
 			lvl_size = ft_strlen("SHLVL=") + ft_strlen(value_str) + 1;
 			lvl = malloc(lvl_size);
