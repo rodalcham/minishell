@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:46:15 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/02 15:15:04 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/05 12:42:08 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 int	unset_command(t_lexer *temp)
 {
-	char	*name;
 	char	**env;
 	int		i;
+	int		j;
 
-	name = temp->cmd[1];
-	if (!name)
-		return (0);
 	env = *ft_env();
-	i = -1;
-	while (env[++i])
+	j = 0;
+	while (temp->cmd[++j])
 	{
-		if (!ft_strncmp(env[i], name, ft_strlen(name)))
-		{
-			free(env[i]);
-			while (env[++i])
-				env[i - 1] = env[i];
-			env[i - 1] = NULL;
+		if (!temp->cmd[j])
 			return (0);
+		i = -1;
+		while (env[++i])
+		{
+			if (!ft_strncmp(env[i], temp->cmd[j], ft_strlen(temp->cmd[j])))
+			{
+				free(env[i]);
+				while (env[++i])
+					env[i - 1] = env[i];
+				env[i - 1] = NULL;
+				break ;
+			}
 		}
 	}
 	return (0);
