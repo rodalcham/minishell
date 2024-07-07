@@ -6,11 +6,13 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/07 15:48:37 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/07 17:06:50 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	declare_usage(void);
 
 int	env_cmp(char *s1, char *s2)
 {
@@ -53,28 +55,31 @@ int	env_pos(char **env, char *cmd)
 	return (-1);
 }
 
-int	declare_usage(void)
+char	*get_es(char *ev)
 {
-	char	**env;
-	int		i;
+	size_t	i;
 
-	env = *ft_env();
-	i = -1;
-	while (env && env[++i])
-		printf("declare -x %s\n", env[i]);
-	*get_exit_status() = 0;
-	return (0);
+	i = 0;
+	while (ev[i])
+	{
+		if (is_spc(ev[i]))
+			return (&ev[i]);
+		i++;
+	}
+	return (NULL);
 }
 
 int	do_export(t_lexer *lexer, char *ev)
 {
 	char	*eq;
 	int		pos;
+	char	*es;
 
 	eq = ft_strchr(ev, '=');
+	es = get_es(ev);
 	pos = env_pos(*ft_env(), ev);
 	if ((eq && (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
-			|| is_spc(*(eq - 1)))) || !ev[0])
+		|| is_spc(*(eq - 1)))) || !ev[0] || (es && eq && es < eq))
 	{
 		ft_perror_spc("export : `", ev, "' : not a valid identifier\n");
 		return (*get_exit_status() = 1);

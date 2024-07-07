@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 16:56:51 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/07 15:40:06 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/07 15:52:20 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,17 @@ int	envp_update_value(char **env, char *cmd, int pos, char *eq)
 	free_t(env[pos]);
 	env[pos] = new;
 	return (*get_exit_status() = 0);
+}
+
+int	declare_usage(void)
+{
+	char	**env;
+	int		i;
+
+	env = *ft_env();
+	i = -1;
+	while (env && env[++i])
+		printf("declare -x %s\n", env[i]);
+	*get_exit_status() = 0;
+	return (0);
 }
