@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:46:15 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 16:25:21 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/07 10:56:33 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	env_cmp(char *s1, char *s2);
 
 int	unset_command(t_lexer *temp)
 {
@@ -27,13 +29,13 @@ int	unset_command(t_lexer *temp)
 		i = -1;
 		while (env[++i])
 		{
-			if (!ft_strncmp(env[i], temp->cmd[j], ft_strlen(temp->cmd[j])))
+			if (!env_cmp(env[i], temp->cmd[j]))
 			{
 				free_t(env[i]);
 				while (env[++i])
 					env[i - 1] = env[i];
 				env[i - 1] = NULL;
-				break ;
+				break;
 			}
 		}
 	}
