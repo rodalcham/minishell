@@ -3,16 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 16:24:17 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/07 17:55:12 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 int	g_signal = 0;
+
+int	update_last_arg(t_lexer *tokens)
+{
+	char	buff[4098];
+	char	*ev;
+	char	*eq;
+	int		pos;
+	int		i;
+
+	i = 0;
+	ft_strcpy(buff, "_=");
+	if (tokens && tokens->cmd && !tokens->next)
+	{
+		while (tokens->cmd[i])
+			i++;
+		if (i)
+			ft_strcpy(&buff[2], tokens->cmd[i - 1]);
+	}
+	ev = &buff[0];
+	eq = &buff[1];
+	pos = env_pos(*ft_env(), ev);
+	if (pos >= 0)
+		return (envp_update_value(*ft_env(), ev, pos, eq));
+	else
+		return (envp_add(*ft_env(), ev, pos, eq));
+}
 
 void	intro(void)
 {
@@ -52,6 +78,8 @@ void	main_loop(void)
 		if (!args)
 			free_all(line, args, tokens, -1);
 		tokens = lex(args, &status);
+		// if (!status && tokens)
+		// 	status = update_last_arg(tokens);
 		signal(SIGINT, signal_temp);
 		if (!status)
 			status = execute(tokens);

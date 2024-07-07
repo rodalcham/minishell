@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 21:09:53 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/05 10:20:41 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/07 17:57:56 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	ft_error(int errno)
 		write(2, "EXECVE: FAILED TO REPLACE PROCESS.\n", 35);
 	else if (errno == -5)
 		write(2, "PIPE: MEMORY EXHAUSTED.\n", 24);
-	exit(*get_exit_status());
+	exit(*get_exit_status()); // DOESNT FREE ENV
 }

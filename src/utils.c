@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 16:25:06 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/07 17:58:35 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 	return (new_str);
 }
 
-char	*handle_unclosed_quotes(char *str)
+char	*handle_unclosed_quotes(char *str) //FIX
 {
 	int	i;
 	int	single;
