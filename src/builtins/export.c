@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/07 17:06:50 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/07 17:08:47 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	do_export(t_lexer *lexer, char *ev)
 	if ((eq && (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
 		|| is_spc(*(eq - 1)))) || !ev[0] || (es && eq && es < eq))
 	{
-		ft_perror_spc("export : `", ev, "' : not a valid identifier\n");
+		ft_perror("export : `", ev, "' : not a valid identifier\n");
 		return (*get_exit_status() = 1);
 	}
 	if (lexer->next || !eq || *get_lexer() != lexer)
