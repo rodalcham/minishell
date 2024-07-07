@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/05 17:00:02 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/07 15:48:37 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	env_len(char **env)
-{
-	int	i;
-
-	i = 0;
-	if (!env)
-		return (0);
-	while (env[i])
-		i++;
-	return (i + 1);
-}
 
 int	env_cmp(char *s1, char *s2)
 {
@@ -78,21 +66,17 @@ int	declare_usage(void)
 	return (0);
 }
 
-int	export_command(t_lexer *lexer)
+int	do_export(t_lexer *lexer, char *ev)
 {
-	char	*ev;
 	char	*eq;
 	int		pos;
 
-	ev = lexer->cmd[1];
-	if (!ev)
-		return (declare_usage());
 	eq = ft_strchr(ev, '=');
 	pos = env_pos(*ft_env(), ev);
-	if (eq && (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
-			|| is_spc(*(eq - 1))))
+	if ((eq && (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
+			|| is_spc(*(eq - 1)))) || !ev[0])
 	{
-		ft_perror_spc("export : '", ev, "' : not a valid identifier\n");
+		ft_perror_spc("export : `", ev, "' : not a valid identifier\n");
 		return (*get_exit_status() = 1);
 	}
 	if (lexer->next || !eq || *get_lexer() != lexer)
@@ -101,4 +85,22 @@ int	export_command(t_lexer *lexer)
 		return (envp_update_value(*ft_env(), ev, pos, eq));
 	else
 		return (envp_add(*ft_env(), ev, pos, eq));
+	return (0);
+}
+
+int	export_command(t_lexer *lexer)
+{
+	char	*ev;
+	int		i;
+
+	i = 0;
+	if (!lexer->cmd[1])
+		return (declare_usage());
+	while (lexer->cmd[++i])
+	{
+		ev = lexer->cmd[i];
+		if (do_export(lexer, ev) < 0)
+			return (-1);
+	}
+	return (*get_exit_status());
 }

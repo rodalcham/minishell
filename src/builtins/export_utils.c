@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 16:56:51 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 17:00:15 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/07 15:40:06 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	env_len(char **env);
+int	env_len(char **env)
+{
+	int	i;
+
+	i = 0;
+	if (!env)
+		return (0);
+	while (env[i])
+		i++;
+	return (i + 1);
+}
 
 int	envp_add(char **env, char *cmd, int pos, char *eq)
 {
