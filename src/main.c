@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 10:07:15 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 13:17:27 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	update_last_arg(t_lexer *tokens)
 		while (tokens->cmd[i])
 			i++;
 		if (i)
-			ft_strcpy(&buff[2], tokens->cmd[i - 1]);
+			ft_strlcpy(&buff[2], tokens->cmd[i - 1], 4096);
 	}
 	ev = &buff[0];
 	eq = &buff[1];
