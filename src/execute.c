@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/08 17:23:09 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 21:07:35 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	execute(t_lexer *tokens)
 	{
 		if (temp->cmd && *get_exit_status() != 130)
 			status = exec_do(temp);
-		if (*get_exit_status() == 130 && *get_run())
-			*get_exit_status() = 1;
 		if (temp->input)
 			close(temp->input->fd);
 		if (temp->output)
@@ -33,6 +31,9 @@ int	execute(t_lexer *tokens)
 		temp = temp->next;
 	}
 	ft_wait(tokens);
+	if ((*get_exit_status() == 130 || *get_exit_status() == 256)
+		&& *get_run())
+		*get_exit_status() = 1;
 	return (0);
 }
 

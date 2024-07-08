@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/07 17:55:16 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/08 20:48:54 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_ctrlc(int signal)
 	if (g_signal == 0)
 	{
 		write(1, "\n", 1);
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 		*get_exit_status() = 1;
