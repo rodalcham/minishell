@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:25:08 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 16:48:01 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 17:48:31 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int	env_command(t_lexer *lexer)
 	i = 0;
 	while (list[i])
 	{
-		if (env_has_value(list[i]) == 1)
-			printf("%s\n", list[i]);
+		printf("%s\n", list[i]);
 		i++;
 	}
 	return (0);

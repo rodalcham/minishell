@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/08 15:52:50 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/08 17:23:09 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	say_not_found(t_lexer *temp)
 	{
 		if (access(temp->cmd[0], F_OK) == 0)
 		{
-			ft_perror(temp->cmd[0], " : Permission denied\n", NULL);
+			ft_perror(temp->cmd[0], " : Permission denied\n", NULL); 
 			*get_exit_status() = 126;
 		}
 		else
@@ -85,6 +85,11 @@ int	say_not_found(t_lexer *temp)
 			ft_perror(temp->cmd[0], " : no such file or directory\n", NULL);
 			*get_exit_status() = 127;
 		}
+	}
+	else if (access(temp->cmd[0], F_OK) == 0 && !env_get_by_name("PATH"))
+	{
+		ft_perror(temp->cmd[0], " : Permission denied\n", NULL);
+		*get_exit_status() = 126;
 	}
 	else
 	{
@@ -96,6 +101,7 @@ int	say_not_found(t_lexer *temp)
 
 int	exec_do(t_lexer *temp)
 {
+	// printf("%s\n", temp->path);
 	if ((!temp->cmd[0][0]) || (!ft_strncmp(temp->path, "not_found", 9)
 		&& !ft_check_commands(temp)))
 		return (say_not_found(temp));

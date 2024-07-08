@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 09:40:25 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 17:44:51 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,19 @@ char	*handle_absolute_path(char *command)
 	return (free_t(path), ft_strdup("not_found"));
 }
 
+void	path_free(char **paths, int i)
+{
+	int j;
+
+	j = i;
+	while (paths[j])
+	{
+		free_t(paths[j]);
+		j++;
+	}
+	free_t(paths);
+}
+
 char	*path_finder(char *command, char *envp)
 {
 	int		i;
@@ -97,14 +110,14 @@ char	*path_finder(char *command, char *envp)
 	paths = ft_split(envp, ':');
 	if (!paths)
 		return (NULL);
-	i = ft_countwords(envp, ':');
-	while (--i >= 0)
+	i = -1;
+	while (paths[++i])
 	{
 		ret = ft_pathjoin(paths[i], command);
 		if (!ret)
-			return (ft_splitfree(paths, i), NULL);
+			return (path_free(paths, i), NULL);
 		if (access(ret, X_OK) == 0)
-			return (ft_splitfree(paths, i + 1), ret);
+			return (path_free(paths, i), ret);
 		free_t(paths[i]);
 		free_t(ret);
 	}
