@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:46:15 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/07 10:56:33 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/08 15:53:56 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ int	unset_command(t_lexer *temp)
 				while (env[++i])
 					env[i - 1] = env[i];
 				env[i - 1] = NULL;
-				break;
+				break ;
 			}
 		}
 	}
+	*get_exit_status() = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 13:36:10 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/08 15:18:20 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ char	**ft_add_shlvl(char **ret, int *index)
 	int		shlvl;
 	char	*str;
 
-	if (ret == NULL || index < 0)
-		return (NULL);
 	i = 0;
 	shlvl = 0;
 	str = NULL;
@@ -76,9 +74,9 @@ char	**ft_add_shlvl(char **ret, int *index)
 	if (shlvl == 0)
 	{
 		str = ft_strjoin("SHLVL=", ft_itoa(shlvl));
-		ret[(*index)++] = str;
 		if (!str)
 			return (env_free(ret), NULL);
+		ret[(*index)++] = str;
 	}
 	return (ret);
 }

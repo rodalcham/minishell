@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/08 10:16:54 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 15:52:50 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	exec_do(t_lexer *temp)
 	if (temp->pid == 0)
 	{
 		signal(SIGINT, custom_handler);
+		signal(SIGQUIT, custom_handler);
 		if (replace_io(temp) < 0)
 			return (-3);
 		if (ft_check_commands(temp))

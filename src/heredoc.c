@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/08 11:28:08 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 13:54:58 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exit_130(int signal)
 	*get_exit_status() = 130;
 }
 
-char	*heredoc_gl(int	mode)
+char	*heredoc_gl(int mode)
 {
 	char	*line;
 
@@ -86,6 +86,6 @@ int	do_heredoc(int fd, char *eof, int mode)
 			return (-1);
 	}
 	close(fd);
-	signal(SIGINT, handle_ctrlc);
+	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }
