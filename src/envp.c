@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:25:12 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 16:23:12 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 13:36:10 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,36 @@ char	**ft_make_envp(char **ret)
 	return (ret);
 }
 
+char	**ft_add_shlvl(char **ret, int *index)
+{
+	int		i;
+	int		shlvl;
+	char	*str;
+
+	if (ret == NULL || index < 0)
+		return (NULL);
+	i = 0;
+	shlvl = 0;
+	str = NULL;
+	while (ret[i])
+	{
+		if (ft_strncmp(ret[i], "SHLVL=", 6) == 0)
+		{
+			shlvl = 1;
+			break ;
+		}
+		i++;
+	}
+	if (shlvl == 0)
+	{
+		str = ft_strjoin("SHLVL=", ft_itoa(shlvl));
+		ret[(*index)++] = str;
+		if (!str)
+			return (env_free(ret), NULL);
+	}
+	return (ret);
+}
+
 char	**init_env(char **env)
 {
 	int		i;
@@ -62,7 +92,7 @@ char	**init_env(char **env)
 	while (env[i])
 		i++;
 	if (env && env[0])
-		ret = (char **)malloc_t(sizeof(char *) * (i + 1));
+		ret = (char **)malloc_t(sizeof(char *) * (i + 2));
 	else
 		ret = (char **)malloc_t(sizeof(char *) * (3 + 1));
 	if (!ret)
@@ -77,6 +107,7 @@ char	**init_env(char **env)
 			return (env_free(ret), NULL);
 		i++;
 	}
+	ret = ft_add_shlvl(ret, &i);
 	ret[i] = NULL;
 	return (ret);
 }
