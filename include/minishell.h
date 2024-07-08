@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 16:29:17 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 21:49:47 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int		ft_exit(t_lexer	*lexer);
 int		env_pos(char **env, char *cmd);
 int		envp_update_value(char **env, char *cmd, int pos, char *eq);
 int		envp_add(char **env, char *cmd, int pos, char *eq);
+void	do_unset(char **env, char *str);
 
 //init_err
 void	ft_perror(char *s1, char *s2, char *s3);

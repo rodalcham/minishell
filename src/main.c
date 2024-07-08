@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 18:00:05 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 21:51:29 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!(*ft_env()) && envp)
 		ft_error(-1);
 	make_shlvl(*ft_env());
+	do_unset(*ft_env(), "OLDPWD");
 	signal_handler();
 	intro();
 	main_loop();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 16:55:24 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 22:07:39 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int	update_cwd(void)
 
 int	update_ocwd(void)
 {
-	char	buff[4103];
-	char	*ev;
-	char	*eq;
-	int		pos;
+	char		buff[4103];
+	char		*ev;
+	char		*eq;
+	int			pos;
+	static int	i = 0;
 
 	ft_strcpy(buff, "OLDPWD=");
 	getcwd(&buff[7], 4096);
@@ -44,8 +45,9 @@ int	update_ocwd(void)
 	pos = env_pos(*ft_env(), ev);
 	if (pos >= 0)
 		return (envp_update_value(*ft_env(), ev, pos, eq));
-	else
+	else if (!i && ++i)
 		return (envp_add(*ft_env(), ev, pos, eq));
+	return (0);
 }
 
 void	cd_expand_home(t_lexer *lexer, char path[], int *i)

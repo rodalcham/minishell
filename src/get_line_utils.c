@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:54:35 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 15:55:24 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 22:47:15 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
