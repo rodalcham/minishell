@@ -6,11 +6,13 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/08 23:25:12 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/08 23:57:49 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+char	*rm_nl(char *line);
 
 void	custom_handler(int signal)
 {
@@ -65,7 +67,25 @@ int	heredoc_child(int written, char *eof, int fd, int mode)
 	return (written);
 }
 
-int	do_heredoc(int fd, char *eof, int mode) //HEREDOC SHOULDNT BE A CHILD PROCESS
+void fix_gnl(char *eof)
+{
+	char	*line;
+
+	if (!isatty(fileno(stdin)))
+	{
+		line = get_next_line(fileno(stdin));
+		line = rm_nl(line);
+		line = expand_tokens(line, 1);
+		while (line && ft_strcmp(line, eof))
+		{
+			line = get_next_line(fileno(stdin));
+			line = rm_nl(line);
+			line = expand_tokens(line, 1);
+		}
+	}
+}
+
+int	do_heredoc(int fd, char *eof, int mode)
 {
 	int		written;
 	int		pid;
@@ -85,6 +105,7 @@ int	do_heredoc(int fd, char *eof, int mode) //HEREDOC SHOULDNT BE A CHILD PROCES
 		if (written < 0)
 			return (-1);
 	}
+	fix_gnl(eof);
 	close(fd);
 	signal(SIGQUIT, SIG_IGN);
 	return (0);
