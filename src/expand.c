@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:47:16 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 16:23:25 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 10:30:11 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	do_expand(char *str, char *buff, char *ret, int mode)
 			&& (is_quoted(str, i) != 1 || mode) && str[i + 1] == '?' && ++i)
 			str_int(&ret[j], &j);
 		else if (str[i] == '$' && str[i + 1] && !is_spc(str[i + 1])
-			&& (is_quoted(str, i) != 1 || mode))
+			&& (is_quoted(str, i) != 1 || mode) && !((is_spc(str[i + 1])
+			|| sep(str[i + 1])) && is_quoted(str, i)))
 		{
 			str_app(&ret[j], env_get_by_name(extract_env(&str[i], buff)), &j);
 			while (str[i + 1] && !is_spc(str[i + 1])
