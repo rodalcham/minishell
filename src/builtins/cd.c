@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/03 09:53:58 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 16:55:24 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,72 @@ int	update_ocwd(void)
 		return (envp_add(*ft_env(), ev, pos, eq));
 }
 
+void	cd_expand_home(t_lexer *lexer, char path[], int *i)
+{
+	if (!lexer->cmd[1] || (lexer->cmd[1][0] == '~' && (!lexer->cmd[1][1] || lexer->cmd[1][1] == '/')))
+	{
+		if (env_pos(*ft_env(), "HOME") < 0)
+		{
+			write(2, "cd: HOME not set\n", 17);
+			*get_exit_status() = 1;
+			*i = -1;
+		}
+		else
+		{
+			if (!lexer->cmd[1] || (lexer->cmd[1][0] == '~' && (!lexer->cmd[1][1] || lexer->cmd[1][1] == '/')))
+				ft_strlcpy(path, env_get_by_name("HOME"), 4096);
+			if (lexer->cmd[1] && lexer->cmd[1][0] == '~')
+				ft_strlcpy(&path[ft_strlen(path)], &lexer->cmd[1][1], 4096 - ft_strlen(path));
+			*i = 1;
+		}
+	}
+}
+
+void	cd_expand_old(t_lexer *lexer, char path[], int *i)
+{
+	if (*i)
+		return ;
+	if (!ft_strcmp(lexer->cmd[1], "-"))
+	{
+		if (env_pos(*ft_env(), "OLDPWD") < 0)
+		{
+			write(2, "cd: OLDPWD not set\n", 19);
+			*get_exit_status() = 1;
+			*i = -1;
+		}
+		else
+		{
+			ft_strlcpy(path, env_get_by_name("OLDPWD"), 4096);
+			*i = 2;
+		}
+	}
+}
+
 int	cd_command(t_lexer *lexer)
 {
-	char	*path;
+	char	path[4096];
+	int		i;
 
-	if (lexer->next)
-		return (0);
+	i = 0;
+	cd_expand_home(lexer, path, &i);
+	cd_expand_old(lexer, path, &i);
 	if (update_ocwd() < 0)
 		return (-1);
-	if (lexer->cmd[1] == NULL)
+	if (!i && lexer->cmd[1])
+		ft_strlcpy(path, lexer->cmd[1], 4096);
+	if (i >= 0)
 	{
-		path = env_get_by_name("HOME");
-		if (!path || !path[0])
-			write(2, "cd: HOME not set\n", 17);
-		else if (chdir(path) == -1)
+		if (chdir(path) == -1)
+		{
 			ft_perror("cd: ", path, ": No such file or directory\n");
-		return (1);
-	}
-	else if (chdir(lexer->cmd[1]) == -1)
-	{
-		ft_perror("cd: ", lexer->cmd[1], ": No such file or directory\n");
-		return (1);
+			*get_exit_status() = 1;
+		}
+		else
+			*get_exit_status() = 0;
+		if (*get_exit_status() == 0 && i ==2)
+			printf("%s\n",path);
 	}
 	if (update_cwd() < 0)
 		return (-1);
-	return (0);
+	return (*get_exit_status());
 }
