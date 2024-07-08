@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/07 17:55:12 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/08 10:07:15 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ int	update_last_arg(t_lexer *tokens)
 	ev = &buff[0];
 	eq = &buff[1];
 	pos = env_pos(*ft_env(), ev);
-	if (pos >= 0)
-		return (envp_update_value(*ft_env(), ev, pos, eq));
-	else
-		return (envp_add(*ft_env(), ev, pos, eq));
+	i = *get_exit_status();
+	if (pos >= 0 && envp_update_value(*ft_env(), ev, pos, eq) < 0)
+		return (-1);
+	else if (pos < 0 && envp_add(*ft_env(), ev, pos, eq) < 0)
+		return (-1);
+	*get_exit_status() = i;
+	return (0);
 }
 
 void	intro(void)
@@ -78,8 +81,8 @@ void	main_loop(void)
 		if (!args)
 			free_all(line, args, tokens, -1);
 		tokens = lex(args, &status);
-		// if (!status && tokens)
-		// 	status = update_last_arg(tokens);
+		if (!status && tokens)
+			status = update_last_arg(tokens);
 		signal(SIGINT, signal_temp);
 		if (!status)
 			status = execute(tokens);
