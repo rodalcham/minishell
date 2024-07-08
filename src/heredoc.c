@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 16:24:10 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 11:28:08 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	exit_130(int signal)
 	*get_exit_status() = 130;
 }
 
+char	*heredoc_gl(int	mode)
+{
+	char	*line;
+
+	line = take_in("> ");
+	if (!mode)
+		line = expand_tokens(line, 1);
+	return (line);
+}
+
 int	heredoc_child(int written, char *eof, int fd, int mode)
 {
 	char	*line;
@@ -33,13 +43,11 @@ int	heredoc_child(int written, char *eof, int fd, int mode)
 	g_signal = 1;
 	signal(SIGINT, custom_handler);
 	written = 1;
-	line = take_in("> ");
+	line = heredoc_gl(mode);
+	if (!line)
+		return (-1);
 	while (written >= 0 && line && ft_strcmp(line, eof))
 	{
-		if (!mode)
-			line = expand_tokens(line, 1);
-		if (!line)
-			return (-1);
 		written = write(fd, line, ft_strlen(line));
 		if (written < 0 || write(fd, "\n", 1) < 0)
 		{
@@ -47,7 +55,9 @@ int	heredoc_child(int written, char *eof, int fd, int mode)
 			break ;
 		}
 		free_t(line);
-		line = take_in("> ");
+		line = heredoc_gl(mode);
+		if (!line)
+			return (-1);
 	}
 	if (line)
 		free_t(line);

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/05 12:30:37 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/08 11:43:37 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	echo_command(t_lexer *lexer)
 	i = 1;
 	newline = 1;
 	cmd = lexer->cmd;
-	if (cmd[i] && is_n_flag(cmd[i]))
+	while (cmd[i] && is_n_flag(cmd[i]))
 	{
 		newline = 0;
 		i++;
