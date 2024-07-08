@@ -6,7 +6,7 @@
 /*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 22:07:39 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/08 23:29:43 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	cd_command(t_lexer *lexer)
 	int		i;
 
 	i = 0;
+	if (lexer->next || *get_lexer() != lexer)
+		return (0);
 	cd_expand_home(lexer, path, &i);
 	cd_expand_old(lexer, path, &i);
 	if (update_ocwd() < 0)

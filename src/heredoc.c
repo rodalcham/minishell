@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/08 13:54:58 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/08 23:25:12 by rchavez@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	heredoc_child(int written, char *eof, int fd, int mode)
 	return (written);
 }
 
-int	do_heredoc(int fd, char *eof, int mode)
+int	do_heredoc(int fd, char *eof, int mode) //HEREDOC SHOULDNT BE A CHILD PROCESS
 {
 	int		written;
 	int		pid;
