@@ -6,7 +6,7 @@
 #    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/07/09 16:03:21 by rchavez          ###   ########.fr        #
+#    Updated: 2024/07/09 16:53:51 by rchavez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ src/builtins/echo.c src/builtins/env.c src/builtins/export.c\
 src/builtins/pwd.c src/builtins/unset.c src/builtins/exit.c src/string_utils.c\
 src/ft_perror.c src/expand_utils.c src/get_line_utils.c\
 src/builtins/export_utils.c src/heredoc2.c src/intro.c src/t_lexer_utils.c\
-src/env_get_by_name.c
+src/env_get_by_name.c src/builtins/cd_utils.c
 
 OBJS	:= ${SRCS:src%.c=obj%.o}
 

@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/09 16:00:15 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 16:46:05 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,48 +43,6 @@ int	sep(char c)
 	return (0);
 }
 
-// char	*make_unclosed_quotes(char *str, int double_quotes, int single)
-// {
-// 	char	*new_input;
-// 	char	*new_str;
-// 	int		i;
-
-// 	new_str = malloc_t(sizeof(char) * ft_strlen(str) + 2);
-// 	ft_strcpy(new_str, str);
-// 	ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
-// 	while (double_quotes == 1 || single == 1)
-// 	{
-// 		new_input = take_in("> ");
-// 		if (!new_input)
-// 			return (NULL);
-// 		new_str = realloc(new_str, sizeof(char) * (ft_strlen(new_str)
-// 					+ ft_strlen(new_input) + 3));
-// 		if (!new_str)
-// 		{
-// 			free_t(new_input);
-// 			return (NULL);
-// 		}
-// 		ft_strlcat(new_str, new_input, ft_strlen(new_str)
-// 			+ ft_strlen(new_input) + 2);
-// 		ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
-// 		i = 0;
-// 		while (new_input[i])
-// 		{
-// 			if (new_input[i] == '"' && double_quotes == 1)
-// 			{
-// 				double_quotes = 0;
-// 			}
-// 			else if (new_input[i] == '\'' && single == 1)
-// 			{
-// 				single = 0;
-// 			}
-// 			i++;
-// 		}
-// 		free_t(new_input);
-// 	}
-// 	return (new_str);
-// }
-
 char	*ft_strnljoin(char const *s1, char const *s2)
 {
 	size_t	i;
@@ -95,7 +53,8 @@ char	*ft_strnljoin(char const *s1, char const *s2)
 		return (NULL);
 	i = -1;
 	j = -1;
-	p = (char *) malloc_t_bad((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
+	p = (char *)malloc_t_bad((ft_strlen(s1)
+				+ ft_strlen(s2) + 2) * sizeof(char));
 	if (!p)
 		return (NULL);
 	while (s1[++i])
