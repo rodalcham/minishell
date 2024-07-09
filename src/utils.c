@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/09 10:20:05 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:26:26 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,70 +43,67 @@ int	sep(char c)
 	return (0);
 }
 
-char	*make_unclosed_quotes(char *str, int double_quotes, int single)
+// char	*make_unclosed_quotes(char *str, int double_quotes, int single)
+// {
+// 	char	*new_input;
+// 	char	*new_str;
+// 	int		i;
+
+// 	new_str = malloc_t(sizeof(char) * ft_strlen(str) + 2);
+// 	ft_strcpy(new_str, str);
+// 	ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
+// 	while (double_quotes == 1 || single == 1)
+// 	{
+// 		new_input = take_in("> ");
+// 		if (!new_input)
+// 			return (NULL);
+// 		new_str = realloc(new_str, sizeof(char) * (ft_strlen(new_str)
+// 					+ ft_strlen(new_input) + 3));
+// 		if (!new_str)
+// 		{
+// 			free_t(new_input);
+// 			return (NULL);
+// 		}
+// 		ft_strlcat(new_str, new_input, ft_strlen(new_str)
+// 			+ ft_strlen(new_input) + 2);
+// 		ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
+// 		i = 0;
+// 		while (new_input[i])
+// 		{
+// 			if (new_input[i] == '"' && double_quotes == 1)
+// 			{
+// 				double_quotes = 0;
+// 			}
+// 			else if (new_input[i] == '\'' && single == 1)
+// 			{
+// 				single = 0;
+// 			}
+// 			i++;
+// 		}
+// 		free_t(new_input);
+// 	}
+// 	return (new_str);
+// }
+
+char	*handle_unclosed_quotes(char *str)
 {
-	char	*new_input;
-	char	*new_str;
-	int		i;
+	char	*ret;
+	char	*new;
 
-	new_str = malloc_t(sizeof(char) * ft_strlen(str) + 2);
-	ft_strcpy(new_str, str);
-	ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
-	while (double_quotes == 1 || single == 1)
-	{
-		new_input = take_in("> ");
-		if (!new_input)
-			return (NULL);
-		new_str = realloc(new_str, sizeof(char) * (ft_strlen(new_str)
-					+ ft_strlen(new_input) + 3));
-		if (!new_str)
-		{
-			free_t(new_input);
-			return (NULL);
-		}
-		ft_strlcat(new_str, new_input, ft_strlen(new_str)
-			+ ft_strlen(new_input) + 2);
-		ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
-		i = 0;
-		while (new_input[i])
-		{
-			if (new_input[i] == '"' && double_quotes == 1)
-			{
-				double_quotes = 0;
-			}
-			else if (new_input[i] == '\'' && single == 1)
-			{
-				single = 0;
-			}
-			i++;
-		}
-		free_t(new_input);
-	}
-	return (new_str);
-}
-
-char	*handle_unclosed_quotes(char *str) //FIX
-{
-	int	i;
-	int	single;
-	int	double_quotes;
-
-	i = 0;
-	single = 0;
-	double_quotes = 0;
 	if (!str)
 		return (NULL);
-	if (!str[0])
-		return (str);
-	while (str[i])
+	ret = str;
+	while (is_quoted(ret, ft_strlen(ret) - 1))
 	{
-		if (str[i] == '\'' && double_quotes == 0)
-			single = !single;
-		if (str[i] == '\"' && single == 0)
-			double_quotes += 1;
-		i++;
+		new = take_in("> ");
+		if (!new)
+			return (NULL);
+		ret = ft_strjoin(ret, new);
+		free_t(str);
+		if (!ret)
+			return (NULL);
+		str = ret;
 	}
-	if (single == 1 || double_quotes == 1)
-		str = make_unclosed_quotes(str, double_quotes, single);
-	return (str);
+	// printf("EXIT\n");
+	return (ret);
 }
