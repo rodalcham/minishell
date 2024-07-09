@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/07 17:58:35 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/09 10:20:05 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*make_unclosed_quotes(char *str, int double_quotes, int single)
 	ft_strlcat(new_str, "\n", ft_strlen(new_str) + 2);
 	while (double_quotes == 1 || single == 1)
 	{
-		new_input = readline("> ");
+		new_input = take_in("> ");
 		if (!new_input)
 			return (NULL);
 		new_str = realloc(new_str, sizeof(char) * (ft_strlen(new_str)
