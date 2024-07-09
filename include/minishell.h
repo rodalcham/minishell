@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/08 21:49:47 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/09 15:20:17 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ int		*get_exit_status(void);
 char	***ft_env(void);
 t_lexer	**get_lexer(void);
 
+//intro
+void	intro(void);
+
+//env_get_by_name
+char	*env_get_by_name(char *name);
+
 //get_line
 char	*get_line(void);
 char	*take_in(char *in);
@@ -63,6 +69,9 @@ int		count_lex(char **args);
 t_lexer	*lex(char **args, int *status);
 char	**add_cmd(t_lexer *lex, char *str);
 int		handle_ops_open(t_lexer *lex, char **args, int *i);
+
+//lexer_utils
+void	set_lexer(t_lexer *temp);
 
 //free_all
 void	free_all(char *line, char **args, t_lexer *head, int errno);
@@ -82,7 +91,11 @@ int		add_pipe(t_lexer *lex);
 
 //heredoc
 int		do_heredoc(int fd, char *eof, int mode);
+
+//heredoc2
 void	exit_130(int signal);
+int		heredoc_gnl(int fd, char *eof, int mode);
+int		heredoc_child(int written, char *eof, int fd, int mode);
 
 //execute
 int		execute(t_lexer *tokens);

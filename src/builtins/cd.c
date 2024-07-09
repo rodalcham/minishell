@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:13:59 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 23:29:43 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/09 15:07:15 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	update_ocwd(void)
 
 void	cd_expand_home(t_lexer *lexer, char path[], int *i)
 {
-	if (!lexer->cmd[1] || (lexer->cmd[1][0] == '~' && (!lexer->cmd[1][1] || lexer->cmd[1][1] == '/')))
+	if (!lexer->cmd[1] || (lexer->cmd[1][0] == '~' && (!lexer->cmd[1][1]
+		|| lexer->cmd[1][1] == '/')))
 	{
 		if (env_pos(*ft_env(), "HOME") < 0)
 		{
@@ -62,10 +63,12 @@ void	cd_expand_home(t_lexer *lexer, char path[], int *i)
 		}
 		else
 		{
-			if (!lexer->cmd[1] || (lexer->cmd[1][0] == '~' && (!lexer->cmd[1][1] || lexer->cmd[1][1] == '/')))
+			if (!lexer->cmd[1] || (lexer->cmd[1][0] == '~'
+				&& (!lexer->cmd[1][1] || lexer->cmd[1][1] == '/')))
 				ft_strlcpy(path, env_get_by_name("HOME"), 4096);
 			if (lexer->cmd[1] && lexer->cmd[1][0] == '~')
-				ft_strlcpy(&path[ft_strlen(path)], &lexer->cmd[1][1], 4096 - ft_strlen(path));
+				ft_strlcpy(&path[ft_strlen(path)], &lexer->cmd[1][1],
+					4096 - ft_strlen(path));
 			*i = 1;
 		}
 	}
@@ -114,8 +117,8 @@ int	cd_command(t_lexer *lexer)
 		}
 		else
 			*get_exit_status() = 0;
-		if (*get_exit_status() == 0 && i ==2)
-			printf("%s\n",path);
+		if (*get_exit_status() == 0 && i == 2)
+			printf("%s\n", path);
 	}
 	if (update_cwd() < 0)
 		return (-1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:35:28 by leo               #+#    #+#             */
-/*   Updated: 2024/07/08 23:39:07 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/09 15:10:43 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ int	do_export(t_lexer *lexer, char *ev)
 	es = get_es(ev);
 	pos = env_pos(*ft_env(), ev);
 	if ((eq && (eq == ev || (ft_strchr(ev, '-') && ft_strchr(ev, '-') < eq)
-		|| is_spc(*(eq - 1)) || (ft_strchr(ev, '?')
-		&& ft_strchr(ev, '?') < eq))) || !ev[0] || (es && eq && es < eq))
+				|| is_spc(*(eq - 1)) || (ft_strchr(ev, '?')
+					&& ft_strchr(ev, '?') < eq))) || !ev[0]
+		|| (es && eq && es < eq))
 	{
 		ft_perror("export : `", ev, "' : not a valid identifier\n");
 		return (*get_exit_status() = 1);

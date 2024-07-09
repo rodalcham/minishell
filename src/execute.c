@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 08:44:18 by rchavez@stu       #+#    #+#             */
-/*   Updated: 2024/07/08 21:07:35 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/09 14:33:45 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	say_not_found(t_lexer *temp)
 	{
 		if (access(temp->cmd[0], F_OK) == 0)
 		{
-			ft_perror(temp->cmd[0], " : Permission denied\n", NULL); 
+			ft_perror(temp->cmd[0], " : Permission denied\n", NULL);
 			*get_exit_status() = 126;
 		}
 		else
@@ -102,7 +102,6 @@ int	say_not_found(t_lexer *temp)
 
 int	exec_do(t_lexer *temp)
 {
-	// printf("%s\n", temp->path);
 	if ((!temp->cmd[0][0]) || (!ft_strncmp(temp->path, "not_found", 9)
 		&& !ft_check_commands(temp)))
 		return (say_not_found(temp));

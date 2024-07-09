@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:36:51 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/08 10:30:47 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 14:35:03 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ size_t	expand_len(char *str, char *buff, int mode)
 			ret += 7;
 		else if (str[i] == '$' && str[i + 1] && !is_spc(str[i + 1])
 			&& (is_quoted(str, i) != 1 || mode) && !((is_spc(str[i + 1])
-			|| sep(str[i + 1])) && is_quoted(str, i)))
+					|| sep(str[i + 1])) && is_quoted(str, i)))
 		{
 			ret += ft_strlen(env_get_by_name(extract_env(&str[i], buff)));
 			while (str[i + 1] && !is_spc(str[i + 1])

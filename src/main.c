@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/09 12:54:40 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 14:50:23 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,6 @@ int	update_last_arg(t_lexer *tokens)
 	return (0);
 }
 
-void	intro(void)
-{
-	char	*name;
-
-	name = env_get_by_name("USER");
-	if (!isatty(fileno(stdin)))
-		return ;
-	printf("\033[H\033[J");
-	printf("        _   _   _   _   _   _   _   _   _   \n");
-	printf("       / \\ / \\ / \\ / \\ / \\ / \\ / \\ / \\ / \\ \n");
-	printf("      ( M | I | N | I | S | H | E | L | L )\n");
-	printf("       \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \\_/ \n");
-	printf("         ********************************\n");
-	printf("\n    Welcome to Minishell by \033]8;;https://github.com/rodalcham"
-		"\archavez\033]8;;\a && \033]8;;https://github.com/lglauch"
-		"\alglauch\033]8;;\a\n\n");
-	printf("         ********************************\n");
-	if (name && name[0])
-		printf("\n\t\tWelcome, %s\n", name);
-}
-
 void	main_loop(void)
 {
 	static char		*line;
@@ -89,8 +68,7 @@ void	main_loop(void)
 		signal(SIGINT, handle_ctrlc);
 		if (status < 0)
 			free_all(line, args, tokens, status);
-		else
-			free_all(line, args, tokens, 0);
+		free_all(line, args, tokens, 0);
 	}
 }
 
