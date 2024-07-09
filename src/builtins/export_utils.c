@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 16:56:51 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/07 15:52:20 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/09 12:29:10 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,25 @@ int	declare_usage(void)
 {
 	char	**env;
 	int		i;
+	size_t	j;
 
 	env = *ft_env();
 	i = -1;
 	while (env && env[++i])
-		printf("declare -x %s\n", env[i]);
+	{
+		j = 0;
+		printf("declare -x ");
+		while(env[i][j] && env[i][j] != '=')
+			printf("%c", env[i][j++]);
+		if (env[i][j])
+		{
+			printf("=");
+			j++;
+		}
+		if (env[i][j])
+			printf("\"%s\"", &env[i][j]);
+		printf("\n");
+	}
 	*get_exit_status() = 0;
 	return (0);
 }
