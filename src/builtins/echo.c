@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/09 15:07:33 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:49:34 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	is_n_flag(char *str)
 
 	i = 0;
 	if (!str || str[0] != '-')
+		return (0);
+	if (str[i] == '-' && str [i + 1] == 0)
 		return (0);
 	i++;
 	while (str[i])
