@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 11:57:54 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 16:54:23 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 12:30:42 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	do_exit(t_lexer *lexer, char **args)
 {
-	if (args[1] && !args[2])
+	if (args[1] && !args[2] && *get_exit_status() != 255)
 		*get_exit_status() = ft_atoi(args[1]);
 	while (*get_exit_status() < 0)
 		*get_exit_status() = 256 + *get_exit_status();
