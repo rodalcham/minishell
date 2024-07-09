@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:08:51 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/09 15:26:26 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 16:00:15 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,28 @@ int	sep(char c)
 // 	return (new_str);
 // }
 
+char	*ft_strnljoin(char const *s1, char const *s2)
+{
+	size_t	i;
+	size_t	j;
+	char	*p;
+
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+	i = -1;
+	j = -1;
+	p = (char *) malloc_t_bad((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
+	if (!p)
+		return (NULL);
+	while (s1[++i])
+		p[i] = s1[i];
+	p[i++] = '\n';
+	while (s2[++j])
+		p[i++] = s2[j];
+	p[i] = '\0';
+	return (p);
+}
+
 char	*handle_unclosed_quotes(char *str)
 {
 	char	*ret;
@@ -92,18 +114,20 @@ char	*handle_unclosed_quotes(char *str)
 
 	if (!str)
 		return (NULL);
+	if (!is_quoted(str, ft_strlen(str) - 1))
+		return (str);
 	ret = str;
 	while (is_quoted(ret, ft_strlen(ret) - 1))
 	{
 		new = take_in("> ");
 		if (!new)
 			return (NULL);
-		ret = ft_strjoin(ret, new);
-		free_t(str);
+		ret = ft_strnljoin(ret, new);
+		if (str)
+			free_t(str);
 		if (!ret)
 			return (NULL);
 		str = ret;
 	}
-	// printf("EXIT\n");
 	return (ret);
 }
