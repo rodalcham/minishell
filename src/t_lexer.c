@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_lexer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/05 16:25:00 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 14:08:32 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,26 @@ t_lexer	*init_lexer(int num)
 
 int	handle_ops_open(t_lexer *lex, char **args, int *i)
 {
+	int status;
+	
+	status = 0;
 	if (lex->cmd && (!is_forkable(lex)))
 		return (0);
 	if (args[*i][0] == '<')
 	{
 		if (args[*i][1] == '<')
-			return (add_heredoc(lex, args, i));
+			status =  (add_heredoc(lex, args, i));
 		else
-			return (add_input(lex, args, i));
+			status = (add_input(lex, args, i));
 	}
 	else if (args[*i][0] == '>')
-		return (add_output(lex, args, i));
+		status = (add_output(lex, args, i));
 	else if (args[*i][0] == '|')
-		return (add_pipe(lex));
-	return (0);
+		status = (add_pipe(lex));
+	if (status < 0 || (lex->input && lex ->input->fd < 0)
+		|| (lex->output && lex->output->fd < 0))
+		*get_exit_status() = 1;
+	return (status);
 }
 
 int	count_lex(char **args)
