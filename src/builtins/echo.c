@@ -6,7 +6,7 @@
 /*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 11:43:37 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 14:22:57 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,21 @@ int	is_n_flag(char *str)
 int	echo_command(t_lexer *lexer)
 {
 	int		i;
+	int		j;
 	int		newline;
 	char	**cmd;
 
-	i = 1;
+	i = 0;
 	newline = 1;
 	cmd = lexer->cmd;
-	while (cmd[i] && is_n_flag(cmd[i]))
-	{
+	while (cmd[++i] && is_n_flag(cmd[i]))
 		newline = 0;
-		i++;
-	}
 	while (cmd[i])
 	{
-		printf("%s", cmd[i]);
+		j = 0;
+		if (cmd[i][0] == '~' && (!cmd[i][1] || cmd[i][1] == '/') && env_pos(*ft_env(), "HOME") >= 0 && ++j)
+			printf("%s", env_get_by_name("HOME"));
+		printf("%s", &cmd[i][j]);
 		if (cmd[i + 1])
 			printf(" ");
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:51:26 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 21:51:29 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/09 12:54:40 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	main_loop(void)
 		signal(SIGINT, handle_ctrlc);
 		if (status < 0)
 			free_all(line, args, tokens, status);
-		free_all(line, args, tokens, 0);
+		else
+			free_all(line, args, tokens, 0);
 	}
 }
 
