@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 11:03:14 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/09 15:01:58 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:20:17 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int		add_input(t_lexer *lex, char **args, int *i);
 int		add_output(t_lexer *lex, char **args, int *i);
 int		add_heredoc(t_lexer *lex, char **args, int *i);
 int		add_pipe(t_lexer *lex);
-
 
 //heredoc
 int		do_heredoc(int fd, char *eof, int mode);
