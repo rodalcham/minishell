@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 16:56:51 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/09 12:29:10 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:11:28 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	declare_usage(void)
 	{
 		j = 0;
 		printf("declare -x ");
-		while(env[i][j] && env[i][j] != '=')
+		while (env[i][j] && env[i][j] != '=')
 			printf("%c", env[i][j++]);
 		if (env[i][j])
 		{

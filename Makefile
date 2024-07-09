@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+         #
+#    By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 17:50:33 by lglauch           #+#    #+#              #
-#    Updated: 2024/07/05 16:58:50 by rchavez          ###   ########.fr        #
+#    Updated: 2024/07/09 15:03:58 by lglauch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ src/get_line.c src/heredoc.c src/builtins/cd.c src/builtins/check_builtins.c\
 src/builtins/echo.c src/builtins/env.c src/builtins/export.c\
 src/builtins/pwd.c src/builtins/unset.c src/builtins/exit.c src/string_utils.c\
 src/ft_perror.c src/expand_utils.c src/get_line_utils.c\
-src/builtins/export_utils.c
+src/builtins/export_utils.c src/heredoc2.c src/intro.c src/t_lexer_utils.c\
+src/env_get_by_name.c
 
 OBJS	:= ${SRCS:src%.c=obj%.o}
 

@@ -3,44 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:04:20 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/09 14:22:57 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:07:33 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-// int	echo_command(t_lexer *lexer)
-// {
-// 	int	i;
-// 	int	newline;
-
-// 	i = 1;
-// 	newline = 1;
-// 	if (lexer->cmd[i] && !ft_strcmp(lexer->cmd[i], "-n"))
-// 	{
-// 		newline = 0;
-// 		i++;
-// 	}
-// 	while (lexer->cmd[i])
-// 	{
-// 		while (lexer->cmd[i])
-// 		{
-// 			if (printf("%s", lexer->cmd[i++]) == -1)
-// 				return (1);
-// 			if (lexer->cmd[i])
-// 			{
-// 				if (printf(" ") == -1)
-// 					return (1);
-// 			}
-// 		}
-// 	}
-// 	if (newline && printf("\n"))
-// 		return (0);
-// 	return (0);
-// }
 
 int	is_n_flag(char *str)
 {
@@ -74,7 +44,8 @@ int	echo_command(t_lexer *lexer)
 	while (cmd[i])
 	{
 		j = 0;
-		if (cmd[i][0] == '~' && (!cmd[i][1] || cmd[i][1] == '/') && env_pos(*ft_env(), "HOME") >= 0 && ++j)
+		if (cmd[i][0] == '~' && (!cmd[i][1] || cmd[i][1] == '/')
+			&& env_pos(*ft_env(), "HOME") >= 0 && ++j)
 			printf("%s", env_get_by_name("HOME"));
 		printf("%s", &cmd[i][j]);
 		if (cmd[i + 1])

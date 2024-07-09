@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:20:41 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/08 17:44:51 by rchavez          ###   ########.fr       */
+/*   Updated: 2024/07/09 14:57:39 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*handle_absolute_path(char *command)
 
 void	path_free(char **paths, int i)
 {
-	int j;
+	int	j;
 
 	j = i;
 	while (paths[j])
@@ -122,23 +122,4 @@ char	*path_finder(char *command, char *envp)
 		free_t(ret);
 	}
 	return (free_t(paths), ft_strdup("not_found"));
-}
-
-char	*env_get_by_name(char *name)
-{
-	int		i;
-	char	**env;
-	size_t	name_len;
-
-	env = *ft_env();
-	i = 0;
-	name_len = ft_strlen(name);
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], name, name_len)
-			&& env[i][name_len] == '=')
-			return (env[i] + name_len + 1);
-		i++;
-	}
-	return (NULL);
 }

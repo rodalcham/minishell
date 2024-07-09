@@ -6,7 +6,7 @@
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:05 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/09 14:08:32 by lglauch          ###   ########.fr       */
+/*   Updated: 2024/07/09 15:01:29 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,7 @@ t_lexer	*init_lexer(int num)
 			head = temp;
 		else
 			prev->next = temp;
-		temp->cmd = NULL;
-		temp->path = NULL;
-		temp->input = NULL;
-		temp->output = NULL;
-		temp->next = NULL;
-		temp->pid = 0;
+		set_lexer(temp);
 		prev = temp;
 	}
 	*get_lexer() = head;
@@ -76,15 +71,15 @@ t_lexer	*init_lexer(int num)
 
 int	handle_ops_open(t_lexer *lex, char **args, int *i)
 {
-	int status;
-	
+	int	status;
+
 	status = 0;
 	if (lex->cmd && (!is_forkable(lex)))
 		return (0);
 	if (args[*i][0] == '<')
 	{
 		if (args[*i][1] == '<')
-			status =  (add_heredoc(lex, args, i));
+			status = (add_heredoc(lex, args, i));
 		else
 			status = (add_input(lex, args, i));
 	}

@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   t_lexer_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/09 14:58:12 by lglauch          ###   ########.fr       */
+/*   Created: 2024/07/09 15:00:15 by lglauch           #+#    #+#             */
+/*   Updated: 2024/07/09 15:04:51 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	handle_ctrlc(int signal)
+void	set_lexer(t_lexer *temp)
 {
-	(void)signal;
-	if (g_signal == 0)
-	{
-		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		*get_exit_status() = 1;
-	}
-}
-
-void	signal_handler(void)
-{
-	if (g_signal == 0)
-		signal(SIGINT, handle_ctrlc);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-void	signal_temp(int signal)
-{
-	(void)signal;
-	*get_exit_status() = 130;
+	temp->cmd = NULL;
+	temp->path = NULL;
+	temp->input = NULL;
+	temp->output = NULL;
+	temp->next = NULL;
+	temp->pid = 0;
 }

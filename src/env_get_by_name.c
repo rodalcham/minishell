@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   env_get_by_name.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lglauch <lglauch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 14:27:55 by lglauch           #+#    #+#             */
-/*   Updated: 2024/07/09 14:58:12 by lglauch          ###   ########.fr       */
+/*   Created: 2024/07/09 14:56:26 by lglauch           #+#    #+#             */
+/*   Updated: 2024/07/09 14:56:39 by lglauch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	handle_ctrlc(int signal)
+char	*env_get_by_name(char *name)
 {
-	(void)signal;
-	if (g_signal == 0)
+	int		i;
+	char	**env;
+	size_t	name_len;
+
+	env = *ft_env();
+	i = 0;
+	name_len = ft_strlen(name);
+	while (env[i])
 	{
-		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		*get_exit_status() = 1;
+		if (!ft_strncmp(env[i], name, name_len)
+			&& env[i][name_len] == '=')
+			return (env[i] + name_len + 1);
+		i++;
 	}
-}
-
-void	signal_handler(void)
-{
-	if (g_signal == 0)
-		signal(SIGINT, handle_ctrlc);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-void	signal_temp(int signal)
-{
-	(void)signal;
-	*get_exit_status() = 130;
+	return (NULL);
 }
