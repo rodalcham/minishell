@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rchavez@student.42heilbronn.de <rchavez    +#+  +:+       +#+        */
+/*   By: rchavez <rchavez@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:31:18 by rchavez           #+#    #+#             */
-/*   Updated: 2024/07/08 23:57:49 by rchavez@stu      ###   ########.fr       */
+/*   Updated: 2024/07/09 11:47:37 by rchavez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,28 @@ int	heredoc_child(int written, char *eof, int fd, int mode)
 	return (written);
 }
 
-void fix_gnl(char *eof)
+int heredoc_gnl(int fd, char *eof, int mode)
 {
 	char	*line;
+	int		written;
 
-	if (!isatty(fileno(stdin)))
+	written = 1;
+	line = heredoc_gl(mode);
+	while (line && ft_strcmp(line, eof) && written >= 0)
 	{
-		line = get_next_line(fileno(stdin));
-		line = rm_nl(line);
-		line = expand_tokens(line, 1);
-		while (line && ft_strcmp(line, eof))
+		written = write(fd, line, ft_strlen(line));
+		if (written < 0 || write(fd, "\n", 1) < 0)
 		{
-			line = get_next_line(fileno(stdin));
-			line = rm_nl(line);
-			line = expand_tokens(line, 1);
+			write(2, "Heredoc : Failed to write.\n", 27);
+			close(fd);
+			return (free_t(line), -1);
 		}
+		if (line)
+			free_t(line);
+		line = heredoc_gl(mode);
 	}
+	close(fd);
+	return (0);
 }
 
 int	do_heredoc(int fd, char *eof, int mode)
@@ -92,6 +98,8 @@ int	do_heredoc(int fd, char *eof, int mode)
 
 	if (*get_exit_status() == 130)
 		return (0);
+	if (!isatty(fileno(stdin)))
+		return (heredoc_gnl(fd, eof, mode));
 	written = 0;
 	signal(SIGINT, exit_130);
 	pid = fork();
@@ -105,7 +113,6 @@ int	do_heredoc(int fd, char *eof, int mode)
 		if (written < 0)
 			return (-1);
 	}
-	fix_gnl(eof);
 	close(fd);
 	signal(SIGQUIT, SIG_IGN);
 	return (0);
